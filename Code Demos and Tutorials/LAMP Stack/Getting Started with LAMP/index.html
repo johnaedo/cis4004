@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app" name="description"/>
+<meta content="Dr. John Aedo" name="author"/>
+<link href="https://johnaedo.github.io/cis4004/Code%20Demos%20and%20Tutorials/LAMP%20Stack/Getting%20Started%20with%20LAMP/" rel="canonical"/>
+<link href="../../../blog/" rel="next"/>
+<link href="../../../_assets/meta/favicons.svg" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Getting Started with LAMP - CIS 4004 - Web-Based Information Systems</title>
+<link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Karla:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Karla";--md-code-font:"Ubuntu Mono"}</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<link href="../../../_static/css/admonition.css" rel="stylesheet"/>
+<link href="../../../_static/css/custom_attributes.css" rel="stylesheet"/>
+<link href="../../../_static/css/customization.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/styles.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css" rel="stylesheet"/>
+<link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://johnaedo.github.io/cis4004/_assets/meta/logo.svg" property="og:image"/>
+<meta content="https://johnaedo.github.io/cis4004/_assets/meta/logo.svg" name="twitter:image"/>
+<meta content="https://johnaedo.github.io/cis4004/" name="site_url"/>
+<meta content="Getting Started with LAMP" property="og:title"/>
+<meta content="Getting Started with LAMP" name="twitter:title"/>
+<meta content="Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app" name="og:description"/>
+<meta content="Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app" name="twitter:description"/>
+<script> document.title = "Getting Started with LAMP" </script>
+<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+<body data-md-color-accent="light-blue" data-md-color-primary="teal" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="../../..">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="CIS 4004 - Web-Based Information Systems" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="CIS 4004 - Web-Based Information Systems">
+<img alt="logo" src="../../../_assets/meta/logo.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            CIS 4004 - Web-Based Information Systems
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Getting Started with LAMP
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Passer au mode sombre" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="teal" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Passer au mode sombre">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Passer en mode clair" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="blue-grey" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Passer en mode clair">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="./">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Code Demos and Tutorials
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../blog/">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Blog
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CIS 4004 - Web-Based Information Systems" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="CIS 4004 - Web-Based Information Systems">
+<img alt="logo" src="../../../_assets/meta/logo.svg"/>
+</a>
+    CIS 4004 - Web-Based Information Systems
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Code Demos and Tutorials
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            Code Demos and Tutorials
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_1_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    LAMP Stack
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_1_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_1">
+<span class="md-nav__icon md-icon"></span>
+            LAMP Stack
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Getting Started with LAMP
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Getting Started with LAMP
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hosting">
+<span class="md-ellipsis">
+      
+        Hosting
+      
+    </span>
+</a>
+<nav aria-label="Hosting" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#create-a-lamp-droplet">
+<span class="md-ellipsis">
+      
+        Create a LAMP Droplet
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#select-your-region-and-datacenter">
+<span class="md-ellipsis">
+      
+        Select Your Region and Datacenter
+      
+    </span>
+</a>
+<nav aria-label="Select Your Region and Datacenter" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scroll-down">
+<span class="md-ellipsis">
+      
+        Scroll Down!
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#select-ubuntu-basic-plan">
+<span class="md-ellipsis">
+      
+        Select Ubuntu, Basic Plan…
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configure-your-storage-cpu-and-transfer-plan">
+<span class="md-ellipsis">
+      
+        Configure your Storage, CPU, and Transfer Plan
+      
+    </span>
+</a>
+<nav aria-label="Configure your Storage, CPU, and Transfer Plan" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scroll-down-more">
+<span class="md-ellipsis">
+      
+        Scroll Down More!
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configure-your-authentication">
+<span class="md-ellipsis">
+      
+        Configure Your Authentication
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#give-your-droplet-a-name-and-go">
+<span class="md-ellipsis">
+      
+        Give Your Droplet a Name and GO!!!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lets-get-it-started">
+<span class="md-ellipsis">
+      
+        Let’s Get It Started!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lets-connect">
+<span class="md-ellipsis">
+      
+        Let’s Connect
+      
+    </span>
+</a>
+<nav aria-label="Let’s Connect" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-windows">
+<span class="md-ellipsis">
+      
+        On Windows
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-macos">
+<span class="md-ellipsis">
+      
+        On MacOS
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-a-web-site-up-and-running">
+<span class="md-ellipsis">
+      
+        Getting a Web Site Up and Running
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#working-with-the-database-mysql">
+<span class="md-ellipsis">
+      
+        Working with the Database (mySQL)
+      
+    </span>
+</a>
+<nav aria-label="Working with the Database (mySQL)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connect-to-mysql-and-populate-a-database">
+<span class="md-ellipsis">
+      
+        Connect to mySQL and Populate a Database
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#create-a-database-user">
+<span class="md-ellipsis">
+      
+        Create a Database User
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-web-site">
+<span class="md-ellipsis">
+      
+        The Web Site
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connecting-the-api-to-the-database">
+<span class="md-ellipsis">
+      
+        Connecting the API to the Database
+      
+    </span>
+</a>
+<nav aria-label="Connecting the API to the Database" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#download-the-lamp-stack-project-files-from-webcourses">
+<span class="md-ellipsis">
+      
+        Download the LAMP Stack Project Files from Webcourses
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-the-database-login-info">
+<span class="md-ellipsis">
+      
+        Update the Database Login Info
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uploading-the-files-to-the-server">
+<span class="md-ellipsis">
+      
+        Uploading the Files to the Server
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testing-the-api">
+<span class="md-ellipsis">
+      
+        Testing the API
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setup-the-front-end">
+<span class="md-ellipsis">
+      
+        Setup the Front End
+      
+    </span>
+</a>
+<nav aria-label="Setup the Front End" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-the-api-url-in-codejs">
+<span class="md-ellipsis">
+      
+        Update the API URL in code.js
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#upload-the-files">
+<span class="md-ellipsis">
+      
+        Upload the Files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#secure-your-site-with-tls">
+<span class="md-ellipsis">
+      
+        Secure Your Site with TLS
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testing-the-complete-application">
+<span class="md-ellipsis">
+      
+        Testing the Complete Application
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../../blog/">
+<svg height="18" viewbox="0 0 1024 1024" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M843.5 737.4c-12.4-75.2-79.2-129.1-155.3-125.4S550.9 676 546 752c-153.5-4.8-208-40.7-199.1-113.7c3.3-27.3 19.8-41.9 50.1-49c18.4-4.3 38.8-4.9 57.3-3.2c1.7.2 3.5.3 5.2.5c11.3 2.7 22.8 5 34.3 6.8c34.1 5.6 68.8 8.4 101.8 6.6c92.8-5 156-45.9 159.2-132.7c3.1-84.1-54.7-143.7-147.9-183.6c-29.9-12.8-61.6-22.7-93.3-30.2c-14.3-3.4-26.3-5.7-35.2-7.2c-7.9-75.9-71.5-133.8-147.8-134.4S189.7 168 180.5 243.8s40 146.3 114.2 163.9s149.9-23.3 175.7-95.1c9.4 1.7 18.7 3.6 28 5.8c28.2 6.6 56.4 15.4 82.4 26.6c70.7 30.2 109.3 70.1 107.5 119.9c-1.6 44.6-33.6 65.2-96.2 68.6c-27.5 1.5-57.6-.9-87.3-5.8c-8.3-1.4-15.9-2.8-22.6-4.3c-3.9-.8-6.6-1.5-7.8-1.8l-3.1-.6c-2.2-.3-5.9-.8-10.7-1.3c-25-2.3-52.1-1.5-78.5 4.6c-55.2 12.9-93.9 47.2-101.1 105.8c-15.7 126.2 78.6 184.7 276 188.9c29.1 70.4 106.4 107.9 179.6 87c73.3-20.9 119.3-93.4 106.9-168.6M329.1 345.2c-46 0-83.3-37.3-83.3-83.3s37.3-83.3 83.3-83.3s83.3 37.3 83.3 83.3s-37.3 83.3-83.3 83.3M695.6 845c-46 0-83.3-37.3-83.3-83.3s37.3-83.3 83.3-83.3s83.3 37.3 83.3 83.3s-37.3 83.3-83.3 83.3" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Blog
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Archive
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hosting">
+<span class="md-ellipsis">
+      
+        Hosting
+      
+    </span>
+</a>
+<nav aria-label="Hosting" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#create-a-lamp-droplet">
+<span class="md-ellipsis">
+      
+        Create a LAMP Droplet
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#select-your-region-and-datacenter">
+<span class="md-ellipsis">
+      
+        Select Your Region and Datacenter
+      
+    </span>
+</a>
+<nav aria-label="Select Your Region and Datacenter" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scroll-down">
+<span class="md-ellipsis">
+      
+        Scroll Down!
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#select-ubuntu-basic-plan">
+<span class="md-ellipsis">
+      
+        Select Ubuntu, Basic Plan…
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configure-your-storage-cpu-and-transfer-plan">
+<span class="md-ellipsis">
+      
+        Configure your Storage, CPU, and Transfer Plan
+      
+    </span>
+</a>
+<nav aria-label="Configure your Storage, CPU, and Transfer Plan" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scroll-down-more">
+<span class="md-ellipsis">
+      
+        Scroll Down More!
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configure-your-authentication">
+<span class="md-ellipsis">
+      
+        Configure Your Authentication
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#give-your-droplet-a-name-and-go">
+<span class="md-ellipsis">
+      
+        Give Your Droplet a Name and GO!!!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lets-get-it-started">
+<span class="md-ellipsis">
+      
+        Let’s Get It Started!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lets-connect">
+<span class="md-ellipsis">
+      
+        Let’s Connect
+      
+    </span>
+</a>
+<nav aria-label="Let’s Connect" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-windows">
+<span class="md-ellipsis">
+      
+        On Windows
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-macos">
+<span class="md-ellipsis">
+      
+        On MacOS
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-a-web-site-up-and-running">
+<span class="md-ellipsis">
+      
+        Getting a Web Site Up and Running
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#working-with-the-database-mysql">
+<span class="md-ellipsis">
+      
+        Working with the Database (mySQL)
+      
+    </span>
+</a>
+<nav aria-label="Working with the Database (mySQL)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connect-to-mysql-and-populate-a-database">
+<span class="md-ellipsis">
+      
+        Connect to mySQL and Populate a Database
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#create-a-database-user">
+<span class="md-ellipsis">
+      
+        Create a Database User
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-web-site">
+<span class="md-ellipsis">
+      
+        The Web Site
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connecting-the-api-to-the-database">
+<span class="md-ellipsis">
+      
+        Connecting the API to the Database
+      
+    </span>
+</a>
+<nav aria-label="Connecting the API to the Database" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#download-the-lamp-stack-project-files-from-webcourses">
+<span class="md-ellipsis">
+      
+        Download the LAMP Stack Project Files from Webcourses
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-the-database-login-info">
+<span class="md-ellipsis">
+      
+        Update the Database Login Info
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uploading-the-files-to-the-server">
+<span class="md-ellipsis">
+      
+        Uploading the Files to the Server
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testing-the-api">
+<span class="md-ellipsis">
+      
+        Testing the API
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setup-the-front-end">
+<span class="md-ellipsis">
+      
+        Setup the Front End
+      
+    </span>
+</a>
+<nav aria-label="Setup the Front End" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-the-api-url-in-codejs">
+<span class="md-ellipsis">
+      
+        Update the API URL in code.js
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#upload-the-files">
+<span class="md-ellipsis">
+      
+        Upload the Files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#secure-your-site-with-tls">
+<span class="md-ellipsis">
+      
+        Secure Your Site with TLS
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testing-the-complete-application">
+<span class="md-ellipsis">
+      
+        Testing the Complete Application
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Tags -->
+<nav class="md-tags">
+<span class="md-tag">apache</span>
+<span class="md-tag">dns</span>
+<span class="md-tag">hosting</span>
+<span class="md-tag">linux</span>
+<span class="md-tag">mysql</span>
+<span class="md-tag">php</span>
+</nav>
+<!-- Actions -->
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+<h1>Getting Started with LAMP</h1>
+<!-- Page content -->
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>My work machines are either Linux or MacOS.  The examples you see here from the local machine (i.e. your computer) will be using the zsh command shell.  Windows users will need to adjust your slashes and maybe directory locations as appropriate.</p>
+</div>
+<p>Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app</p>
+<p>You will need a digitalocean.com account for this. I suggest being logged onto the account before you begin. You will also need to have purchased a domain. I am using <code>lamp.johnaedo.com</code> since I already own it and am not using it. .xyz domains are inexpensive, so you might want to consider those.</p>
+<p>The Digital Ocean hosting will cost $6 per month, and you will need it for two months. The domain will cost something, too.</p>
+<div class="admonition information">
+<p class="admonition-title">Information</p>
+<p>My sample domain will be <code>lamp.johnaedo.com</code>.  Make sure to replace this with the domain that you purchased and will configure below.  Note that some screenshots will say <code>cop4331-5.com</code> as those are from steps provided by Dr. Leinecker for the DNS setup that didn’t apply for my particular setup.</p>
+</div>
+<h3 id="hosting">Hosting<a class="headerlink" href="#hosting" title="Permanent link">¶</a></h3>
+<p>Make sure you are logged in to your Digital Ocean account. Go to <a href="https://marketplace.digitalocean.com/apps/lamp">https://marketplace.digitalocean.com/apps/lamp</a></p>
+<h4 id="create-a-lamp-droplet">Create a LAMP Droplet<a class="headerlink" href="#create-a-lamp-droplet" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/ee5e8f187883bf66360d9d2099e8487d_MD5.png"><img alt="ee5e8f187883bf66360d9d2099e8487d_MD5.png" src="../../../_assets/images/ee5e8f187883bf66360d9d2099e8487d_MD5.png"/></a></p>
+<h4 id="select-your-region-and-datacenter">Select Your Region and Datacenter<a class="headerlink" href="#select-your-region-and-datacenter" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-create-droplets.png"><img alt="screenshot-create-droplets.png" src="../../../_assets/images/screenshot-create-droplets.png"/></a></p>
+<h5 id="scroll-down">Scroll Down!<a class="headerlink" href="#scroll-down" title="Permanent link">¶</a></h5>
+<h4 id="select-ubuntu-basic-plan">Select Ubuntu, Basic Plan…<a class="headerlink" href="#select-ubuntu-basic-plan" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/854eac4b9d987948a953518347c73b7b_MD5.png"><img alt="854eac4b9d987948a953518347c73b7b_MD5.png" src="../../../_assets/images/854eac4b9d987948a953518347c73b7b_MD5.png"/></a></p>
+<h4 id="configure-your-storage-cpu-and-transfer-plan">Configure your Storage, CPU, and Transfer Plan<a class="headerlink" href="#configure-your-storage-cpu-and-transfer-plan" title="Permanent link">¶</a></h4>
+<p><span class="ezlinks_not_found ezlinks_not_found" src="../../Pasted%2520image%252020260107173756.png">Pasted image 20260107173756.png</span></p>
+<h5 id="scroll-down-more">Scroll Down More!<a class="headerlink" href="#scroll-down-more" title="Permanent link">¶</a></h5>
+<h4 id="configure-your-authentication">Configure Your Authentication<a class="headerlink" href="#configure-your-authentication" title="Permanent link">¶</a></h4>
+<p>As this is the first foray into Linux and remote server access for many of you, I recommend starting simple and selecting Password.  The password you enter here will be for the <code>root</code> account for your virtual machine which will have full administrative privileges.  Follow secure password generation techniques here – the guidelines provided are “okay,” but I suggest a minimum of 16 characters.  I also recommend you read this XKCD comic for reference:  <a href="https://xkcd.com/936/">xkcd: Password Strength</a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-droplet-set-password.png"><img alt="screenshot-droplet-set-password.png" src="../../../_assets/images/screenshot-droplet-set-password.png"/></a></p>
+<h4 id="give-your-droplet-a-name-and-go">Give Your Droplet a Name and GO!!!<a class="headerlink" href="#give-your-droplet-a-name-and-go" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-droplet-hostname.png"><img alt="screenshot-droplet-hostname.png" src="../../../_assets/images/screenshot-droplet-hostname.png"/></a></p>
+<h4 id="lets-get-it-started">Let’s Get It Started!<a class="headerlink" href="#lets-get-it-started" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-droplet-get-started.png"><img alt="screenshot-droplet-get-started.png" src="../../../_assets/images/screenshot-droplet-get-started.png"/></a></p>
+<h4 id="lets-connect">Let’s Connect<a class="headerlink" href="#lets-connect" title="Permanent link">¶</a></h4>
+<h5 id="on-windows">On Windows<a class="headerlink" href="#on-windows" title="Permanent link">¶</a></h5>
+<p>You’ll want to run Windows Terminal (<a href="https://www.wikihow.com/Open-Terminal-in-Windows">How to Open Terminal in Windows: Step-by-Step Guide</a>)<br/>
+At the prompt: <br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>ssh<span class="w"> </span>root@lamp.johnaedo.com
+</code></pre></div><p></p>
+<h4 id="on-macos">On MacOS<a class="headerlink" href="#on-macos" title="Permanent link">¶</a></h4>
+<p>CMD + Space, then type in ‘terminal’<br/>
+At the prompt:<br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>ssh<span class="w"> </span>root@lamp.johnaedo.com
+</code></pre></div><p></p>
+<p>Then enter your password.</p>
+<h3 id="getting-a-web-site-up-and-running">Getting a Web Site Up and Running<a class="headerlink" href="#getting-a-web-site-up-and-running" title="Permanent link">¶</a></h3>
+<p>Please note that everything you essentially need is already installed in the droplet. This includes MySQL Apache, and PHP.</p>
+<p>Navigate to the root – <br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/root
+</code></pre></div><p></p>
+<p>The web root is in <code>/var/www/html</code> – Go to that directory now with <br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>/var/www/html
+</code></pre></div><p></p>
+<p>View the contents of the directory with <code>ls</code><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>ls
+</code></pre></div><p></p>
+<p>View the contents of <code>index.html</code> with <code>cat index.html</code> – a ton of text will scroll by.<br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>cat<span class="w"> </span>index.html
+</code></pre></div><p></p>
+<p>Now we will edit the contents of index.html – open for editing with <code>vi index.html</code><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>vi<span class="w"> </span>index.html
+</code></pre></div><p></p>
+<p>You can highlight and delete a block by positioning the cursor at the top of the block and pressing <code>Shift-v</code>, cursoring down to the end of the block and pressing <code>d</code></p>
+<p>You need to add the <code>\&lt;body\&gt;</code> tag and be in insert mode, so press the <code>insert</code> or <code>i</code> key</p>
+<p>Your index.html file should look like the following:</p>
+<p></p><div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>  
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="ni">&amp;emsp;</span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>  
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="ni">&amp;emsp;</span> <span class="ni">&amp;emsp;</span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We love COP 4331<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>  
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="ni">&amp;emsp;</span><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>  
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><br/>
+To save and quit hit the <code>escape</code> key (to get out of insert mode), type <code>:wq</code> – now verify the edit with <code>cat index.html</code><br/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>cat<span class="w"> </span>index.html
+</code></pre></div><p></p>
+<p>You can access this via a web browser. Open a browser and type in your URL using the IP address of the droplet you created.  Your IP address is listed on your Droplets page on Digital Ocean:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-droplet-get-ip.png"><img alt="screenshot-droplet-get-ip.png" src="../../../_assets/images/screenshot-droplet-get-ip.png"/></a></p>
+<p>In your browser, you should now see:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/2b0813940c7649f4ccd4b77803fd84bb_MD5.png"><img alt="2b0813940c7649f4ccd4b77803fd84bb_MD5.png" src="../../../_assets/images/2b0813940c7649f4ccd4b77803fd84bb_MD5.png"/></a></p>
+<p>Now for a domain, since we don’t want to by typing an IP address every time you access your app. You cannot buy a domain through Digital Ocean. Choose another domain registrant. The example below uses GoDaddy, but there are lots of them. Purchase a domain and point the domain to your Digital Ocean applet. Below are the steps taken on GoDaddy.</p>
+<ol>
+<li><strong>I already had this domain purchased:</strong></li>
+</ol>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/853857a8316814d01046a5d00a4c1686_MD5.png"><img alt="853857a8316814d01046a5d00a4c1686_MD5.png" src="../../../_assets/images/853857a8316814d01046a5d00a4c1686_MD5.png"/></a></p>
+<ol start="2">
+<li><strong>Navigate to the DNS manager:</strong></li>
+</ol>
+<p><a href="../../../_assets/images/91f11f93f3b9f8724cccfaab2487c8f6_MD5.jpg">Open: e3b78809f94b7f7a4707b312052fee10_MD5.png</a><br/>
+<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/91f11f93f3b9f8724cccfaab2487c8f6_MD5.jpg"><img alt="Open: e3b78809f94b7f7a4707b312052fee10_MD5.png" src="../../../_assets/images/91f11f93f3b9f8724cccfaab2487c8f6_MD5.jpg"/></a></p>
+<ol start="3">
+<li><strong>Edit the IP address and save:</strong></li>
+</ol>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/4650861af1e276d67ec235154edebbc5_MD5.png"><img alt="4650861af1e276d67ec235154edebbc5_MD5.png" src="../../../_assets/images/4650861af1e276d67ec235154edebbc5_MD5.png"/></a></p>
+<ol start="4">
+<li><strong>Test with a browser. It might take a few minutes to propagate. (On Windows it is helpful to go to a command prompt and type ipconfig /flushdns) You might also want to use Ctrl-F5 to hard reset the web content.</strong>  Note that on campus, DNS propagation for new URLs can take up to a full business day.  <strong><em>DO NOT attempt to configure your domain names on campus with any sort of urgency.</em></strong></li>
+</ol>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/a1f21c23baa7e00a902dba79ee912ace_MD5.png"><img alt="a1f21c23baa7e00a902dba79ee912ace_MD5.png" src="../../../_assets/images/a1f21c23baa7e00a902dba79ee912ace_MD5.png"/></a></p>
+<h2 id="working-with-the-database-mysql">Working with the Database (mySQL)<a class="headerlink" href="#working-with-the-database-mysql" title="Permanent link">¶</a></h2>
+<h3 id="connect-to-mysql-and-populate-a-database">Connect to mySQL and Populate a Database<a class="headerlink" href="#connect-to-mysql-and-populate-a-database" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span><span class="o">(</span><span class="k">then</span><span class="w"> </span>enter<span class="w"> </span>your<span class="w"> </span>password<span class="o">)</span>
+</code></pre></div>
+<p>Note: There are three levels of password you will need to think about. This is the first, which gives you access to MySQL from the command line.</p>
+<p>Here are the steps to create the database, tables, and working data.</p>
+<ol>
+<li><strong>Create database</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>create database COP4331;
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>use COP4331;
+</code></pre></div>
+<ol>
+<li><strong>Create tables</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">COP4331</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">Users</span><span class="o">`</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">(</span><span class="w"> </span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">	</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">	</span><span class="o">`</span><span class="n">FirstName</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">	</span><span class="o">`</span><span class="n">LastName</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">	</span><span class="o">`</span><span class="n">Login</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">	</span><span class="o">`</span><span class="n">Password</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">	</span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="p">)</span>
+<a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span>
+<a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a>
+<a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">COP4331</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">Colors</span><span class="o">`</span><span class="w"> </span><span class="p">(</span>
+<a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">	</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">	</span><span class="o">`</span><span class="n">Name</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">	</span><span class="o">`</span><span class="n">UserID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'0'</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">	</span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="p">)</span>
+<a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span>
+<a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a>
+<a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">COP4331</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">Contacts</span><span class="o">`</span>
+<a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="p">(</span>
+<a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">	</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">	</span><span class="o">`</span><span class="n">FirstName</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">	</span><span class="o">`</span><span class="n">LastName</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">	</span><span class="o">`</span><span class="n">Phone</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">	</span><span class="o">`</span><span class="n">Email</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-25" id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">	</span><span class="o">`</span><span class="n">UserID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'0'</span><span class="w"> </span><span class="p">,</span>
+<a href="#__codelineno-11-26" id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="w">	</span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="p">)</span>
+<a href="#__codelineno-11-27" id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span>
+</code></pre></div>
+<ol start="3">
+<li><strong>Populate working data rows</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>USE<span class="w"> </span>COP4331<span class="p">;</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>insert<span class="w"> </span>into<span class="w"> </span>Users<span class="w"> </span><span class="o">(</span>FirstName,LastName,Login,Password<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Rick'</span>,<span class="s1">'Leinecker'</span>,<span class="s1">'RickL'</span>,<span class="s1">'COP4331'</span><span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>insert<span class="w"> </span>into<span class="w"> </span>Users<span class="w"> </span><span class="o">(</span>FirstName,LastName,Login,Password<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Sam'</span>,<span class="s1">'Hill'</span>,<span class="s1">'SamH'</span>,<span class="s1">'Test'</span><span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>insert<span class="w"> </span>into<span class="w"> </span>Users<span class="w"> </span><span class="o">(</span>FirstName,LastName,Login,Password<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Rick'</span>,<span class="s1">'Leinecker'</span>,<span class="s1">'RickL'</span>,<span class="s1">'5832a71366768098cceb7095efb774f2'</span><span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a>insert<span class="w"> </span>into<span class="w"> </span>Users<span class="w"> </span><span class="o">(</span>FirstName,LastName,Login,Password<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Sam'</span>,<span class="s1">'Hill'</span>,<span class="s1">'SamH'</span>,<span class="s1">'0cbc6611f5540bd0809a388dc95a615b'</span><span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Blue'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'White'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Black'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Magenta'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Yellow'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Cyan'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Salmon'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Chartreuse'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Lime'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Blue'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Gray'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Red'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Green'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Chiffon'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Fuscia'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Brown'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Beige'</span>,1<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Blue'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'White'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Black'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-26" id="__codelineno-12-26" name="__codelineno-12-26"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Gray'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-27" id="__codelineno-12-27" name="__codelineno-12-27"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Magenta'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-28" id="__codelineno-12-28" name="__codelineno-12-28"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Yellow'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-29" id="__codelineno-12-29" name="__codelineno-12-29"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Cyan'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-30" id="__codelineno-12-30" name="__codelineno-12-30"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Salmon'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-31" id="__codelineno-12-31" name="__codelineno-12-31"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Chartreuse'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-32" id="__codelineno-12-32" name="__codelineno-12-32"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Lime'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-33" id="__codelineno-12-33" name="__codelineno-12-33"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Blue'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-34" id="__codelineno-12-34" name="__codelineno-12-34"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Gray'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-35" id="__codelineno-12-35" name="__codelineno-12-35"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Red'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-36" id="__codelineno-12-36" name="__codelineno-12-36"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Light Green'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-37" id="__codelineno-12-37" name="__codelineno-12-37"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Chiffon'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-38" id="__codelineno-12-38" name="__codelineno-12-38"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Fuscia'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-39" id="__codelineno-12-39" name="__codelineno-12-39"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Brown'</span>,3<span class="o">)</span><span class="p">;</span>
+<a href="#__codelineno-12-40" id="__codelineno-12-40" name="__codelineno-12-40"></a>insert<span class="w"> </span>into<span class="w"> </span>Colors<span class="w"> </span><span class="o">(</span>Name,UserID<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">'Beige'</span>,3<span class="o">)</span><span class="p">;</span>
+</code></pre></div>
+<p>Test with:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">Users</span><span class="p">;</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">Colors</span><span class="p">;</span>
+</code></pre></div>
+<p>also:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">Colors</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">UserID</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">Colors</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">UserID</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="create-a-database-user">Create a Database User<a class="headerlink" href="#create-a-database-user" title="Permanent link">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Multiple Credentials in Play!</p>
+<p>Remember, there are three levels of password you will need to think about. This is the second, which allows the webapp (the API code) to run queries against MySQL.</p>
+</div>
+<p></p><div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">Use</span><span class="w"> </span><span class="n">COP4331</span><span class="p">;</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">'TheBeast'</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">'WeLoveCOP4331'</span><span class="p">;</span>
+</code></pre></div><br/>
+Now we need to grant permissions to the database for that user:<p></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">COP4331</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'TheBeast'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
+</code></pre></div>
+<p>The database is ready to use.</p>
+<h3 id="the-web-site">The Web Site<a class="headerlink" href="#the-web-site" title="Permanent link">¶</a></h3>
+<p>We need to build out a directory structure to hold our application.<br/>
+The directory structure looks as follows:</p>
+<p><strong>root</strong> (/var/www/html)<br/>
+    <code>css</code> (/var/www/html/css)<br/>
+    <code>images</code>(/var/www/html/images)<br/>
+    <code>js</code> (/var/www/html/js)<br/>
+    <code>LAMPAPI</code> (/var/www/html/LAMPAPI)<br/>
+    <code>index.html</code><br/>
+    <code>color.html</code></p>
+<p><strong>Navigate to <code>/var/www/html</code></strong></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>/var/www/html
+</code></pre></div>
+<p><strong>Create the directories</strong></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a>mkdir<span class="w"> </span>css
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>mkdir<span class="w"> </span>images
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a>mkdir<span class="w"> </span>js
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a>mkdir<span class="w"> </span>LAMPAPI
+</code></pre></div>
+<h2 id="connecting-the-api-to-the-database">Connecting the API to the Database<a class="headerlink" href="#connecting-the-api-to-the-database" title="Permanent link">¶</a></h2>
+<h3 id="download-the-lamp-stack-project-files-from-webcourses">Download the LAMP Stack Project Files from Webcourses<a class="headerlink" href="#download-the-lamp-stack-project-files-from-webcourses" title="Permanent link">¶</a></h3>
+<p>In Webcourses, under the <code>Week 1</code> Module, there’s a file called <code>"LAMP Stack.zip"</code>  Download that to your PC.</p>
+<p>Decompress the file.  It doesn’t matter where as we’ll eventually be uploading its files to the server.</p>
+<h3 id="update-the-database-login-info">Update the Database Login Info<a class="headerlink" href="#update-the-database-login-info" title="Permanent link">¶</a></h3>
+<p>We need to modify three PHP files in the LAMPAPI directory that was just extracted from the LAMP Stack.zip archive: AddColor.php, Login.php, and SearchColors.php.  These files will serve as your API endpoints for accessing the database from the web application.</p>
+<p>In each PHP file there’s a line of code with your database username, password, and database name.  We need to update those placeholder values with the real values from the database setup we just completed.</p>
+<p>The original line:<br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="x">$conn = new mysqli("localhost", "username", "password", "database");</span>
+</code></pre></div><p></p>
+<p>Becomes:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="x">$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");</span>
+</code></pre></div>
+<p>You can use whatever editor you’re comfortable with to make these changes.</p>
+<h3 id="uploading-the-files-to-the-server">Uploading the Files to the Server<a class="headerlink" href="#uploading-the-files-to-the-server" title="Permanent link">¶</a></h3>
+<p>Once we’ve updated the files, we need to upload them to our server along with the rest of our LAMP Stack package.</p>
+<p>We’re going to use SSH’s cousin, <code>SCP</code>, to upload the files.</p>
+<div class="admonition note">
+<p class="admonition-title">A Word on SCP…</p>
+<p>In an later lesson, I will show you how to secure, contain, and protect your application…</p>
+</div>
+<p>Open your terminal…</p>
+<p>In our example, I extracted the ZIP file to a subdirectory called <code>work</code> in my home directory: </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s1">'work/LAMP Stack/LAMPAPI'</span>
+</code></pre></div>
+<p>Now we use SCP to copy over the files (SCP = “Secure CoPy”)</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a>scp<span class="w"> </span>AddColor.php<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/LAMPAPI
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a>scp<span class="w"> </span>Login.php<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/LAMPAPI
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a>scp<span class="w"> </span>SearchColors.php<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/LAMPAPI
+</code></pre></div>
+<p>Now SSH over to the server and verify the files are there.  Remember that Linux is case sensitive for file names and directories.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nb">cd</span><span class="w"> </span>/var/www/html/LAMPAPI
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a>ls
+</code></pre></div>
+<p>You should see output similar to this:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a>AddColor.php<span class="w">  </span>Login.php<span class="w">  </span>SearchColors.php
+</code></pre></div>
+<p>Now the API endpoints can be tested.</p>
+<h3 id="testing-the-api">Testing the API<a class="headerlink" href="#testing-the-api" title="Permanent link">¶</a></h3>
+<p>Download the Postman application from <a href="https://www.postman.com/downloads/">Download Postman | Get Started for Free</a> and install it on your computer.</p>
+<p>Run the application:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-postman-test-create.png"><img alt="screenshot-postman-test-create.png" src="../../../_assets/images/screenshot-postman-test-create.png"/></a></p>
+<p>Of course your will look different from mine as I’ve already set up a few tests.  Also, I run Arch Linux, by the way.  You’ll use the Add New Request button (highlighted above) to create tests against teach of our three end points.</p>
+<p>Let’s setup the Login endpoint test.  Click on the plus icon to add a new request.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-postman-test-login.png"><img alt="screenshot-postman-test-login.png" src="../../../_assets/images/screenshot-postman-test-login.png"/></a></p>
+<p>Notice that the first drop-down should list <strong>POST</strong>, not GET.<br/>
+The URL for our POST request is <a href="http://lamp.johnaedo.com/LAMPAPI/Login.php">http://lamp.johnaedo.com/LAMPAPI/Login.php</a></p>
+<p>Now since we’re logging into the app, we have to pass it our username and password.<br/>
+Click on the <code>Body</code> tab and make sure that <code>raw</code> is selected.<br/>
+In the text window below, you’ll enter in a small snippet of <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON?%23038=">JSON</a> code</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="p">{</span>
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="w">	</span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RickL"</span><span class="p">,</span>
+<a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="w">	</span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COP4331"</span>
+<a href="#__codelineno-25-4" id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Future use of JSON</p>
+<p>For your contacts app (i.e. the LAMP Stack Project) you will want to return an array of JSON objects. I have a video here: <a href="https://www.youtube.com/watch?v=G7GTKjTLCSI">https://www.youtube.com/watch?v=G7GTKjTLCSI</a> that explains this.</p>
+</div>
+<h2 id="setup-the-front-end">Setup the Front End<a class="headerlink" href="#setup-the-front-end" title="Permanent link">¶</a></h2>
+<h3 id="update-the-api-url-in-codejs">Update the API URL in code.js<a class="headerlink" href="#update-the-api-url-in-codejs" title="Permanent link">¶</a></h3>
+<p>Your front end needs to know where your API server is so it can make data requests.<br/>
+In our application, this is defined in <code>js/code.js</code></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-api-url-edit.png"><img alt="screenshot-api-url-edit.png" src="../../../_assets/images/screenshot-api-url-edit.png"/></a></p>
+<p>You need to update the <code>urlBase</code> variable to the location of your API.<br/>
+For our example:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">urlBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'https://lamp.johnaedo.com/LAMPAPI'</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">We’re using HTTPS here!</p>
+<p>Please note the use of HTTPS instead of HTTP in this URL.  Our last step in the tutorial will be to configure the server to use encryption (HTTPS).</p>
+</div>
+<h3 id="upload-the-files">Upload the Files<a class="headerlink" href="#upload-the-files" title="Permanent link">¶</a></h3>
+<p>Using <code>scp</code> as you did earlier, upload the remaining files from <code>"LAMP Stack.zip"</code> to the server:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s1">'work/LAMP Stack'</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a>scp<span class="w"> </span>css/styles.css<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/css
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a>scp<span class="w"> </span>images/background.png<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/images
+<a href="#__codelineno-27-5" id="__codelineno-27-5" name="__codelineno-27-5"></a>
+<a href="#__codelineno-27-6" id="__codelineno-27-6" name="__codelineno-27-6"></a>scp<span class="w"> </span>js/code.js<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/js
+<a href="#__codelineno-27-7" id="__codelineno-27-7" name="__codelineno-27-7"></a>scp<span class="w"> </span>js/md5.js<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/js
+<a href="#__codelineno-27-8" id="__codelineno-27-8" name="__codelineno-27-8"></a>
+<a href="#__codelineno-27-9" id="__codelineno-27-9" name="__codelineno-27-9"></a>scp<span class="w"> </span>index.html<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/
+<a href="#__codelineno-27-10" id="__codelineno-27-10" name="__codelineno-27-10"></a>scp<span class="w"> </span>color.html<span class="w"> </span>root@lamp.johnaedo.com:/var/www/html/
+</code></pre></div>
+<p>If you wish to use a GUI like FileZilla, that will work as well and may be easier for you.</p>
+<h3 id="secure-your-site-with-tls">Secure Your Site with TLS<a class="headerlink" href="#secure-your-site-with-tls" title="Permanent link">¶</a></h3>
+<p>Last, but definitely NOT least, we need to make sure our site supports encryption.  Nowadays, encryption is a must for privacy and security.  Even though our little apps are of little consequence, encryption is free and it’s always good to reinforce good practice.</p>
+<p>On the droplet, simple run:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a>certbot
+</code></pre></div>
+<p>Follow the prompts and answer the questions:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a>root@lamp-stack:~# certbot
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a>Saving debug log to /var/log/letsencrypt/letsencrypt.log
+<a href="#__codelineno-29-3" id="__codelineno-29-3" name="__codelineno-29-3"></a>Enter email address (used for urgent renewal and security notices)
+<a href="#__codelineno-29-4" id="__codelineno-29-4" name="__codelineno-29-4"></a> (Enter 'c' to cancel): john.aedo@ucf.edu
+<a href="#__codelineno-29-5" id="__codelineno-29-5" name="__codelineno-29-5"></a>
+<a href="#__codelineno-29-6" id="__codelineno-29-6" name="__codelineno-29-6"></a>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<a href="#__codelineno-29-7" id="__codelineno-29-7" name="__codelineno-29-7"></a>Please read the Terms of Service at
+<a href="#__codelineno-29-8" id="__codelineno-29-8" name="__codelineno-29-8"></a>https://letsencrypt.org/documents/LE-SA-v1.6-August-18-2025.pdf. You must agree
+<a href="#__codelineno-29-9" id="__codelineno-29-9" name="__codelineno-29-9"></a>in order to register with the ACME server. Do you agree?
+<a href="#__codelineno-29-10" id="__codelineno-29-10" name="__codelineno-29-10"></a>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<a href="#__codelineno-29-11" id="__codelineno-29-11" name="__codelineno-29-11"></a>(Y)es/(N)o: Y
+<a href="#__codelineno-29-12" id="__codelineno-29-12" name="__codelineno-29-12"></a>
+<a href="#__codelineno-29-13" id="__codelineno-29-13" name="__codelineno-29-13"></a>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<a href="#__codelineno-29-14" id="__codelineno-29-14" name="__codelineno-29-14"></a>Would you be willing, once your first certificate is successfully issued, to
+<a href="#__codelineno-29-15" id="__codelineno-29-15" name="__codelineno-29-15"></a>share your email address with the Electronic Frontier Foundation, a founding
+<a href="#__codelineno-29-16" id="__codelineno-29-16" name="__codelineno-29-16"></a>partner of the Let's Encrypt project and the non-profit organization that
+<a href="#__codelineno-29-17" id="__codelineno-29-17" name="__codelineno-29-17"></a>develops Certbot? We'd like to send you email about our work encrypting the web,
+<a href="#__codelineno-29-18" id="__codelineno-29-18" name="__codelineno-29-18"></a>EFF news, campaigns, and ways to support digital freedom.
+<a href="#__codelineno-29-19" id="__codelineno-29-19" name="__codelineno-29-19"></a>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<a href="#__codelineno-29-20" id="__codelineno-29-20" name="__codelineno-29-20"></a>(Y)es/(N)o: Y
+<a href="#__codelineno-29-21" id="__codelineno-29-21" name="__codelineno-29-21"></a>Account registered.
+<a href="#__codelineno-29-22" id="__codelineno-29-22" name="__codelineno-29-22"></a>Please enter the domain name(s) you would like on your certificate (comma and/or
+<a href="#__codelineno-29-23" id="__codelineno-29-23" name="__codelineno-29-23"></a>space separated) (Enter 'c' to cancel): lamp.johnaedo.com
+<a href="#__codelineno-29-24" id="__codelineno-29-24" name="__codelineno-29-24"></a>Requesting a certificate for lamp.johnaedo.com
+<a href="#__codelineno-29-25" id="__codelineno-29-25" name="__codelineno-29-25"></a>
+<a href="#__codelineno-29-26" id="__codelineno-29-26" name="__codelineno-29-26"></a>Successfully received certificate.
+<a href="#__codelineno-29-27" id="__codelineno-29-27" name="__codelineno-29-27"></a>Certificate is saved at: /etc/letsencrypt/live/lamp.johnaedo.com/fullchain.pem
+<a href="#__codelineno-29-28" id="__codelineno-29-28" name="__codelineno-29-28"></a>Key is saved at:         /etc/letsencrypt/live/lamp.johnaedo.com/privkey.pem
+<a href="#__codelineno-29-29" id="__codelineno-29-29" name="__codelineno-29-29"></a>This certificate expires on 2026-04-08.
+<a href="#__codelineno-29-30" id="__codelineno-29-30" name="__codelineno-29-30"></a>These files will be updated when the certificate renews.
+<a href="#__codelineno-29-31" id="__codelineno-29-31" name="__codelineno-29-31"></a>Certbot has set up a scheduled task to automatically renew this certificate in the background.
+<a href="#__codelineno-29-32" id="__codelineno-29-32" name="__codelineno-29-32"></a>
+<a href="#__codelineno-29-33" id="__codelineno-29-33" name="__codelineno-29-33"></a>Deploying certificate
+<a href="#__codelineno-29-34" id="__codelineno-29-34" name="__codelineno-29-34"></a>Successfully deployed certificate for lamp.johnaedo.com to /etc/apache2/sites-available/000-default-le-ssl.conf
+<a href="#__codelineno-29-35" id="__codelineno-29-35" name="__codelineno-29-35"></a>Congratulations! You have successfully enabled HTTPS on https://lamp.johnaedo.com
+</code></pre></div>
+<h2 id="testing-the-complete-application">Testing the Complete Application<a class="headerlink" href="#testing-the-complete-application" title="Permanent link">¶</a></h2>
+<p>Now you can access your application by the URL <code>https://lamp.johnaedo.com</code> in your browser.  After logging in, you can see the main Colors interface:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-adding-color2.png"><img alt="screenshot-adding-color2.png" src="../../../_assets/images/screenshot-adding-color2.png"/></a></p>
+<p>Here, I’ve searched for “Blue” and added “Hot Pink”</p>
+<p>We can now search and find Hot Pink:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-adding-color.png"><img alt="screenshot-adding-color.png" src="../../../_assets/images/screenshot-adding-color.png"/></a></p>
+<div class="admonition tip">
+<p class="admonition-title">A Flashier Example!</p>
+<p>For an example of a previous project visit <a href="http://4331paradise.com/">http://4331paradise.com/</a></p>
+</div>
+<hr/>
+<div class="md-source-file">
+<small>
+<!-- mkdocs-git-revision-date-localized-plugin -->
+<u>Last update</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 2, 2026 17:18:28 UTC">May 2, 2026</span>
+<!-- mkdocs-git-revision-date-plugin -->
+<br/>
+<u>Created</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 2, 2026 17:18:28 UTC">May 2, 2026</span>
+</small>
+</div>
+<!-- Was this page helpful? -->
+<!-- Comment system -->
+<script> 
+    try {
+      const index = document.querySelector('h1').innerHTML;
+      if (index === "Index") {
+        document.querySelector('h1').innerHTML = "Getting Started with LAMP";
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  </script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/Enveloppe/" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+<script src="../../../_static/js/mathjax.js"></script>
+<script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../../_static/js/snippets.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/index.js"></script>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html><!-- Source file information --><!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
