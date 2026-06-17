@@ -14,17 +14,24 @@ tags:
 > [!warning]
 > My work machines are either Linux or MacOS.  The examples you see here from the local machine (i.e. your computer) will be using the zsh command shell.  Windows users will need to adjust your slashes and maybe directory locations as appropriate.
 
-Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app
 
-You will need a digitalocean.com account for this. I suggest being logged onto the account before you begin. You will also need to have purchased a domain. I am using `lamp.johnaedo.com` since I already own it and am not using it. .xyz domains are inexpensive, so you might want to consider those.
+You will need a [DigitalOcean](https://digitalocean.com) account for this. I suggest being logged onto the account before you begin. 
 
-The Digital Ocean hosting will cost $6 per month, and you will need it for two months. The domain will cost something, too.
+The Digital Ocean hosting will cost about $6 per month, and you will need it for three months.
+
+You will also need a *domain name.*  This is a friendly name you can use in your URL to access your application, for example:  `cop4331c-joe.com`.  Note the `.com` at the end.  This is your Top-Level Domain or TLD.  You don't have to have a `.com` domain.  In fact, it is much cheaper to use the `.xyz` TLD, e.g. cop4331c-joe.xyz.  
+
+Domain names may be purchased through a domain registrar such as [GoDaddy](https://godaddy.com) or [NameCheap](https://namecheap.com).  `.xyz` domains can be had for about $2/year.
 
 > [!information]
-> My sample domain will be `lamp.johnaedo.com`.  Make sure to replace this with the domain that you purchased and will configure below.  Note that some screenshots will say `cop4331-5.com` as those are from steps provided by Dr. Leinecker for the DNS setup that didn't apply for my particular setup.
+> My sample domain will be `lamp.johnaedo.com`.  You will also see `cop4331-5.com` referenced in this tutorial.  Make sure to replace these with the domain that you purchased and will configure below.  
 ## Hosting
 
-Make sure you are logged in to your Digital Ocean account. Go to [https://marketplace.digitalocean.com/apps/lamp](https://marketplace.digitalocean.com/apps/lamp)
+Make sure you are logged in to your Digital Ocean account. 
+### Grab the LAMP Droplet
+A `Droplet` is just DigitalOcean's term for a virtual machine, an online server that will run and serve your application.
+
+Go to [https://marketplace.digitalocean.com/apps/lamp](https://marketplace.digitalocean.com/apps/lamp)
 
 ### Create a LAMP Droplet
 
@@ -42,8 +49,8 @@ Make sure you are logged in to your Digital Ocean account. Go to [https://market
 
 ### Configure your Storage, CPU, and Transfer Plan
 
-![Pasted image 20260107173756.png](Pasted%20image%2020260107173756.png)
-
+[Open: Pasted image 20260517154507.png](../../_assets/images/screenshot-digitalocean-choose-plan.jpg)
+![Open: Pasted image 20260517154507.png](../../_assets/images/screenshot-digitalocean-choose-plan.jpg)
 #### Scroll Down More!
 
 ### Configure Your Authentication
@@ -66,9 +73,11 @@ At the prompt:
 ```bash
 ssh root@lamp.johnaedo.com
 ```
+> [!IMPORTANT]
+> Remember to replace `lamp.johnaedo.com` with your domain
 
 #### On MacOS
-CMD + Space, then type in 'terminal'
+`CMD + Space`, then type in 'terminal'
 At the prompt:
 ```bash
 ssh root@lamp.johnaedo.com
@@ -78,7 +87,7 @@ Then enter your password.
 
 ### Getting a Web Site Up and Running
 
-Please note that everything you essentially need is already installed in the droplet. This includes MySQL Apache, and PHP.
+Please note that everything you essentially need is already installed in the droplet. This includes MySQL, Apache, and PHP.
 
 Navigate to the root – 
 ```bash
@@ -104,7 +113,10 @@ Now we will edit the contents of index.html – open for editing with `vi index.
 ```bash
 vi index.html
 ```
-
+> [!TIP]
+> You may also use the `nano` editor, which most find more user-friendly.  My instructions use `vi` because I'm an elitist Linux user that can't be broken of old habits.  ;-)
+> 
+> Also, `vi` is good for you.  Eat your veggies!
 
 You can highlight and delete a block by positioning the cursor at the top of the block and pressing `Shift-v`, cursoring down to the end of the block and pressing `d`
 
@@ -115,7 +127,7 @@ Your index.html file should look like the following:
 ```html
 <html>  
  <body>  
-   <h1>We love COP 4331</h1>  
+   <h1>We love COP 4331C</h1>  
  </body>  
 </html>
 ```
@@ -132,10 +144,10 @@ In your browser, you should now see:
 
 ![2b0813940c7649f4ccd4b77803fd84bb_MD5.png](../../_assets/images/2b0813940c7649f4ccd4b77803fd84bb_MD5.png)
 
-Now for a domain, since we don't want to by typing an IP address every time you access your app. You cannot buy a domain through Digital Ocean. Choose another domain registrant. The example below uses GoDaddy, but there are lots of them. Purchase a domain and point the domain to your Digital Ocean applet. Below are the steps taken on GoDaddy.
+Now let's setup the domain your purchased earlier, since we don't want to by typing an IP address every time you access your app. The example below uses GoDaddy, but there are lots of them. Purchase a domain and point the domain to your DigitalOcean applet. Below are the steps taken on GoDaddy.
 
 
-1. **I already had this domain purchased:**
+1. **We're using cop4331-5.com for this example:**
 
 ![853857a8316814d01046a5d00a4c1686_MD5.png](../../_assets/images/853857a8316814d01046a5d00a4c1686_MD5.png)
 
@@ -191,16 +203,6 @@ CREATE TABLE `COP4331`.`Colors` (
 	PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `COP4331`.`Contacts`
-(
-	`ID` INT NOT NULL AUTO_INCREMENT ,
-	`FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
-	`LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
-	`Phone` VARCHAR(50) NOT NULL DEFAULT '' ,
-	`Email` VARCHAR(50) NOT NULL DEFAULT '' ,
-	`UserID` INT NOT NULL DEFAULT '0' ,
-	PRIMARY KEY (`ID`)
-) ENGINE = InnoDB;
 ```
 
 3. **Populate working data rows**
@@ -284,11 +286,11 @@ The database is ready to use.
 We need to build out a directory structure to hold our application.
 The directory structure looks as follows:
 
-**root** (/var/www/html)
-    `css` (/var/www/html/css)
-    `images `(/var/www/html/images)
-    `js` (/var/www/html/js)
-    `LAMPAPI` (/var/www/html/LAMPAPI)
+**Web root** (/var/www/html)
+    `css/`
+    `images/`
+    `js/`
+    `LAMPAPI/`
     `index.html`
     `color.html`
 
@@ -311,9 +313,11 @@ mkdir LAMPAPI
 
 ### Download the LAMP Stack Project Files from Webcourses
 
-In Webcourses, under the `Week 1` Module, there's a file called `"LAMP Stack.zip"`  Download that to your PC.
+In Webcourses, under the `Week 1` Module, there's a file called `"LAMP Stack.zip"`
+You can also download the file from my website:  [LAMP Stack.zip](https://teaching.johnaedo.com/_assets/files/LAMP%20Stack.zip)
+Download that to your PC.
 
-Decompress the file.  It doesn't matter where as we'll eventually be uploading its files to the server.
+Decompress the file.  It doesn't matter where as we'll be uploading its files to the server.
 
 ### Update the Database Login Info
 
