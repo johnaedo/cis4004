@@ -518,7 +518,7 @@ curl -X POST http://localhost:3000/users \
 ---
 
 ### Postman / Bruno — GUI for exploring APIs during development
-![8912f5a9dfa00e5be3a4121533ab809a_MD5](../_assets/images/8912f5a9dfa00e5be3a4121533ab809a_MD5.jpg)
+![Screenshot - Bruno POST Test.jpg](../_assets/images/Screenshot%20-%20Bruno%20POST%20Test.jpg)
 
 ---
 
