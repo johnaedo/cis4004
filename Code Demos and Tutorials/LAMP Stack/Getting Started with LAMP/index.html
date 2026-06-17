@@ -2,7 +2,7 @@
 <html class="no-js" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app" name="description"/>
+<meta content="You will need a DigitalOcean account for this. I suggest being logged onto the account before you begin." name="description"/>
 <meta content="Dr. John Aedo" name="author"/>
 <link href="https://johnaedo.github.io/cis4004/Code%20Demos%20and%20Tutorials/LAMP%20Stack/Getting%20Started%20with%20LAMP/" rel="canonical"/>
 <link href="../../Demo%20-%20Node.js%20and%20Express/" rel="prev"/>
@@ -32,8 +32,8 @@
 <meta content="https://johnaedo.github.io/cis4004/" name="site_url"/>
 <meta content="Getting Started with LAMP" property="og:title"/>
 <meta content="Getting Started with LAMP" name="twitter:title"/>
-<meta content="Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app" name="og:description"/>
-<meta content="Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app" name="twitter:description"/>
+<meta content="You will need a DigitalOcean account for this. I suggest being logged onto the account before you begin." name="og:description"/>
+<meta content="You will need a DigitalOcean account for this. I suggest being logged onto the account before you begin." name="twitter:description"/>
 <script> document.title = "Getting Started with LAMP" </script>
 <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
@@ -249,6 +249,15 @@
 </a>
 <nav aria-label="Hosting" class="md-nav">
 <ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#grab-the-lamp-droplet">
+<span class="md-ellipsis">
+      
+        Grab the LAMP Droplet
+      
+    </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#create-a-lamp-droplet">
 <span class="md-ellipsis">
@@ -551,6 +560,14 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Lecture%20Slides/Lecture%20-%20Node.js%20Fundamentals/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Lecture   Node.js Fundamentals
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -608,6 +625,15 @@
 </a>
 <nav aria-label="Hosting" class="md-nav">
 <ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#grab-the-lamp-droplet">
+<span class="md-ellipsis">
+      
+        Grab the LAMP Droplet
+      
+    </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#create-a-lamp-droplet">
 <span class="md-ellipsis">
@@ -926,15 +952,19 @@
 <p class="admonition-title">Warning</p>
 <p>My work machines are either Linux or MacOS.  The examples you see here from the local machine (i.e. your computer) will be using the zsh command shell.  Windows users will need to adjust your slashes and maybe directory locations as appropriate.</p>
 </div>
-<p>Notes for LAMP stack creation using Digital Ocean – Instructions to recreate the color app</p>
-<p>You will need a digitalocean.com account for this. I suggest being logged onto the account before you begin. You will also need to have purchased a domain. I am using <code>lamp.johnaedo.com</code> since I already own it and am not using it. .xyz domains are inexpensive, so you might want to consider those.</p>
-<p>The Digital Ocean hosting will cost $6 per month, and you will need it for two months. The domain will cost something, too.</p>
+<p>You will need a <a href="https://digitalocean.com">DigitalOcean</a> account for this. I suggest being logged onto the account before you begin. </p>
+<p>The Digital Ocean hosting will cost about $6 per month, and you will need it for three months.</p>
+<p>You will also need a <em>domain name.</em>  This is a friendly name you can use in your URL to access your application, for example:  <code>cop4331c-joe.com</code>.  Note the <code>.com</code> at the end.  This is your Top-Level Domain or TLD.  You don’t have to have a <code>.com</code> domain.  In fact, it is much cheaper to use the <code>.xyz</code> TLD, e.g. cop4331c-joe.xyz.  </p>
+<p>Domain names may be purchased through a domain registrar such as <a href="https://godaddy.com">GoDaddy</a> or <a href="https://namecheap.com">NameCheap</a>.  <code>.xyz</code> domains can be had for about $2/year.</p>
 <div class="admonition information">
 <p class="admonition-title">Information</p>
-<p>My sample domain will be <code>lamp.johnaedo.com</code>.  Make sure to replace this with the domain that you purchased and will configure below.  Note that some screenshots will say <code>cop4331-5.com</code> as those are from steps provided by Dr. Leinecker for the DNS setup that didn’t apply for my particular setup.</p>
+<p>My sample domain will be <code>lamp.johnaedo.com</code>.  You will also see <code>cop4331-5.com</code> referenced in this tutorial.  Make sure to replace these with the domain that you purchased and will configure below.  </p>
 </div>
 <h3 id="hosting">Hosting<a class="headerlink" href="#hosting" title="Permanent link">¶</a></h3>
-<p>Make sure you are logged in to your Digital Ocean account. Go to <a href="https://marketplace.digitalocean.com/apps/lamp">https://marketplace.digitalocean.com/apps/lamp</a></p>
+<p>Make sure you are logged in to your Digital Ocean account. </p>
+<h4 id="grab-the-lamp-droplet">Grab the LAMP Droplet<a class="headerlink" href="#grab-the-lamp-droplet" title="Permanent link">¶</a></h4>
+<p>A <code>Droplet</code> is just DigitalOcean’s term for a virtual machine, an online server that will run and serve your application.</p>
+<p>Go to <a href="https://marketplace.digitalocean.com/apps/lamp">https://marketplace.digitalocean.com/apps/lamp</a></p>
 <h4 id="create-a-lamp-droplet">Create a LAMP Droplet<a class="headerlink" href="#create-a-lamp-droplet" title="Permanent link">¶</a></h4>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/ee5e8f187883bf66360d9d2099e8487d_MD5.png"><img alt="ee5e8f187883bf66360d9d2099e8487d_MD5.png" src="../../../_assets/images/ee5e8f187883bf66360d9d2099e8487d_MD5.png"/></a></p>
 <h4 id="select-your-region-and-datacenter">Select Your Region and Datacenter<a class="headerlink" href="#select-your-region-and-datacenter" title="Permanent link">¶</a></h4>
@@ -943,7 +973,8 @@
 <h4 id="select-ubuntu-basic-plan">Select Ubuntu, Basic Plan…<a class="headerlink" href="#select-ubuntu-basic-plan" title="Permanent link">¶</a></h4>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/854eac4b9d987948a953518347c73b7b_MD5.png"><img alt="854eac4b9d987948a953518347c73b7b_MD5.png" src="../../../_assets/images/854eac4b9d987948a953518347c73b7b_MD5.png"/></a></p>
 <h4 id="configure-your-storage-cpu-and-transfer-plan">Configure your Storage, CPU, and Transfer Plan<a class="headerlink" href="#configure-your-storage-cpu-and-transfer-plan" title="Permanent link">¶</a></h4>
-<p><span class="ezlinks_not_found ezlinks_not_found" src="../../Pasted%2520image%252020260107173756.png">Pasted image 20260107173756.png</span></p>
+<p><a href="../../../_assets/images/screenshot-digitalocean-choose-plan.jpg">Open: Pasted image 20260517154507.png</a><br/>
+<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-digitalocean-choose-plan.jpg"><img alt="Open: Pasted image 20260517154507.png" src="../../../_assets/images/screenshot-digitalocean-choose-plan.jpg"/></a></p>
 <h5 id="scroll-down-more">Scroll Down More!<a class="headerlink" href="#scroll-down-more" title="Permanent link">¶</a></h5>
 <h4 id="configure-your-authentication">Configure Your Authentication<a class="headerlink" href="#configure-your-authentication" title="Permanent link">¶</a></h4>
 <p>As this is the first foray into Linux and remote server access for many of you, I recommend starting simple and selecting Password.  The password you enter here will be for the <code>root</code> account for your virtual machine which will have full administrative privileges.  Follow secure password generation techniques here – the guidelines provided are “okay,” but I suggest a minimum of 16 characters.  I also recommend you read this XKCD comic for reference:  <a href="https://xkcd.com/936/">xkcd: Password Strength</a></p>
@@ -958,14 +989,18 @@
 At the prompt: <br/>
 </p><div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>ssh<span class="w"> </span>root@lamp.johnaedo.com
 </code></pre></div><p></p>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Remember to replace <code>lamp.johnaedo.com</code> with your domain</p>
+</div>
 <h4 id="on-macos">On MacOS<a class="headerlink" href="#on-macos" title="Permanent link">¶</a></h4>
-<p>CMD + Space, then type in ‘terminal’<br/>
+<p><code>CMD + Space</code>, then type in ‘terminal’<br/>
 At the prompt:<br/>
 </p><div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>ssh<span class="w"> </span>root@lamp.johnaedo.com
 </code></pre></div><p></p>
 <p>Then enter your password.</p>
 <h3 id="getting-a-web-site-up-and-running">Getting a Web Site Up and Running<a class="headerlink" href="#getting-a-web-site-up-and-running" title="Permanent link">¶</a></h3>
-<p>Please note that everything you essentially need is already installed in the droplet. This includes MySQL Apache, and PHP.</p>
+<p>Please note that everything you essentially need is already installed in the droplet. This includes MySQL, Apache, and PHP.</p>
 <p>Navigate to the root – <br/>
 </p><div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/root
 </code></pre></div><p></p>
@@ -981,12 +1016,17 @@ At the prompt:<br/>
 <p>Now we will edit the contents of index.html – open for editing with <code>vi index.html</code><br/>
 </p><div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>vi<span class="w"> </span>index.html
 </code></pre></div><p></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You may also use the <code>nano</code> editor, which most find more user-friendly.  My instructions use <code>vi</code> because I’m an elitist Linux user that can’t be broken of old habits.  ;-)</p>
+<p>Also, <code>vi</code> is good for you.  Eat your veggies!</p>
+</div>
 <p>You can highlight and delete a block by positioning the cursor at the top of the block and pressing <code>Shift-v</code>, cursoring down to the end of the block and pressing <code>d</code></p>
 <p>You need to add the <code>\&lt;body\&gt;</code> tag and be in insert mode, so press the <code>insert</code> or <code>i</code> key</p>
 <p>Your index.html file should look like the following:</p>
 <p></p><div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>  
 <a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="ni">&amp;emsp;</span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>  
-<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="ni">&amp;emsp;</span> <span class="ni">&amp;emsp;</span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We love COP 4331<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>  
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="ni">&amp;emsp;</span> <span class="ni">&amp;emsp;</span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We love COP 4331C<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>  
 <a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="ni">&amp;emsp;</span><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>  
 <a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div><br/>
@@ -997,9 +1037,9 @@ To save and quit hit the <code>escape</code> key (to get out of insert mode), ty
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/screenshot-droplet-get-ip.png"><img alt="screenshot-droplet-get-ip.png" src="../../../_assets/images/screenshot-droplet-get-ip.png"/></a></p>
 <p>In your browser, you should now see:</p>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/2b0813940c7649f4ccd4b77803fd84bb_MD5.png"><img alt="2b0813940c7649f4ccd4b77803fd84bb_MD5.png" src="../../../_assets/images/2b0813940c7649f4ccd4b77803fd84bb_MD5.png"/></a></p>
-<p>Now for a domain, since we don’t want to by typing an IP address every time you access your app. You cannot buy a domain through Digital Ocean. Choose another domain registrant. The example below uses GoDaddy, but there are lots of them. Purchase a domain and point the domain to your Digital Ocean applet. Below are the steps taken on GoDaddy.</p>
+<p>Now let’s setup the domain your purchased earlier, since we don’t want to by typing an IP address every time you access your app. The example below uses GoDaddy, but there are lots of them. Purchase a domain and point the domain to your DigitalOcean applet. Below are the steps taken on GoDaddy.</p>
 <ol>
-<li><strong>I already had this domain purchased:</strong></li>
+<li><strong>We’re using cop4331-5.com for this example:</strong></li>
 </ol>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../../_assets/images/853857a8316814d01046a5d00a4c1686_MD5.png"><img alt="853857a8316814d01046a5d00a4c1686_MD5.png" src="../../../_assets/images/853857a8316814d01046a5d00a4c1686_MD5.png"/></a></p>
 <ol start="2">
@@ -1046,17 +1086,6 @@ To save and quit hit the <code>escape</code> key (to get out of insert mode), ty
 <a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">	</span><span class="o">`</span><span class="n">UserID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'0'</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
 <a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">	</span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="p">)</span>
 <a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span>
-<a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a>
-<a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">COP4331</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">Contacts</span><span class="o">`</span>
-<a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="p">(</span>
-<a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">	</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span>
-<a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">	</span><span class="o">`</span><span class="n">FirstName</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
-<a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">	</span><span class="o">`</span><span class="n">LastName</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
-<a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">	</span><span class="o">`</span><span class="n">Phone</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
-<a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">	</span><span class="o">`</span><span class="n">Email</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="p">,</span>
-<a href="#__codelineno-11-25" id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">	</span><span class="o">`</span><span class="n">UserID</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'0'</span><span class="w"> </span><span class="p">,</span>
-<a href="#__codelineno-11-26" id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="w">	</span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">ID</span><span class="o">`</span><span class="p">)</span>
-<a href="#__codelineno-11-27" id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span>
 </code></pre></div>
 <ol start="3">
 <li><strong>Populate working data rows</strong></li>
@@ -1125,11 +1154,11 @@ Now we need to grant permissions to the database for that user:<p></p>
 <h3 id="the-web-site">The Web Site<a class="headerlink" href="#the-web-site" title="Permanent link">¶</a></h3>
 <p>We need to build out a directory structure to hold our application.<br/>
 The directory structure looks as follows:</p>
-<p><strong>root</strong> (/var/www/html)<br/>
-    <code>css</code> (/var/www/html/css)<br/>
-    <code>images</code>(/var/www/html/images)<br/>
-    <code>js</code> (/var/www/html/js)<br/>
-    <code>LAMPAPI</code> (/var/www/html/LAMPAPI)<br/>
+<p><strong>Web root</strong> (/var/www/html)<br/>
+    <code>css/</code><br/>
+    <code>images/</code><br/>
+    <code>js/</code><br/>
+    <code>LAMPAPI/</code><br/>
     <code>index.html</code><br/>
     <code>color.html</code></p>
 <p><strong>Navigate to <code>/var/www/html</code></strong></p>
@@ -1143,8 +1172,10 @@ The directory structure looks as follows:</p>
 </code></pre></div>
 <h2 id="connecting-the-api-to-the-database">Connecting the API to the Database<a class="headerlink" href="#connecting-the-api-to-the-database" title="Permanent link">¶</a></h2>
 <h3 id="download-the-lamp-stack-project-files-from-webcourses">Download the LAMP Stack Project Files from Webcourses<a class="headerlink" href="#download-the-lamp-stack-project-files-from-webcourses" title="Permanent link">¶</a></h3>
-<p>In Webcourses, under the <code>Week 1</code> Module, there’s a file called <code>"LAMP Stack.zip"</code>  Download that to your PC.</p>
-<p>Decompress the file.  It doesn’t matter where as we’ll eventually be uploading its files to the server.</p>
+<p>In Webcourses, under the <code>Week 1</code> Module, there’s a file called <code>"LAMP Stack.zip"</code><br/>
+You can also download the file from my website:  <a href="https://teaching.johnaedo.com/_assets/files/LAMP%20Stack.zip">LAMP Stack.zip</a><br/>
+Download that to your PC.</p>
+<p>Decompress the file.  It doesn’t matter where as we’ll be uploading its files to the server.</p>
 <h3 id="update-the-database-login-info">Update the Database Login Info<a class="headerlink" href="#update-the-database-login-info" title="Permanent link">¶</a></h3>
 <p>We need to modify three PHP files in the LAMPAPI directory that was just extracted from the LAMP Stack.zip archive: AddColor.php, Login.php, and SearchColors.php.  These files will serve as your API endpoints for accessing the database from the web application.</p>
 <p>In each PHP file there’s a line of code with your database username, password, and database name.  We need to update those placeholder values with the real values from the database setup we just completed.</p>
@@ -1284,7 +1315,7 @@ For our example:</p>
 <small>
 <!-- mkdocs-git-revision-date-localized-plugin -->
 <u>Last update</u> :
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 2, 2026 17:18:28 UTC">May 2, 2026</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 17, 2026 13:07:18 UTC">June 17, 2026</span>
 <!-- mkdocs-git-revision-date-plugin -->
 <br/>
 <u>Created</u> :

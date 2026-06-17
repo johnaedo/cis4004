@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Course notes, code demos, and tutorials" name="description"/>
+<meta content="Dr. John Aedo" name="author"/>
+<link href="https://johnaedo.github.io/cis4004/Lecture%20Slides/Lecture%20-%20Node.js%20Fundamentals/" rel="canonical"/>
+<link href="../Lecture%20-%20Express%20and%20Mongo/" rel="prev"/>
+<link href="../../blog/" rel="next"/>
+<link href="../../_assets/meta/favicons.svg" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Lecture Node.js Fundamentals - CIS 4004 - Web-Based Information Systems</title>
+<link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Karla:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Karla";--md-code-font:"Ubuntu Mono"}</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<link href="../../_static/css/admonition.css" rel="stylesheet"/>
+<link href="../../_static/css/custom_attributes.css" rel="stylesheet"/>
+<link href="../../_static/css/customization.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/styles.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css" rel="stylesheet"/>
+<link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://johnaedo.github.io/cis4004/_assets/meta/logo.svg" property="og:image"/>
+<meta content="https://johnaedo.github.io/cis4004/_assets/meta/logo.svg" name="twitter:image"/>
+<meta content="https://johnaedo.github.io/cis4004/" name="site_url"/>
+<meta content="Lecture   Node.js Fundamentals" property="og:title"/>
+<meta content="Lecture   Node.js Fundamentals" name="twitter:title"/>
+<meta content="Course notes, code demos, and tutorials" name="og:description"/>
+<meta content="Course notes, code demos, and tutorials" name="twitter:description"/>
+<script> document.title = "Lecture   Node.js Fundamentals" </script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+<body data-md-color-accent="light-blue" data-md-color-primary="teal" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="../..">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="CIS 4004 - Web-Based Information Systems" class="md-header__button md-logo" data-md-component="logo" href="../.." title="CIS 4004 - Web-Based Information Systems">
+<img alt="logo" src="../../_assets/meta/logo.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            CIS 4004 - Web-Based Information Systems
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Lecture   Node.js Fundamentals
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Passer au mode sombre" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="teal" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Passer au mode sombre">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Passer en mode clair" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="blue-grey" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Passer en mode clair">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../Code%20Demos%20and%20Tutorials/Demo%20-%20MongoDB/">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Code Demos and Tutorials
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../Lecture%20-%20Express%20and%20Mongo/">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Lecture Slides
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../blog/">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Blog
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CIS 4004 - Web-Based Information Systems" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="CIS 4004 - Web-Based Information Systems">
+<img alt="logo" src="../../_assets/meta/logo.svg"/>
+</a>
+    CIS 4004 - Web-Based Information Systems
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Code Demos and Tutorials
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            Code Demos and Tutorials
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/Demo%20-%20MongoDB/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Demo   MongoDB
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/Demo%20-%20Node.js%20and%20Express/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Demo   Node.js and Express
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    LAMP Stack
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_3">
+<span class="md-nav__icon md-icon"></span>
+            LAMP Stack
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/LAMP%20Stack/Getting%20Started%20with%20LAMP/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Getting Started with LAMP
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Lecture Slides
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Lecture Slides
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Lecture%20-%20Express%20and%20Mongo/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Lecture   Express and Mongo
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Lecture   Node.js Fundamentals
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Lecture   Node.js Fundamentals
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nodejs-fundamentals">
+<span class="md-ellipsis">
+      
+        Node.js Fundamentals
+      
+    </span>
+</a>
+<nav aria-label="Node.js Fundamentals" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#javascript-outside-the-browser">
+<span class="md-ellipsis">
+      
+        JavaScript, outside the browser
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-nodejs">
+<span class="md-ellipsis">
+      
+        What Is Node.js?
+      
+    </span>
+</a>
+<nav aria-label="What Is Node.js?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#javascript-but-on-the-server">
+<span class="md-ellipsis">
+      
+        JavaScript, but on the server
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-node-for-backend">
+<span class="md-ellipsis">
+      
+        Why Node for Backend?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-event-loop-the-core-idea">
+<span class="md-ellipsis">
+      
+        The Event Loop: The Core Idea
+      
+    </span>
+</a>
+<nav aria-label="The Event Loop: The Core Idea" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-node-can-handle-many-requests-without-many-threads">
+<span class="md-ellipsis">
+      
+        Why Node can handle many requests without many threads
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#traditional-servers-php-java-one-thread-per-request">
+<span class="md-ellipsis">
+      
+        Traditional servers (PHP, Java): one thread per request
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#request-1-thread-1-waiting-for-db-request-2-thread-2-waiting-for-db-request-3-thread-3-waiting-for-db-1000-requests-1000-threads-out-of-memory">
+<span class="md-ellipsis">
+      
+        Request 1 → Thread 1 (waiting for DB...) Request 2 → Thread 2 (waiting for DB...) Request 3 → Thread 3 (waiting for DB...) 1000 requests → 1000 threads → out of memory
+      
+    </span>
+</a>
+<nav aria-label="Request 1 → Thread 1 (waiting for DB...) Request 2 → Thread 2 (waiting for DB...) Request 3 → Thread 3 (waiting for DB...) 1000 requests → 1000 threads → out of memory" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#node-one-thread-event-driven">
+<span class="md-ellipsis">
+      
+        Node: one thread, event-driven
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-event-loop-how-it-works">
+<span class="md-ellipsis">
+      
+        The Event Loop: How It Works
+      
+    </span>
+</a>
+<nav aria-label="The Event Loop: How It Works" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-simplified-mental-model">
+<span class="md-ellipsis">
+      
+        The simplified mental model
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#synchronous-vs-asynchronous">
+<span class="md-ellipsis">
+      
+        Synchronous vs Asynchronous
+      
+    </span>
+</a>
+<nav aria-label="Synchronous vs Asynchronous" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-most-important-nodejs-concept-to-internalize">
+<span class="md-ellipsis">
+      
+        The most important Node.js concept to internalize
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#async-patterns-callbacks-promises-asyncawait">
+<span class="md-ellipsis">
+      
+        Async Patterns: Callbacks → Promises → Async/Await
+      
+    </span>
+</a>
+<nav aria-label="Async Patterns: Callbacks → Promises → Async/Await" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#javascript-async-has-evolved-know-all-three">
+<span class="md-ellipsis">
+      
+        JavaScript async has evolved — know all three
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#node-modules-commonjs-legacy">
+<span class="md-ellipsis">
+      
+        Node Modules: CommonJS (Legacy)
+      
+    </span>
+</a>
+<nav aria-label="Node Modules: CommonJS (Legacy)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-node-organizes-and-shares-code">
+<span class="md-ellipsis">
+      
+        How Node organizes and shares code
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#node-modules-es-modules">
+<span class="md-ellipsis">
+      
+        Node Modules: ES Modules
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#npm-the-package-manager">
+<span class="md-ellipsis">
+      
+        npm: The Package Manager
+      
+    </span>
+</a>
+<nav aria-label="npm: The Package Manager" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#npm-does-three-things">
+<span class="md-ellipsis">
+      
+        npm does three things:
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#packagejson-the-project-blueprint">
+<span class="md-ellipsis">
+      
+        package.json: The Project Blueprint
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#package-lockjson-why-it-matters">
+<span class="md-ellipsis">
+      
+        package-lock.json: Why It Matters
+      
+    </span>
+</a>
+<nav aria-label="package-lock.json: Why It Matters" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-file-you-shouldnt-ignore-or-edit-manually">
+<span class="md-ellipsis">
+      
+        The file you shouldn’t ignore (or edit manually)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#your-first-nodejs-server-without-express">
+<span class="md-ellipsis">
+      
+        Your First Node.js Server (Without Express)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#enter-express">
+<span class="md-ellipsis">
+      
+        Enter Express
+      
+    </span>
+</a>
+<nav aria-label="Enter Express" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#express-is-a-minimal-fast-web-framework-for-node">
+<span class="md-ellipsis">
+      
+        Express is a minimal, fast web framework for Node
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-requestresponse-cycle-in-express">
+<span class="md-ellipsis">
+      
+        The Request/Response Cycle in Express
+      
+    </span>
+</a>
+<nav aria-label="The Request/Response Cycle in Express" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-happens-when-a-request-comes-in">
+<span class="md-ellipsis">
+      
+        What happens when a request comes in
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#every-express-handler-receives-two-objects">
+<span class="md-ellipsis">
+      
+        Every Express handler receives two objects:
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nodemon-restart-on-change">
+<span class="md-ellipsis">
+      
+        Nodemon: Restart on Change
+      
+    </span>
+</a>
+<nav aria-label="Nodemon: Restart on Change" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#stop-restarting-your-server-manually">
+<span class="md-ellipsis">
+      
+        Stop restarting your server manually!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#without-nodemon">
+<span class="md-ellipsis">
+      
+        Without nodemon:
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#with-nodemon">
+<span class="md-ellipsis">
+      
+        With nodemon:
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#environment-variables-with-dotenv">
+<span class="md-ellipsis">
+      
+        Environment Variables with dotenv
+      
+    </span>
+</a>
+<nav aria-label="Environment Variables with dotenv" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuration-that-isnt-hardcoded">
+<span class="md-ellipsis">
+      
+        Configuration that isn’t hardcoded
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#keep-your-secrets-safe">
+<span class="md-ellipsis">
+      
+        Keep Your Secrets Safe
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#npm-install-dotenv">
+<span class="md-ellipsis">
+      
+        npm install dotenv
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-env-file">
+<span class="md-ellipsis">
+      
+        The .env file
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#env-never-commit-this-port3000-node_envdevelopment-mongo_urimongodblocalhost27017myapp">
+<span class="md-ellipsis">
+      
+        # .env (never commit this) PORT=3000 NODE_ENV=development MONGO_URI=mongodb://localhost:27017/myapp
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#using-the-env-file">
+<span class="md-ellipsis">
+      
+        Using the .env file
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#keep-it-secret">
+<span class="md-ellipsis">
+      
+        Keep it Secret!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-coming-in-the-demo">
+<span class="md-ellipsis">
+      
+        What’s Coming in the Demo
+      
+    </span>
+</a>
+<nav aria-label="What’s Coming in the Demo" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#build-our-first-express-server">
+<span class="md-ellipsis">
+      
+        Build Our First Express Server
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+<span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+</a>
+<nav aria-label="Summary" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-we-covered">
+<span class="md-ellipsis">
+      
+        What we covered
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#speaker-notes">
+<span class="md-ellipsis">
+      
+        Speaker Notes
+      
+    </span>
+</a>
+<nav aria-label="Speaker Notes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-45-event-loop">
+<span class="md-ellipsis">
+      
+        Slide 4–5 (Event Loop)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-6-sync-vs-async">
+<span class="md-ellipsis">
+      
+        Slide 6 (Sync vs Async)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-11-package-lockjson">
+<span class="md-ellipsis">
+      
+        Slide 11 (package-lock.json)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-12-raw-http-server">
+<span class="md-ellipsis">
+      
+        Slide 12 (Raw HTTP Server)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../blog/">
+<svg height="18" viewbox="0 0 1024 1024" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M843.5 737.4c-12.4-75.2-79.2-129.1-155.3-125.4S550.9 676 546 752c-153.5-4.8-208-40.7-199.1-113.7c3.3-27.3 19.8-41.9 50.1-49c18.4-4.3 38.8-4.9 57.3-3.2c1.7.2 3.5.3 5.2.5c11.3 2.7 22.8 5 34.3 6.8c34.1 5.6 68.8 8.4 101.8 6.6c92.8-5 156-45.9 159.2-132.7c3.1-84.1-54.7-143.7-147.9-183.6c-29.9-12.8-61.6-22.7-93.3-30.2c-14.3-3.4-26.3-5.7-35.2-7.2c-7.9-75.9-71.5-133.8-147.8-134.4S189.7 168 180.5 243.8s40 146.3 114.2 163.9s149.9-23.3 175.7-95.1c9.4 1.7 18.7 3.6 28 5.8c28.2 6.6 56.4 15.4 82.4 26.6c70.7 30.2 109.3 70.1 107.5 119.9c-1.6 44.6-33.6 65.2-96.2 68.6c-27.5 1.5-57.6-.9-87.3-5.8c-8.3-1.4-15.9-2.8-22.6-4.3c-3.9-.8-6.6-1.5-7.8-1.8l-3.1-.6c-2.2-.3-5.9-.8-10.7-1.3c-25-2.3-52.1-1.5-78.5 4.6c-55.2 12.9-93.9 47.2-101.1 105.8c-15.7 126.2 78.6 184.7 276 188.9c29.1 70.4 106.4 107.9 179.6 87c73.3-20.9 119.3-93.4 106.9-168.6M329.1 345.2c-46 0-83.3-37.3-83.3-83.3s37.3-83.3 83.3-83.3s83.3 37.3 83.3 83.3s-37.3 83.3-83.3 83.3M695.6 845c-46 0-83.3-37.3-83.3-83.3s37.3-83.3 83.3-83.3s83.3 37.3 83.3 83.3s-37.3 83.3-83.3 83.3" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Blog
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Archive
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nodejs-fundamentals">
+<span class="md-ellipsis">
+      
+        Node.js Fundamentals
+      
+    </span>
+</a>
+<nav aria-label="Node.js Fundamentals" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#javascript-outside-the-browser">
+<span class="md-ellipsis">
+      
+        JavaScript, outside the browser
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-nodejs">
+<span class="md-ellipsis">
+      
+        What Is Node.js?
+      
+    </span>
+</a>
+<nav aria-label="What Is Node.js?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#javascript-but-on-the-server">
+<span class="md-ellipsis">
+      
+        JavaScript, but on the server
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-node-for-backend">
+<span class="md-ellipsis">
+      
+        Why Node for Backend?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-event-loop-the-core-idea">
+<span class="md-ellipsis">
+      
+        The Event Loop: The Core Idea
+      
+    </span>
+</a>
+<nav aria-label="The Event Loop: The Core Idea" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-node-can-handle-many-requests-without-many-threads">
+<span class="md-ellipsis">
+      
+        Why Node can handle many requests without many threads
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#traditional-servers-php-java-one-thread-per-request">
+<span class="md-ellipsis">
+      
+        Traditional servers (PHP, Java): one thread per request
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#request-1-thread-1-waiting-for-db-request-2-thread-2-waiting-for-db-request-3-thread-3-waiting-for-db-1000-requests-1000-threads-out-of-memory">
+<span class="md-ellipsis">
+      
+        Request 1 → Thread 1 (waiting for DB...) Request 2 → Thread 2 (waiting for DB...) Request 3 → Thread 3 (waiting for DB...) 1000 requests → 1000 threads → out of memory
+      
+    </span>
+</a>
+<nav aria-label="Request 1 → Thread 1 (waiting for DB...) Request 2 → Thread 2 (waiting for DB...) Request 3 → Thread 3 (waiting for DB...) 1000 requests → 1000 threads → out of memory" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#node-one-thread-event-driven">
+<span class="md-ellipsis">
+      
+        Node: one thread, event-driven
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-event-loop-how-it-works">
+<span class="md-ellipsis">
+      
+        The Event Loop: How It Works
+      
+    </span>
+</a>
+<nav aria-label="The Event Loop: How It Works" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-simplified-mental-model">
+<span class="md-ellipsis">
+      
+        The simplified mental model
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#synchronous-vs-asynchronous">
+<span class="md-ellipsis">
+      
+        Synchronous vs Asynchronous
+      
+    </span>
+</a>
+<nav aria-label="Synchronous vs Asynchronous" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-most-important-nodejs-concept-to-internalize">
+<span class="md-ellipsis">
+      
+        The most important Node.js concept to internalize
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#async-patterns-callbacks-promises-asyncawait">
+<span class="md-ellipsis">
+      
+        Async Patterns: Callbacks → Promises → Async/Await
+      
+    </span>
+</a>
+<nav aria-label="Async Patterns: Callbacks → Promises → Async/Await" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#javascript-async-has-evolved-know-all-three">
+<span class="md-ellipsis">
+      
+        JavaScript async has evolved — know all three
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#node-modules-commonjs-legacy">
+<span class="md-ellipsis">
+      
+        Node Modules: CommonJS (Legacy)
+      
+    </span>
+</a>
+<nav aria-label="Node Modules: CommonJS (Legacy)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-node-organizes-and-shares-code">
+<span class="md-ellipsis">
+      
+        How Node organizes and shares code
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#node-modules-es-modules">
+<span class="md-ellipsis">
+      
+        Node Modules: ES Modules
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#npm-the-package-manager">
+<span class="md-ellipsis">
+      
+        npm: The Package Manager
+      
+    </span>
+</a>
+<nav aria-label="npm: The Package Manager" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#npm-does-three-things">
+<span class="md-ellipsis">
+      
+        npm does three things:
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#packagejson-the-project-blueprint">
+<span class="md-ellipsis">
+      
+        package.json: The Project Blueprint
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#package-lockjson-why-it-matters">
+<span class="md-ellipsis">
+      
+        package-lock.json: Why It Matters
+      
+    </span>
+</a>
+<nav aria-label="package-lock.json: Why It Matters" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-file-you-shouldnt-ignore-or-edit-manually">
+<span class="md-ellipsis">
+      
+        The file you shouldn’t ignore (or edit manually)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#your-first-nodejs-server-without-express">
+<span class="md-ellipsis">
+      
+        Your First Node.js Server (Without Express)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#enter-express">
+<span class="md-ellipsis">
+      
+        Enter Express
+      
+    </span>
+</a>
+<nav aria-label="Enter Express" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#express-is-a-minimal-fast-web-framework-for-node">
+<span class="md-ellipsis">
+      
+        Express is a minimal, fast web framework for Node
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-requestresponse-cycle-in-express">
+<span class="md-ellipsis">
+      
+        The Request/Response Cycle in Express
+      
+    </span>
+</a>
+<nav aria-label="The Request/Response Cycle in Express" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-happens-when-a-request-comes-in">
+<span class="md-ellipsis">
+      
+        What happens when a request comes in
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#every-express-handler-receives-two-objects">
+<span class="md-ellipsis">
+      
+        Every Express handler receives two objects:
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nodemon-restart-on-change">
+<span class="md-ellipsis">
+      
+        Nodemon: Restart on Change
+      
+    </span>
+</a>
+<nav aria-label="Nodemon: Restart on Change" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#stop-restarting-your-server-manually">
+<span class="md-ellipsis">
+      
+        Stop restarting your server manually!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#without-nodemon">
+<span class="md-ellipsis">
+      
+        Without nodemon:
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#with-nodemon">
+<span class="md-ellipsis">
+      
+        With nodemon:
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#environment-variables-with-dotenv">
+<span class="md-ellipsis">
+      
+        Environment Variables with dotenv
+      
+    </span>
+</a>
+<nav aria-label="Environment Variables with dotenv" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuration-that-isnt-hardcoded">
+<span class="md-ellipsis">
+      
+        Configuration that isn’t hardcoded
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#keep-your-secrets-safe">
+<span class="md-ellipsis">
+      
+        Keep Your Secrets Safe
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#npm-install-dotenv">
+<span class="md-ellipsis">
+      
+        npm install dotenv
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-env-file">
+<span class="md-ellipsis">
+      
+        The .env file
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#env-never-commit-this-port3000-node_envdevelopment-mongo_urimongodblocalhost27017myapp">
+<span class="md-ellipsis">
+      
+        # .env (never commit this) PORT=3000 NODE_ENV=development MONGO_URI=mongodb://localhost:27017/myapp
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#using-the-env-file">
+<span class="md-ellipsis">
+      
+        Using the .env file
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#keep-it-secret">
+<span class="md-ellipsis">
+      
+        Keep it Secret!
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-coming-in-the-demo">
+<span class="md-ellipsis">
+      
+        What’s Coming in the Demo
+      
+    </span>
+</a>
+<nav aria-label="What’s Coming in the Demo" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#build-our-first-express-server">
+<span class="md-ellipsis">
+      
+        Build Our First Express Server
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+<span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+</a>
+<nav aria-label="Summary" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-we-covered">
+<span class="md-ellipsis">
+      
+        What we covered
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#speaker-notes">
+<span class="md-ellipsis">
+      
+        Speaker Notes
+      
+    </span>
+</a>
+<nav aria-label="Speaker Notes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-45-event-loop">
+<span class="md-ellipsis">
+      
+        Slide 4–5 (Event Loop)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-6-sync-vs-async">
+<span class="md-ellipsis">
+      
+        Slide 6 (Sync vs Async)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-11-package-lockjson">
+<span class="md-ellipsis">
+      
+        Slide 11 (package-lock.json)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-12-raw-http-server">
+<span class="md-ellipsis">
+      
+        Slide 12 (Raw HTTP Server)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Tags -->
+<!-- Actions -->
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+<h1>Lecture   Node.js Fundamentals</h1>
+<!-- Page content -->
+<h2 id="nodejs-fundamentals">Node.js Fundamentals<a class="headerlink" href="#nodejs-fundamentals" title="Permanent link">¶</a></h2>
+<h4 id="javascript-outside-the-browser">JavaScript, outside the browser<a class="headerlink" href="#javascript-outside-the-browser" title="Permanent link">¶</a></h4>
+<p><em>“Node didn’t invent server-side JavaScript. It made it worth using.”</em></p>
+<hr/>
+<h3 id="what-is-nodejs">What Is Node.js?<a class="headerlink" href="#what-is-nodejs" title="Permanent link">¶</a></h3>
+<h4 id="javascript-but-on-the-server">JavaScript, but on the server<a class="headerlink" href="#javascript-but-on-the-server" title="Permanent link">¶</a></h4>
+<p>Before Node (pre-2009):</p>
+<ul>
+<li>JavaScript ran only in browsers</li>
+<li>Servers used PHP, Ruby, Java, Python</li>
+<li>Frontend devs had to context-switch to a different language for backend work</li>
+</ul>
+<hr/>
+<p><strong>Node.js</strong> is a JavaScript runtime built on Chrome’s V8 engine. It lets you run JavaScript anywhere — on a server, your laptop, a Raspberry Pi.</p>
+<p>What Node is <strong>not:</strong></p>
+<ul>
+<li>Not a web framework (that’s Express)</li>
+<li>Not a language (still JavaScript)</li>
+<li>Not just for web servers — CLI tools, scripts, build tools, desktop apps</li>
+</ul>
+<blockquote>
+<p>Node.js made JavaScript a general-purpose language.</p>
+</blockquote>
+<hr/>
+<h3 id="why-node-for-backend">Why Node for Backend?<a class="headerlink" href="#why-node-for-backend" title="Permanent link">¶</a></h3>
+<p><strong>One language, full stack</strong></p>
+<ul>
+<li>Write JavaScript on the frontend and backend</li>
+<li>Share validation logic, types, and utilities between client and server</li>
+<li>Smaller context switch for developers</li>
+</ul>
+<p><strong>Massive ecosystem</strong></p>
+<ul>
+<li>npm has over 2 million packages</li>
+<li>If you need it, a package probably exists</li>
+</ul>
+<p><strong>Fast for I/O-heavy work</strong></p>
+<ul>
+<li>APIs, databases, file systems — Node handles these efficiently</li>
+<li>The reason is the event loop (next slide)</li>
+</ul>
+<p><strong>Used in production by:</strong><br/>
+Netflix, LinkedIn, Uber, PayPal, NASA, GitHub</p>
+<hr/>
+<h3 id="the-event-loop-the-core-idea">The Event Loop: The Core Idea<a class="headerlink" href="#the-event-loop-the-core-idea" title="Permanent link">¶</a></h3>
+<h4 id="why-node-can-handle-many-requests-without-many-threads">Why Node can handle many requests without many threads<a class="headerlink" href="#why-node-can-handle-many-requests-without-many-threads" title="Permanent link">¶</a></h4>
+<ul>
+<li>JavaScript is single-threaded, but can hand off some tasks to browser or Node APIs</li>
+<li>These APIs do the work while JavaScript moves on to other tasks</li>
+</ul>
+<hr/>
+<h4 id="traditional-servers-php-java-one-thread-per-request">Traditional servers (PHP, Java): one thread per request<a class="headerlink" href="#traditional-servers-php-java-one-thread-per-request" title="Permanent link">¶</a></h4>
+<h2 id="request-1-thread-1-waiting-for-db-request-2-thread-2-waiting-for-db-request-3-thread-3-waiting-for-db-1000-requests-1000-threads-out-of-memory"><div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>Request 1 → Thread 1 (waiting for DB...)
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>Request 2 → Thread 2 (waiting for DB...)
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>Request 3 → Thread 3 (waiting for DB...)
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>1000 requests → 1000 threads → out of memory
+</code></pre></div><a class="headerlink" href="#request-1-thread-1-waiting-for-db-request-2-thread-2-waiting-for-db-request-3-thread-3-waiting-for-db-1000-requests-1000-threads-out-of-memory" title="Permanent link">¶</a></h2>
+<h3 id="node-one-thread-event-driven">Node: one thread, event-driven<a class="headerlink" href="#node-one-thread-event-driven" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>Request 1 → ask DB for data → go handle other things
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>Request 2 → ask DB for data → go handle other things
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>Request 3 → ask DB for data → go handle other things
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>DB responds to Request 1 → handle it
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>DB responds to Request 2 → handle it
+</code></pre></div>
+<p><strong>Node doesn’t wait. It delegates and moves on.</strong></p>
+<hr/>
+<h2 id="the-event-loop-how-it-works">The Event Loop: How It Works<a class="headerlink" href="#the-event-loop-how-it-works" title="Permanent link">¶</a></h2>
+<h3 id="the-simplified-mental-model">The simplified mental model<a class="headerlink" href="#the-simplified-mental-model" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>┌─────────────────────────────────┐
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>│           Call Stack            │  ← your synchronous code runs here
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>└─────────────────┬───────────────┘
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>                  │ when stack is empty
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>                  ▼
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>┌─────────────────────────────────┐
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>│          Event Queue            │  ← completed async tasks wait here
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>│  [DB result] [file read] [timer]│
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>└─────────────────┬───────────────┘
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>                  │ event loop picks next item
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>                  ▼
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>             Back to call stack
+</code></pre></div>
+<p><strong>The event loop:</strong> constantly checks — “is the call stack empty? is there something in the queue?” If yes to both: process the next queued item.</p>
+<p>This is why Node is <strong>single-threaded but non-blocking</strong>.</p>
+<hr/>
+<h2 id="synchronous-vs-asynchronous">Synchronous vs Asynchronous<a class="headerlink" href="#synchronous-vs-asynchronous" title="Permanent link">¶</a></h2>
+<h3 id="the-most-important-nodejs-concept-to-internalize">The most important Node.js concept to internalize<a class="headerlink" href="#the-most-important-nodejs-concept-to-internalize" title="Permanent link">¶</a></h3>
+<p><strong>Synchronous — blocks everything:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="c1">// nothing else runs while waiting</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">'bigfile.txt'</span><span class="p">);</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'this runs after the file is read'</span><span class="p">);</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>Asynchronous — non-blocking:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1">// register a callback, move on</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'bigfile.txt'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span><span class="w">      </span><span class="c1">// runs when file is ready</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="p">});</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'this runs immediately,'</span><span class="p">);</span><span class="w"> </span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'before the file is read'</span><span class="p">);</span>
+</code></pre></div><p></p>
+<p><strong>Rule:</strong> In Node, any operation that touches I/O (files, network, database) should be async. Using sync versions in a server blocks every request while one waits.</p>
+<hr/>
+<h2 id="async-patterns-callbacks-promises-asyncawait">Async Patterns: Callbacks → Promises → Async/Await<a class="headerlink" href="#async-patterns-callbacks-promises-asyncawait" title="Permanent link">¶</a></h2>
+<h3 id="javascript-async-has-evolved-know-all-three">JavaScript async has evolved — know all three<a class="headerlink" href="#javascript-async-has-evolved-know-all-three" title="Permanent link">¶</a></h3>
+<ol>
+<li>Callbacks</li>
+<li>Promises</li>
+<li>Async/Await</li>
+</ol>
+<hr/>
+<p><strong>Callbacks (oldest, still common in Node core):</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'file.txt'</span><span class="p">,</span><span class="w"> </span><span class="s1">'utf8'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="nx">err</span><span class="p">;</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="p">});</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>Promises:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">readFile</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'fs/promises'</span><span class="p">);</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="nx">readFile</span><span class="p">(</span><span class="s1">'file.txt'</span><span class="p">,</span><span class="w"> </span><span class="s1">'utf8'</span><span class="p">)</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>Async/Await (modern, preferred):</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">readFile</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'fs/promises'</span><span class="p">);</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadFile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'file.txt'</span><span class="p">,</span><span class="w"> </span><span class="s1">'utf8'</span><span class="p">);</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="p">}</span>
+</code></pre></div><p></p>
+<blockquote>
+<p>You’ll use async/await for almost everything in Express. Know callbacks because you’ll read them in docs and older code.</p>
+</blockquote>
+<hr/>
+<h2 id="node-modules-commonjs-legacy">Node Modules: CommonJS (Legacy)<a class="headerlink" href="#node-modules-commonjs-legacy" title="Permanent link">¶</a></h2>
+<h3 id="how-node-organizes-and-shares-code">How Node organizes and shares code<a class="headerlink" href="#how-node-organizes-and-shares-code" title="Permanent link">¶</a></h3>
+<hr/>
+<p><strong>Exporting from a file:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">// math.js</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="p">}</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="kd">function</span><span class="w"> </span><span class="nx">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="p">}</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">add</span><span class="p">,</span><span class="w"> </span><span class="nx">subtract</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>Importing in another file:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">// app.js</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">add</span><span class="p">,</span><span class="w"> </span><span class="nx">subtract</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'./math'</span><span class="p">);</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">));</span><span class="w">       </span><span class="c1">// 5</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">));</span><span class="w"> </span><span class="c1">// 6</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>Importing a built-in Node module:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'http'</span><span class="p">);</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+</code></pre></div><p></p>
+<p><strong>Importing an npm package:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span><span class="w">  </span><span class="c1">// after npm install express</span>
+</code></pre></div><p></p>
+<hr/>
+<h2 id="node-modules-es-modules">Node Modules: ES Modules<a class="headerlink" href="#node-modules-es-modules" title="Permanent link">¶</a></h2>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1">// math.js</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">subtract</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
+</code></pre></div>
+<hr/>
+<h2 id="npm-the-package-manager">npm: The Package Manager<a class="headerlink" href="#npm-the-package-manager" title="Permanent link">¶</a></h2>
+<hr/>
+<h3 id="npm-does-three-things">npm does three things:<a class="headerlink" href="#npm-does-three-things" title="Permanent link">¶</a></h3>
+<ol>
+<li>Install packages</li>
+<li>Run scripts</li>
+<li>Manage versions/updates</li>
+</ol>
+<hr/>
+<p><strong>1. Install packages</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>npm<span class="w"> </span>install<span class="w"> </span>express<span class="w">          </span><span class="c1"># add to dependencies</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>npm<span class="w"> </span>install<span class="w"> </span>--save-dev<span class="w"> </span>jest<span class="w">  </span><span class="c1"># add to devDependencies (not in production)</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>npm<span class="w"> </span>install<span class="w">                  </span><span class="c1"># install everything in package.json</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>npm<span class="w"> </span>ci<span class="w">                       </span><span class="c1"># clean install (use in CI/CD)</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>2. Run scripts</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>npm<span class="w"> </span>start<span class="w">    </span><span class="c1"># node server.js (or whatever you configure)</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>npm<span class="w"> </span><span class="nb">test</span><span class="w">     </span><span class="c1"># run your test suite</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">  </span><span class="c1"># any custom script you define</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>3. Manage versions</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a>npm<span class="w"> </span>init<span class="w"> </span>-y<span class="w">              </span><span class="c1"># create package.json</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>npm<span class="w"> </span>update<span class="w">               </span><span class="c1"># update packages</span>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a>npm<span class="w"> </span>outdated<span class="w">             </span><span class="c1"># see what's out of date</span>
+</code></pre></div><p></p>
+<hr/>
+<h3 id="packagejson-the-project-blueprint">package.json: The Project Blueprint<a class="headerlink" href="#packagejson-the-project-blueprint" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="p">{</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-api"</span><span class="p">,</span>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A simple REST API"</span><span class="p">,</span>
+<a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">  </span><span class="nt">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server.js"</span><span class="p">,</span>
+<a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="nt">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node server.js"</span><span class="p">,</span>
+<a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="nt">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nodemon server.js"</span><span class="p">,</span>
+<a href="#__codelineno-16-9" id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jest"</span>
+<a href="#__codelineno-16-10" id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">  </span><span class="p">},</span>
+<a href="#__codelineno-16-11" id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-16-12" id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">    </span><span class="nt">"express"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.19.2"</span><span class="p">,</span>
+<a href="#__codelineno-16-13" id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="nt">"mongoose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.4.0"</span>
+<a href="#__codelineno-16-14" id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">  </span><span class="p">},</span>
+<a href="#__codelineno-16-15" id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">  </span><span class="nt">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-16-16" id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">    </span><span class="nt">"jest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^29.7.0"</span><span class="p">,</span>
+<a href="#__codelineno-16-17" id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="w">    </span><span class="nt">"nodemon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.1.0"</span>
+<a href="#__codelineno-16-18" id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-16-19" id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong><code>dependencies</code></strong> — needed to run the app<br/>
+<strong><code>devDependencies</code></strong> — only needed during development/testing<br/>
+<strong><code>scripts</code></strong> — shortcuts for common commands<br/>
+<strong><code>^</code></strong> — means “compatible with this major version”</p>
+<hr/>
+<h2 id="package-lockjson-why-it-matters">package-lock.json: Why It Matters<a class="headerlink" href="#package-lockjson-why-it-matters" title="Permanent link">¶</a></h2>
+<h3 id="the-file-you-shouldnt-ignore-or-edit-manually">The file you shouldn’t ignore (or edit manually)<a class="headerlink" href="#the-file-you-shouldnt-ignore-or-edit-manually" title="Permanent link">¶</a></h3>
+<ul>
+<li><code>package.json</code> says: “I need express version <code>^4.19.0</code>“</li>
+<li><code>package-lock.json</code> says: “I installed express <code>4.19.2</code>, which depends on X <code>1.2.3</code>, which depends on Y <code>0.8.1</code>…”</li>
+</ul>
+<p><strong>Why this matters:</strong></p>
+<ul>
+<li><code>npm install</code> on two different machines might install different patch versions</li>
+<li><code>package-lock.json</code> pins the exact version tree</li>
+<li><code>npm ci</code> uses <code>package-lock.json</code> strictly — always reproducible</li>
+</ul>
+<p><strong>Rules:</strong></p>
+<ul>
+<li>✅ Commit <code>package-lock.json</code> to version control</li>
+<li>✅ Use <code>npm ci</code> in production and CI</li>
+<li>❌ Never edit it manually</li>
+<li>❌ Never add it to <code>.gitignore</code></li>
+</ul>
+<hr/>
+<h3 id="your-first-nodejs-server-without-express">Your First Node.js Server (Without Express)<a class="headerlink" href="#your-first-nodejs-server-without-express" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1">// server-raw.js</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'http'</span><span class="p">);</span>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'/'</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'GET'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">'Content-Type'</span><span class="o">:</span><span class="w"> </span><span class="s1">'text/plain'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello, world!'</span><span class="p">);</span>
+<a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mf">404</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">'Content-Type'</span><span class="o">:</span><span class="w"> </span><span class="s1">'text/plain'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Not found'</span><span class="p">);</span>
+<a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="p">});</span>
+<a href="#__codelineno-17-13" id="__codelineno-17-13" name="__codelineno-17-13"></a>
+<a href="#__codelineno-17-14" id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mf">3000</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-15" id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Server running on http://localhost:3000'</span><span class="p">);</span>
+<a href="#__codelineno-17-16" id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="p">});</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a>node<span class="w"> </span>server-raw.js
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>curl<span class="w"> </span>http://localhost:3000
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="c1"># → Hello, world!</span>
+</code></pre></div>
+<p>This works. But routing, parsing request bodies, setting headers — it all has to be done manually. <strong>Express handles all of this.</strong></p>
+<hr/>
+<h2 id="enter-express">Enter Express<a class="headerlink" href="#enter-express" title="Permanent link">¶</a></h2>
+<h3 id="express-is-a-minimal-fast-web-framework-for-node">Express is a minimal, fast web framework for Node<a class="headerlink" href="#express-is-a-minimal-fast-web-framework-for-node" title="Permanent link">¶</a></h3>
+<p>Express gives you:</p>
+<ul>
+<li><strong>Routing</strong> — map URLs and HTTP methods to functions</li>
+<li><strong>Middleware</strong> — a pipeline for processing requests</li>
+<li><strong>Request/Response helpers</strong> — <code>res.json()</code>, <code>req.body</code>, <code>req.params</code></li>
+<li><strong>Error handling</strong> — a standard way to catch and respond to errors</li>
+</ul>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a>npm<span class="w"> </span>install<span class="w"> </span>express
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1">// server.js</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span><span class="w">  </span><span class="c1">// parse JSON request bodies</span>
+<a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a>
+<a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s1">'Hello, world!'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="p">});</span>
+<a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a>
+<a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mf">3000</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Server running on http://localhost:3000'</span><span class="p">);</span>
+<a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="p">});</span>
+</code></pre></div>
+<p><strong>That’s it.</strong> Compare to the raw http version — Express handles the boilerplate.</p>
+<hr/>
+<h2 id="the-requestresponse-cycle-in-express">The Request/Response Cycle in Express<a class="headerlink" href="#the-requestresponse-cycle-in-express" title="Permanent link">¶</a></h2>
+<h3 id="what-happens-when-a-request-comes-in">What happens when a request comes in<a class="headerlink" href="#what-happens-when-a-request-comes-in" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a>Client sends: GET /users/42
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a>                    │
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a>                    ▼
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a>         ┌──────────────────────────┐
+<a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a>         │   Express Router         │
+<a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a>         │  matches GET /users/:id  │
+<a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a>         └──────────┬───────────────┘
+<a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a>                    │
+<a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a>                    ▼
+<a href="#__codelineno-21-10" id="__codelineno-21-10" name="__codelineno-21-10"></a>         ┌─────────────────────┐
+<a href="#__codelineno-21-11" id="__codelineno-21-11" name="__codelineno-21-11"></a>         │    Middleware       │  ← runs in order (auth, logging, etc.)
+<a href="#__codelineno-21-12" id="__codelineno-21-12" name="__codelineno-21-12"></a>         └──────────┬──────────┘
+<a href="#__codelineno-21-13" id="__codelineno-21-13" name="__codelineno-21-13"></a>                    │
+<a href="#__codelineno-21-14" id="__codelineno-21-14" name="__codelineno-21-14"></a>                    ▼
+<a href="#__codelineno-21-15" id="__codelineno-21-15" name="__codelineno-21-15"></a>         ┌─────────────────────┐
+<a href="#__codelineno-21-16" id="__codelineno-21-16" name="__codelineno-21-16"></a>         │   Route Handler     │  ← your function runs here
+<a href="#__codelineno-21-17" id="__codelineno-21-17" name="__codelineno-21-17"></a>         │   (req, res) =&gt; {}  │
+<a href="#__codelineno-21-18" id="__codelineno-21-18" name="__codelineno-21-18"></a>         └──────────┬──────────┘
+<a href="#__codelineno-21-19" id="__codelineno-21-19" name="__codelineno-21-19"></a>                    │
+<a href="#__codelineno-21-20" id="__codelineno-21-20" name="__codelineno-21-20"></a>                    ▼
+<a href="#__codelineno-21-21" id="__codelineno-21-21" name="__codelineno-21-21"></a>         Client receives: 200 { id: 42, name: "Alice" }
+</code></pre></div>
+<hr/>
+<h3 id="every-express-handler-receives-two-objects">Every Express handler receives two objects:<a class="headerlink" href="#every-express-handler-receives-two-objects" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong><code>req</code></strong> (the incoming request) </li>
+<li><strong><code>res</code></strong> (your outgoing response).</li>
+</ul>
+<hr/>
+<h2 id="nodemon-restart-on-change">Nodemon: Restart on Change<a class="headerlink" href="#nodemon-restart-on-change" title="Permanent link">¶</a></h2>
+<h3 id="stop-restarting-your-server-manually">Stop restarting your server manually!<a class="headerlink" href="#stop-restarting-your-server-manually" title="Permanent link">¶</a></h3>
+<hr/>
+<h3 id="without-nodemon">Without nodemon:<a class="headerlink" href="#without-nodemon" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a>node<span class="w"> </span>server.js
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="c1"># make a change</span>
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a>Ctrl+C
+<a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a>node<span class="w"> </span>server.js<span class="w">  </span><span class="c1"># repeat forever</span>
+</code></pre></div>
+<hr/>
+<h3 id="with-nodemon">With nodemon:<a class="headerlink" href="#with-nodemon" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a>npm<span class="w"> </span>install<span class="w"> </span>--save-dev<span class="w"> </span>nodemon
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="c1">// package.json</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">  </span><span class="nt">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nodemon server.js"</span>
+<a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a>npm<span class="w"> </span>run<span class="w"> </span>dev
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="c1"># Server restarts automatically on every file save</span>
+</code></pre></div>
+<blockquote>
+<p>Nodemon is a development tool only. In production you use a process manager like pm2. In CI you use <code>node</code> directly.</p>
+</blockquote>
+<hr/>
+<h2 id="environment-variables-with-dotenv">Environment Variables with <code>dotenv</code><a class="headerlink" href="#environment-variables-with-dotenv" title="Permanent link">¶</a></h2>
+<h3 id="configuration-that-isnt-hardcoded">Configuration that isn’t hardcoded<a class="headerlink" href="#configuration-that-isnt-hardcoded" title="Permanent link">¶</a></h3>
+<hr/>
+<h2 id="keep-your-secrets-safe">Keep Your Secrets Safe<a class="headerlink" href="#keep-your-secrets-safe" title="Permanent link">¶</a></h2>
+<p><strong>Why:</strong> port numbers, database URLs, API keys change between development and production. Hardcoding them is fragile and a security risk.</p>
+<h2 id="npm-install-dotenv"><div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a>npm<span class="w"> </span>install<span class="w"> </span>dotenv
+</code></pre></div><a class="headerlink" href="#npm-install-dotenv" title="Permanent link">¶</a></h2>
+<h2 id="the-env-file">The <code>.env</code> file<a class="headerlink" href="#the-env-file" title="Permanent link">¶</a></h2>
+<h2 id="env-never-commit-this-port3000-node_envdevelopment-mongo_urimongodblocalhost27017myapp"><div class="highlight"><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="c1"># .env  (never commit this)</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="nv">PORT</span><span class="o">=</span><span class="m">3000</span>
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="nv">MONGO_URI</span><span class="o">=</span>mongodb://localhost:27017/myapp
+</code></pre></div><a class="headerlink" href="#env-never-commit-this-port3000-node_envdevelopment-mongo_urimongodblocalhost27017myapp" title="Permanent link">¶</a></h2>
+<h2 id="using-the-env-file">Using the <code>.env</code> file<a class="headerlink" href="#using-the-env-file" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="c1">// server.js — load at the very top</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="nx">require</span><span class="p">(</span><span class="s1">'dotenv'</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
+<a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a>
+<a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">PORT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">3000</span><span class="p">;</span>
+<a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">MONGO_URI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGO_URI</span><span class="p">;</span>
+<a href="#__codelineno-28-6" id="__codelineno-28-6" name="__codelineno-28-6"></a>
+<a href="#__codelineno-28-7" id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-28-8" id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<a href="#__codelineno-28-9" id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="p">});</span>
+</code></pre></div>
+<hr/>
+<h2 id="keep-it-secret">Keep it Secret!<a class="headerlink" href="#keep-it-secret" title="Permanent link">¶</a></h2>
+<p><strong>Add to <code>.gitignore</code>:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a>.env
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a>node_modules/
+</code></pre></div><p></p>
+<hr/>
+<h2 id="whats-coming-in-the-demo">What’s Coming in the Demo<a class="headerlink" href="#whats-coming-in-the-demo" title="Permanent link">¶</a></h2>
+<h3 id="build-our-first-express-server">Build Our First Express Server<a class="headerlink" href="#build-our-first-express-server" title="Permanent link">¶</a></h3>
+<p>You will:</p>
+<ol>
+<li>Initialize a new Node project with <code>npm init</code></li>
+<li>Install Express and dotenv</li>
+<li>Build a server with multiple routes</li>
+<li>Use <code>req.params</code> and <code>req.body</code></li>
+<li>Return JSON responses with appropriate status codes</li>
+<li><em>(Stretch)</em> Add nodemon and wire up a dev script</li>
+</ol>
+<p><strong>End state:</strong> a running Express API you can hit with a browser or <code>curl</code></p>
+<p><strong>Come with:</strong> Node.js installed (<code>node --version</code> should work), a code editor</p>
+<blockquote>
+<p>Install Node.js: <a href="https://nodejs.org">nodejs.org</a> — use the LTS version</p>
+</blockquote>
+<hr/>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<h3 id="what-we-covered">What we covered<a class="headerlink" href="#what-we-covered" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Node.js</strong> is a JavaScript runtime — JS outside the browser</li>
+<li><strong>The event loop</strong> makes Node non-blocking: it delegates I/O and moves on</li>
+<li><strong>Async/await</strong> is the modern pattern for handling asynchronous operations</li>
+<li><strong>CommonJS modules</strong> let you split code across files with <code>require</code> / <code>module.exports</code></li>
+<li><strong>npm</strong> manages packages, scripts, and versioning</li>
+<li><strong>package.json</strong> defines the project; <strong>package-lock.json</strong> locks exact versions</li>
+<li><strong>Express</strong> is a minimal framework that wraps Node’s http module</li>
+<li><strong>dotenv</strong> keeps configuration out of your source code</li>
+</ul>
+<p><strong>Next up:</strong> Lecture 2 — REST APIs with Express and MongoDB</p>
+<p><em>Before Lab 1:</em> confirm <code>node --version</code> and <code>npm --version</code> work in your terminal.</p>
+<hr/>
+<h2 id="speaker-notes">Speaker Notes<a class="headerlink" href="#speaker-notes" title="Permanent link">¶</a></h2>
+<h3 id="slide-45-event-loop">Slide 4–5 (Event Loop)<a class="headerlink" href="#slide-45-event-loop" title="Permanent link">¶</a></h3>
+<p>Don’t go deep on the internals (microtask queue, libuv, etc.) — that’s a rabbit hole. The mental model that matters: Node doesn’t sit and wait; it registers a callback and goes back to work. Ask: “What would happen to a restaurant if one waiter had to stand at the kitchen window waiting for every order before taking another table?” That’s threaded blocking I/O. Node is the waiter who drops off the order, takes three more tables, and comes back when the kitchen calls.</p>
+<h3 id="slide-6-sync-vs-async">Slide 6 (Sync vs Async)<a class="headerlink" href="#slide-6-sync-vs-async" title="Permanent link">¶</a></h3>
+<p>Run both examples live if possible. The output order surprises students every time — “this runs immediately” printing before the file contents is counterintuitive until the event loop clicks.</p>
+<h3 id="slide-11-package-lockjson">Slide 11 (package-lock.json)<a class="headerlink" href="#slide-11-package-lockjson" title="Permanent link">¶</a></h3>
+<p>This is where students make their first git mistakes. They add it to .gitignore, or they delete it and wonder why <code>npm ci</code> fails in CI. Spend 2 minutes here. It will save you debugging sessions later.</p>
+<h3 id="slide-12-raw-http-server">Slide 12 (Raw HTTP Server)<a class="headerlink" href="#slide-12-raw-http-server" title="Permanent link">¶</a></h3>
+<p>Show this briefly — 60 seconds — then move to Express. The point isn’t to teach the http module; it’s to motivate why Express exists. “You could do all of this manually. Express means you don’t have to.”</p>
+<hr/>
+<div class="md-source-file">
+<small>
+<!-- mkdocs-git-revision-date-localized-plugin -->
+<u>Last update</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 17, 2026 13:07:18 UTC">June 17, 2026</span>
+<!-- mkdocs-git-revision-date-plugin -->
+<br/>
+<u>Created</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 17, 2026 13:07:18 UTC">June 17, 2026</span>
+</small>
+</div>
+<!-- Was this page helpful? -->
+<!-- Comment system -->
+<script> 
+    try {
+      const index = document.querySelector('h1').innerHTML;
+      if (index === "Index") {
+        document.querySelector('h1').innerHTML = "Lecture   Node.js Fundamentals";
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  </script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/Enveloppe/" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+<script src="../../_static/js/mathjax.js"></script>
+<script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../_static/js/snippets.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/index.js"></script>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html><!-- Source file information --><!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
