@@ -624,39 +624,38 @@ Add: <input type="text" id="cardText" placeholder="Card To Add" onChange={handle
 
 After the `addCard` and `searchCard` functions, add these two:
 ```ts
-    function handleSearchTextChange( e: any ) : void
-    {
-        setSearchValue( e.target.value );
-    }
-
-    function handleCardTextChange( e: any ) : void
-    {
-        setCardNameValue( e.target.value );
-    }
+function handleSearchTextChange( e: any ) : void
+{
+	setSearchValue( e.target.value );
+}
+function handleCardTextChange( e: any ) : void
+{
+	setCardNameValue( e.target.value );
+}
 ```
 
 ### Update `addCard` and `searchCard` to print the input values
 
 Again, this is placeholder code until we wire it up to the API.
 ```ts
-    function addCard(e:any) : void
-    {
-         e.preventDefault();
-         alert('addCard() ' + card);
-    };
+function addCard(e:any) : void
+{
+	e.preventDefault();
+	alert('addCard() ' + card);
+};
 
-    function searchCard(e:any) : void
-    {
-        e.preventDefault();
-        alert('searchCard() ' + search);
-    };
+function searchCard(e:any) : void
+{
+	e.preventDefault();
+	alert('searchCard() ' + search);
+};
 ```
 
 ## Test
 
 You should now get a login page when you access the app:
 
-![screenshot-login-page-unstyled.png](cop4331c/Code%20Demos%20and%20Tutorials/MERN%20Stack/images/screenshot-login-page-unstyled.png)
+![screenshot-login-page-unstyled.png](cop4331c/images/screenshot-login-page-unstyled.png)
 
 Login as user `RickL` with password `COP4331` 
 
@@ -973,105 +972,103 @@ Make sure you can still login as `RickL`
 ## Update CardUI.tsx to use the API
 	
 ```ts
-    let _ud : any = localStorage.getItem('user_data');
-    let ud = JSON.parse( _ud );
-    let userId : string = ud.id;
-    let firstName : string = ud.firstName;
-    let lastName : string = ud.lastName;
-    const [message,setMessage] = useState('');
-    const [searchResults,setResults] = useState('');
-    const [cardList,setCardList] = useState('');
-    const [search,setSearchValue] = useState('');
-    const [card,setCardNameValue] = useState('');
-    
-    function handleSearchTextChange( e: any ) : void
-    {
-        setSearchValue( e.target.value );
-    }
+let _ud : any = localStorage.getItem('user_data');
+let ud = JSON.parse( _ud );
+let userId : string = ud.id;
+let firstName : string = ud.firstName;
+let lastName : string = ud.lastName;
 
-    function handleCardTextChange( e: any ) : void
-    {
-        setCardNameValue( e.target.value );
-    }
-    
-    async function addCard(e:any) : Promise<void>
-    {
-	    e.preventDefault();
+const [message,setMessage] = useState('');
+const [searchResults,setResults] = useState('');
+const [cardList,setCardList] = useState('');
+const [search,setSearchValue] = useState('');
+const [card,setCardNameValue] = useState('');
 
-        let obj = {userId:userId,card:card};
-        let js = JSON.stringify(obj);
+function handleSearchTextChange( e: any ) : void
+{
+	setSearchValue( e.target.value );
+}
 
-        try
-        {
-            const response = await fetch('http://localhost:5000/api/addcard',
-            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+function handleCardTextChange( e: any ) : void
+{
+	setCardNameValue( e.target.value );
+}
 
-            let txt = await response.text();
-            let res = JSON.parse(txt);
+async function addCard(e:any) : Promise<void>
+{
+	e.preventDefault();
+	let obj = {userId:userId,card:card};
+	let js = JSON.stringify(obj);
+	try
+	{
+		const response = await fetch('http://localhost:5000/api/addcard',
+		{
+			method:'POST',
+			body:js,
+			headers:{'Content-Type': 'application/json'}
+		});
+		let txt = await response.text();
+		let res = JSON.parse(txt);
+		if( res.error.length > 0 )
+		{
+			setMessage( "API Error:" + res.error );
+		} else {
+			setMessage('Card has been added');
+		}
+	} catch(error:any) {
+		setMessage(error.toString());
+	}
+};
 
-            if( res.error.length > 0 )
-            {
-                setMessage( "API Error:" + res.error );
-            }
-            else
-            {
-                setMessage('Card has been added');
-            }
-        }
-        catch(error:any)
-        {
-            setMessage(error.toString());
-        }
-    };
+async function searchCard(e:any) : Promise<void>
+{
+	e.preventDefault();
+	let obj = {userId:userId,search:search};
+	let js = JSON.stringify(obj);
+	try
+	{
+		
+		const response = await fetch('http://localhost:5000/api/searchcards',{method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+		let txt = await response.text();
+		let res = JSON.parse(txt);
+		let _results = res.results;
+		let resultText = '';
+		for( let i=0; i<_results.length; i++ )
+		{
+			resultText += _results[i];
+			if( i < _results.length - 1 )
+			{
+				resultText += ', ';
+			}
+		}
+		setResults('Card(s) have been retrieved');
+		setCardList(resultText);
+	} catch(error:any) {
+		alert(error.toString());
+		setResults(error.toString());
+	}
+};
 
-    async function searchCard(e:any) : Promise<void>
-    {
-        e.preventDefault();
-        
-        let obj = {userId:userId,search:search};
-        let js = JSON.stringify(obj);
+return(
+<div id="cardUIDiv">
+<br />
+<input type="text" id="searchText" placeholder="Card To Search For" />
 
-        try
-        {
-            const response = await fetch('http://localhost:5000/api/searchcards',
-            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+<button type="button" id="searchCardButton" className="buttons" 
+onClick={searchCard}> Search Card </button><br />
 
-            let txt = await response.text();
-            let res = JSON.parse(txt);
-            let _results = res.results;
-            let resultText = '';
-            for( let i=0; i<_results.length; i++ )
-            {
-                resultText += _results[i];
-                if( i < _results.length - 1 )
-                {
-                    resultText += ', ';
-                }
-            }
-            setResults('Card(s) have been retrieved');
-            setCardList(resultText);
-        }
-        catch(error:any)
-        {
-            alert(error.toString());
-            setResults(error.toString());
-        }
-    };
-    
-    return(
-      <div id="cardUIDiv">
-       <br />
-       <input type="text" id="searchText" placeholder="Card To Search For" />
-       <button type="button" id="searchCardButton" className="buttons" 
-           onClick={searchCard}> Search Card </button><br />
-       <span id="cardSearchResult"></span>
-       <p id="cardList"></p><br /><br />
-       <input type="text" id="cardText" placeholder="Card To Add" />
-       <button type="button" id="addCardButton" className="buttons" 
-          onClick={addCard}> Add Card </button><br />
-       <span id="cardAddResult"></span>
-     </div>
-    );
+<span id="cardSearchResult"></span>
+
+<p id="cardList"></p><br /><br />
+
+<input type="text" id="cardText" placeholder="Card To Add" />
+
+<button type="button" id="addCardButton" className="buttons" 
+onClick={addCard}> Add Card </button><br />
+
+<span id="cardAddResult"></span>
+</div>
+);
 
 ```
 
