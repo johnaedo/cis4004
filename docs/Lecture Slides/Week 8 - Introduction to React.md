@@ -631,11 +631,6 @@ function TodoList() {
 | Lists       | Render arrays        | `arr.map(i => <li key={i.id}>)`    |
 
 ---
-<style>
-.reveal pre {
-	font-size: 1.2em;
-}
-</style>
 ## Common Mistakes to Avoid
 
 ❌ **Mutating state directly**
