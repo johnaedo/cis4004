@@ -1,7 +1,7 @@
 ---
 share_cop4331c: "true"
-site-folder: docs/Code Demos and Tutorials/MERN Stack
 share_cis4004: "true"
+site-folder: docs/Code Demos and Tutorials/MERN Stack
 ---
 
 # The Development Environment
@@ -532,10 +532,10 @@ import { useNavigate } from "react-router-dom";
 Still in Login.tsx, add the following at the top of the `Login()` function:
 
 ```ts
-  const navigate = useNavigate();
-  const [message,setMessage] = useState('');
-  const [loginName,setLoginName] = useState('');
-  const [loginPassword,setPassword] = useState('');
+const navigate = useNavigate();
+const [message,setMessage] = useState('');
+const [loginName,setLoginName] = useState('');
+const [loginPassword,setPassword] = useState('');
 ```
 
 ### Add Calls to Event Handlers to the Login input elements
@@ -591,28 +591,32 @@ import { useState } from 'react';
 
 At the top of the `CardUI()` function, add:
 ```ts
-    const [message,setMessage] = useState('');
-    const [searchResults,setResults] = useState('');
-    const [cardList,setCardList] = useState('');
-    const [search,setSearchValue] = useState('');
-    const [card,setCardNameValue] = useState('');
+const [message,setMessage] = useState('');
+const [searchResults,setResults] = useState('');
+const [cardList,setCardList] = useState('');
+const [search,setSearchValue] = useState('');
+const [card,setCardNameValue] = useState('');
 ```
 
 ### Add Feedback and Calls to Event Handlers to the Form
 
 ```tsx
 <div id="cardUIDiv">
-  <br />
-  Search: <input type="text" id="searchText" placeholder="Card To Search For" onChange={handleSearchTextChange} />
-  <button type="button" id="searchCardButton" className="buttons" onClick={searchCard}> Search Card</button><br />
-  <span id="cardSearchResult">{searchResults}</span>
-  
-  <p id="cardList">{cardList}</p><br /><br />
-  
-  Add: <input type="text" id="cardText" placeholder="Card To Add" onChange={handleCardTextChange} />
-  <button type="button" id="addCardButton" className="buttons" onClick={addCard}> Add Card </button><br />
-  
-  <span id="cardAddResult">{message}</span>
+<br />
+Search: <input type="text" id="searchText" placeholder="Card To Search For" onChange={handleSearchTextChange} />
+
+<button type="button" id="searchCardButton" className="buttons" onClick={searchCard}> Search Card</button><br />
+
+<span id="cardSearchResult">{searchResults}</span>
+
+<p id="cardList">{cardList}</p><br /><br />
+
+Add: <input type="text" id="cardText" placeholder="Card To Add" onChange={handleCardTextChange} />
+
+<button type="button" id="addCardButton" className="buttons" onClick={addCard}> Add Card </button><br />
+
+<span id="cardAddResult">{message}</span>
+
 </div>
 ```
 
