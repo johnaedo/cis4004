@@ -97,7 +97,7 @@ MONGO_URI=mongodb://localhost:27017/myapi
 ```bash
 PORT=3000
 NODE_ENV=development
-MONGO_URI=mongodb://localhost:27017/yourdbname
+MONGO_URI=mongodb://localhost:27017/mernDemo
 ```
 
 **Wire it into server.js:**
@@ -115,6 +115,10 @@ const PORT = process.env.PORT || 3000;
 connectDB();  // connect to MongoDB on startup
 
 app.use(express.json());
+app.use('/', (req, res, next) => {
+	res.status(200).json({message: "Hello, World!"});
+	next();
+});
 app.use('/users', usersRouter);
 
 app.listen(PORT, () => {
