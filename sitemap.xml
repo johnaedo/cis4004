@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+         <loc>https://johnaedo.github.io/cis4004/</loc>
+         <lastmod>2026-07-06</lastmod>
+    </url>
+    <url>
          <loc>https://johnaedo.github.io/cis4004/Code%20Demos%20and%20Tutorials/Week%2010%20Demo%202%20-%20Docker/</loc>
          <lastmod>2026-07-06</lastmod>
     </url>
