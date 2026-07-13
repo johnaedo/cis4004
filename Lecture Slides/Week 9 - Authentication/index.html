@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Course notes, code demos, and tutorials" name="description"/>
+<meta content="Dr. John Aedo" name="author"/>
+<link href="https://johnaedo.github.io/cis4004/Lecture%20Slides/Week%209%20-%20Authentication/" rel="canonical"/>
+<link href="../Week%208%20Lecture%20-%20Introduction%20to%20React/" rel="prev"/>
+<link href="../react-intro-slides/" rel="next"/>
+<link href="../../_assets/meta/favicons.svg" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Week 9 Authentication - CIS 4004 - Web-Based Information Systems</title>
+<link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Karla:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Karla";--md-code-font:"Ubuntu Mono"}</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<link href="../../_static/css/admonition.css" rel="stylesheet"/>
+<link href="../../_static/css/custom_attributes.css" rel="stylesheet"/>
+<link href="../../_static/css/customization.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/styles.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css" rel="stylesheet"/>
+<link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://johnaedo.github.io/cis4004/_assets/meta/logo.svg" property="og:image"/>
+<meta content="https://johnaedo.github.io/cis4004/_assets/meta/logo.svg" name="twitter:image"/>
+<meta content="https://johnaedo.github.io/cis4004/" name="site_url"/>
+<meta content="Week 9   Authentication" property="og:title"/>
+<meta content="Week 9   Authentication" name="twitter:title"/>
+<meta content="Course notes, code demos, and tutorials" name="og:description"/>
+<meta content="Course notes, code demos, and tutorials" name="twitter:description"/>
+<script> document.title = "Week 9   Authentication" </script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+<body data-md-color-accent="light-blue" data-md-color-primary="teal" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="../..">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="CIS 4004 - Web-Based Information Systems" class="md-header__button md-logo" data-md-component="logo" href="../.." title="CIS 4004 - Web-Based Information Systems">
+<img alt="logo" src="../../_assets/meta/logo.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            CIS 4004 - Web-Based Information Systems
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Week 9   Authentication
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Passer au mode sombre" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="teal" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Passer au mode sombre">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Passer en mode clair" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="blue-grey" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Passer en mode clair">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Home
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../Code%20Demos%20and%20Tutorials/Week%2010%20Demo%201%20-%20CICD/">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Code Demos and Tutorials
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../Week%2010%20-%20Testing%20Routes%20with%20Jest/">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+    
+  
+  Lecture Slides
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CIS 4004 - Web-Based Information Systems" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="CIS 4004 - Web-Based Information Systems">
+<img alt="logo" src="../../_assets/meta/logo.svg"/>
+</a>
+    CIS 4004 - Web-Based Information Systems
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<svg height="18" viewbox="0 0 1024 1024" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M843.5 737.4c-12.4-75.2-79.2-129.1-155.3-125.4S550.9 676 546 752c-153.5-4.8-208-40.7-199.1-113.7c3.3-27.3 19.8-41.9 50.1-49c18.4-4.3 38.8-4.9 57.3-3.2c1.7.2 3.5.3 5.2.5c11.3 2.7 22.8 5 34.3 6.8c34.1 5.6 68.8 8.4 101.8 6.6c92.8-5 156-45.9 159.2-132.7c3.1-84.1-54.7-143.7-147.9-183.6c-29.9-12.8-61.6-22.7-93.3-30.2c-14.3-3.4-26.3-5.7-35.2-7.2c-7.9-75.9-71.5-133.8-147.8-134.4S189.7 168 180.5 243.8s40 146.3 114.2 163.9s149.9-23.3 175.7-95.1c9.4 1.7 18.7 3.6 28 5.8c28.2 6.6 56.4 15.4 82.4 26.6c70.7 30.2 109.3 70.1 107.5 119.9c-1.6 44.6-33.6 65.2-96.2 68.6c-27.5 1.5-57.6-.9-87.3-5.8c-8.3-1.4-15.9-2.8-22.6-4.3c-3.9-.8-6.6-1.5-7.8-1.8l-3.1-.6c-2.2-.3-5.9-.8-10.7-1.3c-25-2.3-52.1-1.5-78.5 4.6c-55.2 12.9-93.9 47.2-101.1 105.8c-15.7 126.2 78.6 184.7 276 188.9c29.1 70.4 106.4 107.9 179.6 87c73.3-20.9 119.3-93.4 106.9-168.6M329.1 345.2c-46 0-83.3-37.3-83.3-83.3s37.3-83.3 83.3-83.3s83.3 37.3 83.3 83.3s-37.3 83.3-83.3 83.3M695.6 845c-46 0-83.3-37.3-83.3-83.3s37.3-83.3 83.3-83.3s83.3 37.3 83.3 83.3s-37.3 83.3-83.3 83.3" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Home
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Code Demos and Tutorials
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Code Demos and Tutorials
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/Week%2010%20Demo%201%20-%20CICD/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 10 Demo 1   CICD
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/Week%2010%20Demo%202%20-%20Docker/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 10 Demo 2   Docker
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/Week%204%20Demo%20-%20Node.js%20and%20Express/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 4 Demo   Node.js and Express
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/Week%205%20Demo%20-%20MongoDB/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 5 Demo   MongoDB
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    LAMP Stack
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span>
+            LAMP Stack
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/LAMP%20Stack/Getting%20Started%20with%20LAMP/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Getting Started with LAMP
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    MERN Stack
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span>
+            MERN Stack
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Code%20Demos%20and%20Tutorials/MERN%20Stack/Getting%20Started%20with%20MERN%20A%20%28version%202.0%29/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Getting Started with MERN A (version 2.0)
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+<svg height="18" viewbox="0 0 20 20" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5v6.604l1.5-2.6a3 3 0 0 1 2.599-1.5H15V7.5A1.5 1.5 0 0 0 13.5 6h-4a.5.5 0 0 1-.353-.146L7.44 4.146A.5.5 0 0 0 7.086 4H4.5A1.5 1.5 0 0 0 3 5.5m1.284 10.485q.106.015.22.015H13.9a2 2 0 0 0 1.732-1l2.163-3.745a1.5 1.5 0 0 0-1.3-2.25H7.1a2 2 0 0 0-1.732 1L3.205 13.75a1.5 1.5 0 0 0 1.079 2.235M2 14.46V5.5A2.5 2.5 0 0 1 4.5 3h2.586a1.5 1.5 0 0 1 1.06.44L9.708 5H13.5A2.5 2.5 0 0 1 16 7.5v.505h.496c1.925 0 3.128 2.083 2.166 3.75L16.499 15.5a3 3 0 0 1-2.598 1.5h-9.4q-.095 0-.186-.007a2.46 2.46 0 0 1-1.438-.592A2.5 2.5 0 0 1 2 14.461" fill="currentColor"></path></svg>
+<span class="md-ellipsis">
+    Lecture Slides
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Lecture Slides
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%2010%20-%20Testing%20Routes%20with%20Jest/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 10   Testing Routes with Jest
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%2010%20Demo%201%20-%20CICD/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 10 Demo 1   CICD
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%2010%20Lecture%201%20-%20CICD/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 10 Lecture 1   CICD
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%2010%20Lecture%202%20-%20Docker/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 10 Lecture 2   Docker
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%202%20Lecture%20-%20Overview%20and%20History%20of%20the%20Web/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 2 Lecture   Overview and History of the Web
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%204%20Lecture%20-%20Node.js%20Fundamentals/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 4 Lecture   Node.js Fundamentals
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%205%20Lecture%20-%20Express%20and%20Mongo/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 5 Lecture   Express and Mongo
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%208%20-%20Introduction%20to%20React/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 8   Introduction to React
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Week%208%20Lecture%20-%20Introduction%20to%20React/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 8 Lecture   Introduction to React
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 9   Authentication
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    Week 9   Authentication
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authentication-and-authorization-with-jwt">
+<span class="md-ellipsis">
+      
+        Authentication and Authorization with JWT
+      
+    </span>
+</a>
+<nav aria-label="Authentication and Authorization with JWT" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#knowing-whos-asking-and-what-theyre-allowed-to-do">
+<span class="md-ellipsis">
+      
+        Knowing who’s asking, and what they’re allowed to do
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#two-concepts-often-confused">
+<span class="md-ellipsis">
+      
+        Two Concepts, Often Confused
+      
+    </span>
+</a>
+<nav aria-label="Two Concepts, Often Confused" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authentication-vs-authorization">
+<span class="md-ellipsis">
+      
+        Authentication vs Authorization
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-problem-with-sessions">
+<span class="md-ellipsis">
+      
+        The Problem with Sessions
+      
+    </span>
+</a>
+<nav aria-label="The Problem with Sessions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-not-just-use-server-side-sessions">
+<span class="md-ellipsis">
+      
+        Why not just use server-side sessions?
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-a-jwt">
+<span class="md-ellipsis">
+      
+        What Is a JWT?
+      
+    </span>
+</a>
+<nav aria-label="What Is a JWT?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#json-web-token-a-self-contained-credential">
+<span class="md-ellipsis">
+      
+        JSON Web Token — a self-contained credential
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jwt-anatomy-decoded">
+<span class="md-ellipsis">
+      
+        JWT Anatomy: Decoded
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#claims">
+<span class="md-ellipsis">
+      
+        Claims
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-jwt-auth-works-the-full-cycle">
+<span class="md-ellipsis">
+      
+        How JWT Auth Works - the Full Cycle
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#storing-passwords-bcrypt">
+<span class="md-ellipsis">
+      
+        Storing Passwords: bcrypt
+      
+    </span>
+</a>
+<nav aria-label="Storing Passwords: bcrypt" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#never-store-plaintext-passwords">
+<span class="md-ellipsis">
+      
+        Never store plaintext passwords
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-user-model-with-password-hashing">
+<span class="md-ellipsis">
+      
+        The User Model with Password Hashing
+      
+    </span>
+</a>
+<nav aria-label="The User Model with Password Hashing" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hashing-at-the-model-layer-with-a-mongoose-hook">
+<span class="md-ellipsis">
+      
+        Hashing at the model layer with a Mongoose hook
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#modelsuserjs-const-mongoose-requiremongoose-const-bcrypt-requirebcrypt-const-userschema-new-mongooseschema-name-type-string-required-true-trim-true-email-type-string-required-true-unique-true-lowercase-true-password-type-string-required-true-minlength-8-role-type-string-enum-user-admin-default-user-timestamps-true-hash-password-before-saving-userschemapresave-async-function-next-if-thisismodifiedpassword-return-next-only-hash-if-changed-thispassword-await-bcrypthashthispassword-12-next">
+<span class="md-ellipsis">
+      
+        // models/User.js const mongoose = require('mongoose'); const bcrypt = require('bcrypt'); const userSchema = new mongoose.Schema({ name: { type: String, required: true, trim: true }, email: { type: String, required: true, unique: true, lowercase: true }, password: { type: String, required: true, minlength: 8 }, role: { type: String, enum: ['user', 'admin'], default: 'user' }, }, { timestamps: true }); // Hash password before saving userSchema.pre('save', async function (next) { if (!this.isModified('password')) return next(); // only hash if changed this.password = await bcrypt.hash(this.password, 12); next(); });
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#safely-return-user-object">
+<span class="md-ellipsis">
+      
+        Safely return user object
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-auth-routes-register-and-login">
+<span class="md-ellipsis">
+      
+        The Auth Routes: Register and Login
+      
+    </span>
+</a>
+<nav aria-label="The Auth Routes: Register and Login" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#two-endpoints-two-flows">
+<span class="md-ellipsis">
+      
+        Two endpoints, two flows
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#routesauthjs-const-express-requireexpress-const-jwt-requirejsonwebtoken-const-user-requiremodelsuser-const-router-expressrouter-post-authregister-routerpostregister-async-req-res-next-try-const-name-email-password-reqbody-const-user-await-usercreate-name-email-password-presave-hook-hashes-the-password-automatically-resstatus201json-message-account-created-user-catch-err-nexterr">
+<span class="md-ellipsis">
+      
+        // routes/auth.js const express = require('express'); const jwt = require('jsonwebtoken'); const User = require('../models/User'); const router = express.Router(); // POST /auth/register router.post('/register', async (req, res, next) =&gt; { try { const { name, email, password } = req.body; const user = await User.create({ name, email, password }); // pre('save') hook hashes the password automatically res.status(201).json({ message: 'Account created', user }); } catch (err) { next(err); } });
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#post-authlogin-routerpostlogin-async-req-res-next-try-const-email-password-reqbody-const-user-await-userfindone-email-selectpassword-if-user-return-resstatus401json-error-invalid-credentials-const-ismatch-await-usercomparepasswordpassword-if-ismatch-return-resstatus401json-error-invalid-credentials-const-token-jwtsign-userid-user_id-role-userrole-processenvjwt_secret-expiresin-24h-resjson-token-catch-err-nexterr-moduleexports-router">
+<span class="md-ellipsis">
+      
+        // POST /auth/login router.post('/login', async (req, res, next) =&gt; { try { const { email, password } = req.body; const user = await User.findOne({ email }).select('+password'); if (!user) return res.status(401).json({ error: 'Invalid credentials' }); const isMatch = await user.comparePassword(password); if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' }); const token = jwt.sign( { userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' } ); res.json({ token }); } catch (err) { next(err); } }); module.exports = router;
+      
+    </span>
+</a>
+<nav aria-label="// POST /auth/login router.post('/login', async (req, res, next) =&gt; { try { const { email, password } = req.body; const user = await User.findOne({ email }).select('+password'); if (!user) return res.status(401).json({ error: 'Invalid credentials' }); const isMatch = await user.comparePassword(password); if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' }); const token = jwt.sign( { userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' } ); res.json({ token }); } catch (err) { next(err); } }); module.exports = router;" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-authenticate-middleware">
+<span class="md-ellipsis">
+      
+        The Authenticate Middleware
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage-protect-any-route">
+<span class="md-ellipsis">
+      
+        Usage — protect any route:
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authorization-role-based-access-control">
+<span class="md-ellipsis">
+      
+        Authorization: Role-Based Access Control
+      
+    </span>
+</a>
+<nav aria-label="Authorization: Role-Based Access Control" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authentication-proves-identity-authorization-enforces-permissions">
+<span class="md-ellipsis">
+      
+        Authentication proves identity. Authorization enforces permissions.
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage">
+<span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#token-expiry-and-refresh-tokens">
+<span class="md-ellipsis">
+      
+        Token Expiry and Refresh Tokens
+      
+    </span>
+</a>
+<nav aria-label="Token Expiry and Refresh Tokens" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#short-lived-access-tokens-long-lived-refresh-tokens">
+<span class="md-ellipsis">
+      
+        Short-lived access tokens + long-lived refresh tokens
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#security-what-can-go-wrong">
+<span class="md-ellipsis">
+      
+        Security: What Can Go Wrong
+      
+    </span>
+</a>
+<nav aria-label="Security: What Can Go Wrong" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-most-common-jwt-implementation-mistakes">
+<span class="md-ellipsis">
+      
+        The most common JWT implementation mistakes
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#secrets-that-must-never-be-committed">
+<span class="md-ellipsis">
+      
+        Secrets that must never be committed
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#updated-project-structure">
+<span class="md-ellipsis">
+      
+        Updated Project Structure
+      
+    </span>
+</a>
+<nav aria-label="Updated Project Structure" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#where-auth-files-live">
+<span class="md-ellipsis">
+      
+        Where auth files live
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#in-serverjs">
+<span class="md-ellipsis">
+      
+        In server.js
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-oauth-20">
+<span class="md-ellipsis">
+      
+        What Is OAuth 2.0?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#oauth-key-concepts">
+<span class="md-ellipsis">
+      
+        OAuth Key Concepts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#oauth-with-passportjs">
+<span class="md-ellipsis">
+      
+        OAuth with Passport.js
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#user-model-for-oauth">
+<span class="md-ellipsis">
+      
+        User Model for OAuth
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#const-userschema-new-mongooseschema-name-type-string-required-true-email-type-string-required-true-unique-true-role-type-string-enum-user-admin-default-user-local-auth-not-required-oauth-users-have-no-password-password-type-string-minlength-8-oauth-sparse-unique-index-ignores-null-values-googleid-type-string-sparse-true-githubid-type-string-sparse-true-timestamps-true-only-hash-password-if-it-exists-and-was-modified-userschemapresave-async-function-next-if-thispassword-thisismodifiedpassword-return-next-thispassword-await-bcrypthashthispassword-12-next">
+<span class="md-ellipsis">
+      
+        const userSchema = new mongoose.Schema({ name: { type: String, required: true }, email: { type: String, required: true, unique: true }, role: { type: String, enum: ['user', 'admin'], default: 'user' }, // Local auth // not required — OAuth users have no password password: { type: String, minlength: 8 }, // OAuth // sparse: unique index ignores null values googleId: { type: String, sparse: true }, githubId: { type: String, sparse: true }, }, { timestamps: true }); // Only hash password if it exists and was modified userSchema.pre('save', async function (next) { if (!this.password || !this.isModified('password')) return next(); this.password = await bcrypt.hash(this.password, 12); next(); });
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+<span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+</a>
+<nav aria-label="Summary" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-we-covered">
+<span class="md-ellipsis">
+      
+        What we covered
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#speaker-notes">
+<span class="md-ellipsis">
+      
+        Speaker Notes
+      
+    </span>
+</a>
+<nav aria-label="Speaker Notes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-2-auth-vs-authz">
+<span class="md-ellipsis">
+      
+        Slide 2 (Auth vs Authz)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-45-jwt-anatomy">
+<span class="md-ellipsis">
+      
+        Slide 4–5 (JWT Anatomy)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-7-bcrypt">
+<span class="md-ellipsis">
+      
+        Slide 7 (bcrypt)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-9-auth-routes">
+<span class="md-ellipsis">
+      
+        Slide 9 (Auth Routes)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-12-refresh-tokens">
+<span class="md-ellipsis">
+      
+        Slide 12 (Refresh Tokens)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-13-what-can-go-wrong">
+<span class="md-ellipsis">
+      
+        Slide 13 (What Can Go Wrong)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slides-1619-oauth-bonus">
+<span class="md-ellipsis">
+      
+        Slides 16–19 (OAuth — Bonus)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../react-intro-slides/">
+<svg fill="currentColor" height="16px" viewbox="0 0 24 24" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path><path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path></svg>
+<span class="md-ellipsis">
+    React intro slides
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authentication-and-authorization-with-jwt">
+<span class="md-ellipsis">
+      
+        Authentication and Authorization with JWT
+      
+    </span>
+</a>
+<nav aria-label="Authentication and Authorization with JWT" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#knowing-whos-asking-and-what-theyre-allowed-to-do">
+<span class="md-ellipsis">
+      
+        Knowing who’s asking, and what they’re allowed to do
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#two-concepts-often-confused">
+<span class="md-ellipsis">
+      
+        Two Concepts, Often Confused
+      
+    </span>
+</a>
+<nav aria-label="Two Concepts, Often Confused" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authentication-vs-authorization">
+<span class="md-ellipsis">
+      
+        Authentication vs Authorization
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-problem-with-sessions">
+<span class="md-ellipsis">
+      
+        The Problem with Sessions
+      
+    </span>
+</a>
+<nav aria-label="The Problem with Sessions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-not-just-use-server-side-sessions">
+<span class="md-ellipsis">
+      
+        Why not just use server-side sessions?
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-a-jwt">
+<span class="md-ellipsis">
+      
+        What Is a JWT?
+      
+    </span>
+</a>
+<nav aria-label="What Is a JWT?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#json-web-token-a-self-contained-credential">
+<span class="md-ellipsis">
+      
+        JSON Web Token — a self-contained credential
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jwt-anatomy-decoded">
+<span class="md-ellipsis">
+      
+        JWT Anatomy: Decoded
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#claims">
+<span class="md-ellipsis">
+      
+        Claims
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-jwt-auth-works-the-full-cycle">
+<span class="md-ellipsis">
+      
+        How JWT Auth Works - the Full Cycle
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#storing-passwords-bcrypt">
+<span class="md-ellipsis">
+      
+        Storing Passwords: bcrypt
+      
+    </span>
+</a>
+<nav aria-label="Storing Passwords: bcrypt" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#never-store-plaintext-passwords">
+<span class="md-ellipsis">
+      
+        Never store plaintext passwords
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-user-model-with-password-hashing">
+<span class="md-ellipsis">
+      
+        The User Model with Password Hashing
+      
+    </span>
+</a>
+<nav aria-label="The User Model with Password Hashing" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hashing-at-the-model-layer-with-a-mongoose-hook">
+<span class="md-ellipsis">
+      
+        Hashing at the model layer with a Mongoose hook
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#modelsuserjs-const-mongoose-requiremongoose-const-bcrypt-requirebcrypt-const-userschema-new-mongooseschema-name-type-string-required-true-trim-true-email-type-string-required-true-unique-true-lowercase-true-password-type-string-required-true-minlength-8-role-type-string-enum-user-admin-default-user-timestamps-true-hash-password-before-saving-userschemapresave-async-function-next-if-thisismodifiedpassword-return-next-only-hash-if-changed-thispassword-await-bcrypthashthispassword-12-next">
+<span class="md-ellipsis">
+      
+        // models/User.js const mongoose = require('mongoose'); const bcrypt = require('bcrypt'); const userSchema = new mongoose.Schema({ name: { type: String, required: true, trim: true }, email: { type: String, required: true, unique: true, lowercase: true }, password: { type: String, required: true, minlength: 8 }, role: { type: String, enum: ['user', 'admin'], default: 'user' }, }, { timestamps: true }); // Hash password before saving userSchema.pre('save', async function (next) { if (!this.isModified('password')) return next(); // only hash if changed this.password = await bcrypt.hash(this.password, 12); next(); });
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#safely-return-user-object">
+<span class="md-ellipsis">
+      
+        Safely return user object
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-auth-routes-register-and-login">
+<span class="md-ellipsis">
+      
+        The Auth Routes: Register and Login
+      
+    </span>
+</a>
+<nav aria-label="The Auth Routes: Register and Login" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#two-endpoints-two-flows">
+<span class="md-ellipsis">
+      
+        Two endpoints, two flows
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#routesauthjs-const-express-requireexpress-const-jwt-requirejsonwebtoken-const-user-requiremodelsuser-const-router-expressrouter-post-authregister-routerpostregister-async-req-res-next-try-const-name-email-password-reqbody-const-user-await-usercreate-name-email-password-presave-hook-hashes-the-password-automatically-resstatus201json-message-account-created-user-catch-err-nexterr">
+<span class="md-ellipsis">
+      
+        // routes/auth.js const express = require('express'); const jwt = require('jsonwebtoken'); const User = require('../models/User'); const router = express.Router(); // POST /auth/register router.post('/register', async (req, res, next) =&gt; { try { const { name, email, password } = req.body; const user = await User.create({ name, email, password }); // pre('save') hook hashes the password automatically res.status(201).json({ message: 'Account created', user }); } catch (err) { next(err); } });
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#post-authlogin-routerpostlogin-async-req-res-next-try-const-email-password-reqbody-const-user-await-userfindone-email-selectpassword-if-user-return-resstatus401json-error-invalid-credentials-const-ismatch-await-usercomparepasswordpassword-if-ismatch-return-resstatus401json-error-invalid-credentials-const-token-jwtsign-userid-user_id-role-userrole-processenvjwt_secret-expiresin-24h-resjson-token-catch-err-nexterr-moduleexports-router">
+<span class="md-ellipsis">
+      
+        // POST /auth/login router.post('/login', async (req, res, next) =&gt; { try { const { email, password } = req.body; const user = await User.findOne({ email }).select('+password'); if (!user) return res.status(401).json({ error: 'Invalid credentials' }); const isMatch = await user.comparePassword(password); if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' }); const token = jwt.sign( { userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' } ); res.json({ token }); } catch (err) { next(err); } }); module.exports = router;
+      
+    </span>
+</a>
+<nav aria-label="// POST /auth/login router.post('/login', async (req, res, next) =&gt; { try { const { email, password } = req.body; const user = await User.findOne({ email }).select('+password'); if (!user) return res.status(401).json({ error: 'Invalid credentials' }); const isMatch = await user.comparePassword(password); if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' }); const token = jwt.sign( { userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' } ); res.json({ token }); } catch (err) { next(err); } }); module.exports = router;" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-authenticate-middleware">
+<span class="md-ellipsis">
+      
+        The Authenticate Middleware
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage-protect-any-route">
+<span class="md-ellipsis">
+      
+        Usage — protect any route:
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authorization-role-based-access-control">
+<span class="md-ellipsis">
+      
+        Authorization: Role-Based Access Control
+      
+    </span>
+</a>
+<nav aria-label="Authorization: Role-Based Access Control" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#authentication-proves-identity-authorization-enforces-permissions">
+<span class="md-ellipsis">
+      
+        Authentication proves identity. Authorization enforces permissions.
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage">
+<span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#token-expiry-and-refresh-tokens">
+<span class="md-ellipsis">
+      
+        Token Expiry and Refresh Tokens
+      
+    </span>
+</a>
+<nav aria-label="Token Expiry and Refresh Tokens" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#short-lived-access-tokens-long-lived-refresh-tokens">
+<span class="md-ellipsis">
+      
+        Short-lived access tokens + long-lived refresh tokens
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#security-what-can-go-wrong">
+<span class="md-ellipsis">
+      
+        Security: What Can Go Wrong
+      
+    </span>
+</a>
+<nav aria-label="Security: What Can Go Wrong" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-most-common-jwt-implementation-mistakes">
+<span class="md-ellipsis">
+      
+        The most common JWT implementation mistakes
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#secrets-that-must-never-be-committed">
+<span class="md-ellipsis">
+      
+        Secrets that must never be committed
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#updated-project-structure">
+<span class="md-ellipsis">
+      
+        Updated Project Structure
+      
+    </span>
+</a>
+<nav aria-label="Updated Project Structure" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#where-auth-files-live">
+<span class="md-ellipsis">
+      
+        Where auth files live
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#in-serverjs">
+<span class="md-ellipsis">
+      
+        In server.js
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-oauth-20">
+<span class="md-ellipsis">
+      
+        What Is OAuth 2.0?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#oauth-key-concepts">
+<span class="md-ellipsis">
+      
+        OAuth Key Concepts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#oauth-with-passportjs">
+<span class="md-ellipsis">
+      
+        OAuth with Passport.js
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#user-model-for-oauth">
+<span class="md-ellipsis">
+      
+        User Model for OAuth
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#const-userschema-new-mongooseschema-name-type-string-required-true-email-type-string-required-true-unique-true-role-type-string-enum-user-admin-default-user-local-auth-not-required-oauth-users-have-no-password-password-type-string-minlength-8-oauth-sparse-unique-index-ignores-null-values-googleid-type-string-sparse-true-githubid-type-string-sparse-true-timestamps-true-only-hash-password-if-it-exists-and-was-modified-userschemapresave-async-function-next-if-thispassword-thisismodifiedpassword-return-next-thispassword-await-bcrypthashthispassword-12-next">
+<span class="md-ellipsis">
+      
+        const userSchema = new mongoose.Schema({ name: { type: String, required: true }, email: { type: String, required: true, unique: true }, role: { type: String, enum: ['user', 'admin'], default: 'user' }, // Local auth // not required — OAuth users have no password password: { type: String, minlength: 8 }, // OAuth // sparse: unique index ignores null values googleId: { type: String, sparse: true }, githubId: { type: String, sparse: true }, }, { timestamps: true }); // Only hash password if it exists and was modified userSchema.pre('save', async function (next) { if (!this.password || !this.isModified('password')) return next(); this.password = await bcrypt.hash(this.password, 12); next(); });
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+<span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+</a>
+<nav aria-label="Summary" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-we-covered">
+<span class="md-ellipsis">
+      
+        What we covered
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#speaker-notes">
+<span class="md-ellipsis">
+      
+        Speaker Notes
+      
+    </span>
+</a>
+<nav aria-label="Speaker Notes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-2-auth-vs-authz">
+<span class="md-ellipsis">
+      
+        Slide 2 (Auth vs Authz)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-45-jwt-anatomy">
+<span class="md-ellipsis">
+      
+        Slide 4–5 (JWT Anatomy)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-7-bcrypt">
+<span class="md-ellipsis">
+      
+        Slide 7 (bcrypt)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-9-auth-routes">
+<span class="md-ellipsis">
+      
+        Slide 9 (Auth Routes)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-12-refresh-tokens">
+<span class="md-ellipsis">
+      
+        Slide 12 (Refresh Tokens)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slide-13-what-can-go-wrong">
+<span class="md-ellipsis">
+      
+        Slide 13 (What Can Go Wrong)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slides-1619-oauth-bonus">
+<span class="md-ellipsis">
+      
+        Slides 16–19 (OAuth — Bonus)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Tags -->
+<!-- Actions -->
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+<h1>Week 9   Authentication</h1>
+<!-- Page content -->
+<h2 id="authentication-and-authorization-with-jwt">Authentication and Authorization with JWT<a class="headerlink" href="#authentication-and-authorization-with-jwt" title="Permanent link">¶</a></h2>
+<h4 id="knowing-whos-asking-and-what-theyre-allowed-to-do">Knowing who’s asking, and what they’re allowed to do<a class="headerlink" href="#knowing-whos-asking-and-what-theyre-allowed-to-do" title="Permanent link">¶</a></h4>
+<p><em>“Security is not a feature you add at the end. It’s a constraint you design around from the start.”</em></p>
+<hr/>
+<h3 id="two-concepts-often-confused">Two Concepts, Often Confused<a class="headerlink" href="#two-concepts-often-confused" title="Permanent link">¶</a></h3>
+<h4 id="authentication-vs-authorization">Authentication vs Authorization<a class="headerlink" href="#authentication-vs-authorization" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Question It Answers</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Authentication</strong></td>
+<td><em>Who are you?</em></td>
+<td>Verifying a username and password</td>
+</tr>
+<tr>
+<td><strong>Authorization</strong></td>
+<td><em>What are you allowed to do?</em></td>
+<td>Checking if a user has admin rights</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The order matters: you must authenticate before you can authorize.</strong></p>
+<p>A request can fail at either step:</p>
+<ul>
+<li><strong>401 Unauthorized</strong> — not authenticated (we don’t know who you are)</li>
+<li><strong>403 Forbidden</strong> — authenticated but not authorized (we know who you are, but you can’t do this)</li>
+</ul>
+<blockquote>
+<p>Think of a building with a keycard lock. Authentication is swiping your card to prove you work there. Authorization is whether your card opens the server room specifically.</p>
+</blockquote>
+<hr/>
+<h3 id="the-problem-with-sessions">The Problem with Sessions<a class="headerlink" href="#the-problem-with-sessions" title="Permanent link">¶</a></h3>
+<h4 id="why-not-just-use-server-side-sessions">Why not just use server-side sessions?<a class="headerlink" href="#why-not-just-use-server-side-sessions" title="Permanent link">¶</a></h4>
+<p>Traditional session-based auth:<br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>1. User logs in → server creates a session, 
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>   stores it in memory (or DB)
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>2. Server sends back a session ID in a cookie
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>3. Every request includes the cookie
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>4. Server looks up the session ID to identify the user
+</code></pre></div><p></p>
+<p>This works. But:</p>
+<ul>
+<li><strong>Stateful</strong> — the server must store and look up session data for every request</li>
+<li><strong>Scaling problem</strong> — if you add a second server, it doesn’t have the first server’s sessions</li>
+<li><strong>Session store required</strong> — Redis or DB needed to share sessions across instances</li>
+<li><strong>Mobile/API unfriendly</strong> — cookies are a browser concept; mobile apps and other APIs don’t use them naturally</li>
+</ul>
+<p><strong>JWTs are a stateless alternative.</strong></p>
+<hr/>
+<h2 id="what-is-a-jwt">What Is a JWT?<a class="headerlink" href="#what-is-a-jwt" title="Permanent link">¶</a></h2>
+<h3 id="json-web-token-a-self-contained-credential">JSON Web Token — a self-contained credential<a class="headerlink" href="#json-web-token-a-self-contained-credential" title="Permanent link">¶</a></h3>
+<p>A JWT is a string that encodes identity and claims, signed by the server.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>...many more characters follow...
+</code></pre></div>
+<p>Three parts, separated by dots:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Content</th>
+<th>Encoded as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td>Algorithm and token type</td>
+<td>Base64URL</td>
+</tr>
+<tr>
+<td><strong>Payload</strong></td>
+<td>Claims (userId, role, expiry)</td>
+<td>Base64URL</td>
+</tr>
+<tr>
+<td><strong>Signature</strong></td>
+<td>HMAC of header + payload, signed with a secret</td>
+<td>Base64URL</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Base64URL is not encryption.</strong> Anyone can decode the header and payload. The signature is what makes the token trustworthy — it proves the token was issued by your server and hasn’t been tampered with.</p>
+<hr/>
+<h2 id="jwt-anatomy-decoded">JWT Anatomy: Decoded<a class="headerlink" href="#jwt-anatomy-decoded" title="Permanent link">¶</a></h2>
+<p><strong>Header:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HS256"</span><span class="p">,</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="p">}</span>
+</code></pre></div><p></p>
+<p><strong>Payload (claims):</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"64abc123"</span><span class="p">,</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alice@example.com"</span><span class="p">,</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1700000000</span><span class="p">,</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1700086400</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="p">}</span>
+</code></pre></div><p></p>
+<hr/>
+<h2 id="claims">Claims<a class="headerlink" href="#claims" title="Permanent link">¶</a></h2>
+<p><strong>Standard claim names:</strong></p>
+<ul>
+<li><code>iat</code> — issued at (Unix timestamp)</li>
+<li><code>exp</code> — expiration time (Unix timestamp)</li>
+<li><code>sub</code> — subject (usually the user ID)</li>
+<li><code>iss</code> — issuer</li>
+</ul>
+<blockquote>
+<p><strong>Never put sensitive data in a JWT payload.</strong> Passwords, credit card numbers, secrets — anyone who intercepts the token can read the payload. Put only what downstream services need to identify and authorize the user.</p>
+</blockquote>
+<hr/>
+<h2 id="how-jwt-auth-works-the-full-cycle">How JWT Auth Works - the Full Cycle<a class="headerlink" href="#how-jwt-auth-works-the-full-cycle" title="Permanent link">¶</a></h2>
+<style>
+.reveal pre {
+    font-size: 0.8em;
+}
+</style>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>┌──────────┐                         ┌──────────────┐
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>│  Client  │                         │    Server    │
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>└────┬─────┘                         └──────┬───────┘
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>     │                                      │
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>     │  POST /auth/login                    │
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>     │  { email, password }                 │
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>     │─────────────────────────────────────▶│
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>     │                                      │ 1. Find user by email
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>     │                                      │ 2. Compare password hash
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>     │                                      │ 3. Sign JWT with secret
+<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>     │  200 { token: "eyJ..." }             │
+<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>     │◀─────────────────────────────────────│
+<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>     │                                      │
+<a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>     │  GET /api/profile                    │
+<a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>     │  Authorization: Bearer eyJ...        │
+<a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a>     │─────────────────────────────────────▶│
+<a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>     │                                      │ 4. Verify JWT signature
+<a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a>     │                                      │ 5. Check expiry
+<a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a>     │                                      │ 6. Attach user to req
+<a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>     │  200 { user data }                   │
+<a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a>     │◀─────────────────────────────────────│
+</code></pre></div>
+<p><strong>The server never stores the token.</strong> Validity is proven by the signature alone.</p>
+<hr/>
+<h2 id="storing-passwords-bcrypt">Storing Passwords: bcrypt<a class="headerlink" href="#storing-passwords-bcrypt" title="Permanent link">¶</a></h2>
+<h3 id="never-store-plaintext-passwords">Never store plaintext passwords<a class="headerlink" href="#never-store-plaintext-passwords" title="Permanent link">¶</a></h3>
+<p><strong>What not to do:</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1">// NEVER DO THIS</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="k">await</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+</code></pre></div><p></p>
+<p>If your database is breached, every user’s password is exposed — and since people reuse passwords, it compromises their accounts everywhere.</p>
+<hr/>
+<p><strong>What to do: hash with bcrypt</strong></p>
+<p>bcrypt is a slow, one-way hashing algorithm designed for passwords:</p>
+<ul>
+<li><strong>One-way:</strong> you cannot reverse a bcrypt hash to get the original password</li>
+<li><strong>Salted:</strong> each hash includes a random salt, so identical passwords produce different hashes</li>
+<li><strong>Intentionally slow:</strong> configurable work factor (cost) makes brute-force attacks expensive</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>npm<span class="w"> </span>install<span class="w"> </span>bcrypt
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">bcrypt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'bcrypt'</span><span class="p">);</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">SALT_ROUNDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12</span><span class="p">;</span><span class="w">  </span><span class="c1">// work factor — higher is slower/safer</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1">// Hashing (on registration)</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="nx">plainTextPassword</span><span class="p">,</span><span class="w"> </span><span class="nx">SALT_ROUNDS</span><span class="p">);</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1">// Comparing (on login)</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="kd">const</span><span class="w"> </span><span class="nx">isMatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="nx">plainTextPassword</span><span class="p">,</span><span class="w"> </span><span class="nx">storedHash</span><span class="p">);</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="c1">// → true or false</span>
+</code></pre></div>
+<hr/>
+<h2 id="the-user-model-with-password-hashing">The User Model with Password Hashing<a class="headerlink" href="#the-user-model-with-password-hashing" title="Permanent link">¶</a></h2>
+<h3 id="hashing-at-the-model-layer-with-a-mongoose-hook">Hashing at the model layer with a Mongoose hook<a class="headerlink" href="#hashing-at-the-model-layer-with-a-mongoose-hook" title="Permanent link">¶</a></h3>
+<h2 id="modelsuserjs-const-mongoose-requiremongoose-const-bcrypt-requirebcrypt-const-userschema-new-mongooseschema-name-type-string-required-true-trim-true-email-type-string-required-true-unique-true-lowercase-true-password-type-string-required-true-minlength-8-role-type-string-enum-user-admin-default-user-timestamps-true-hash-password-before-saving-userschemapresave-async-function-next-if-thisismodifiedpassword-return-next-only-hash-if-changed-thispassword-await-bcrypthashthispassword-12-next"><div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">// models/User.js</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">mongoose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'mongoose'</span><span class="p">);</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">bcrypt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'bcrypt'</span><span class="p">);</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">userSchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">trim</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">unique</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">lowercase</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">  </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">minlength</span><span class="o">:</span><span class="w"> </span><span class="mf">8</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span><span class="nx">role</span><span class="o">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="kr">enum</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'user'</span><span class="p">,</span><span class="w"> </span><span class="s1">'admin'</span><span class="p">],</span><span class="w"> </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="s1">'user'</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">timestamps</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="c1">// Hash password before saving</span>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="nx">userSchema</span><span class="p">.</span><span class="nx">pre</span><span class="p">(</span><span class="s1">'save'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isModified</span><span class="p">(</span><span class="s1">'password'</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">();</span><span class="w">  </span><span class="c1">// only hash if changed</span>
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="mf">12</span><span class="p">);</span>
+<a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">  </span><span class="nx">next</span><span class="p">();</span>
+<a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="p">});</span>
+</code></pre></div><a class="headerlink" href="#modelsuserjs-const-mongoose-requiremongoose-const-bcrypt-requirebcrypt-const-userschema-new-mongooseschema-name-type-string-required-true-trim-true-email-type-string-required-true-unique-true-lowercase-true-password-type-string-required-true-minlength-8-role-type-string-enum-user-admin-default-user-timestamps-true-hash-password-before-saving-userschemapresave-async-function-next-if-thisismodifiedpassword-return-next-only-hash-if-changed-thispassword-await-bcrypthashthispassword-12-next" title="Permanent link">¶</a></h2>
+<h2 id="safely-return-user-object">Safely return user object<a class="headerlink" href="#safely-return-user-object" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">// Never return the password field in responses</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nx">userSchema</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'toJSON'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">  </span><span class="nx">transform</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span><span class="w"> </span><span class="nx">ret</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="ow">delete</span><span class="w"> </span><span class="nx">ret</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="ow">delete</span><span class="w"> </span><span class="nx">ret</span><span class="p">.</span><span class="nx">__v</span><span class="p">;</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ret</span><span class="p">;</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">  </span><span class="p">},</span>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="p">});</span>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="c1">// Instance method to compare passwords</span>
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="nx">userSchema</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">comparePassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">candidate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="nx">candidate</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="p">};</span>
+<a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a>
+<a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'User'</span><span class="p">,</span><span class="w"> </span><span class="nx">userSchema</span><span class="p">);</span>
+</code></pre></div>
+<hr/>
+<h2 id="the-auth-routes-register-and-login">The Auth Routes: Register and Login<a class="headerlink" href="#the-auth-routes-register-and-login" title="Permanent link">¶</a></h2>
+<h3 id="two-endpoints-two-flows">Two endpoints, two flows<a class="headerlink" href="#two-endpoints-two-flows" title="Permanent link">¶</a></h3>
+<h2 id="routesauthjs-const-express-requireexpress-const-jwt-requirejsonwebtoken-const-user-requiremodelsuser-const-router-expressrouter-post-authregister-routerpostregister-async-req-res-next-try-const-name-email-password-reqbody-const-user-await-usercreate-name-email-password-presave-hook-hashes-the-password-automatically-resstatus201json-message-account-created-user-catch-err-nexterr"><div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1">// routes/auth.js</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jwt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'jsonwebtoken'</span><span class="p">);</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'../models/User'</span><span class="p">);</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1">// POST /auth/register</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/register'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="c1">// pre('save') hook hashes the password automatically</span>
+<a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">201</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s1">'Account created'</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="p">});</span>
+</code></pre></div><a class="headerlink" href="#routesauthjs-const-express-requireexpress-const-jwt-requirejsonwebtoken-const-user-requiremodelsuser-const-router-expressrouter-post-authregister-routerpostregister-async-req-res-next-try-const-name-email-password-reqbody-const-user-await-usercreate-name-email-password-presave-hook-hashes-the-password-automatically-resstatus201json-message-account-created-user-catch-err-nexterr" title="Permanent link">¶</a></h2>
+<h2 id="post-authlogin-routerpostlogin-async-req-res-next-try-const-email-password-reqbody-const-user-await-userfindone-email-selectpassword-if-user-return-resstatus401json-error-invalid-credentials-const-ismatch-await-usercomparepasswordpassword-if-ismatch-return-resstatus401json-error-invalid-credentials-const-token-jwtsign-userid-user_id-role-userrole-processenvjwt_secret-expiresin-24h-resjson-token-catch-err-nexterr-moduleexports-router"><div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1">// POST /auth/login</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/login'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="w"> </span><span class="nx">email</span><span class="w"> </span><span class="p">}).</span><span class="nx">select</span><span class="p">(</span><span class="s1">'+password'</span><span class="p">);</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Invalid credentials'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>
+<a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">isMatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">comparePassword</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+<a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">isMatch</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Invalid credentials'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a>
+<a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
+<a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">      </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">,</span>
+<a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">expiresIn</span><span class="o">:</span><span class="w"> </span><span class="s1">'24h'</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="p">);</span>
+<a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a>
+<a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="p">});</span>
+<a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a>
+<a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">router</span><span class="p">;</span>
+</code></pre></div><a class="headerlink" href="#post-authlogin-routerpostlogin-async-req-res-next-try-const-email-password-reqbody-const-user-await-userfindone-email-selectpassword-if-user-return-resstatus401json-error-invalid-credentials-const-ismatch-await-usercomparepasswordpassword-if-ismatch-return-resstatus401json-error-invalid-credentials-const-token-jwtsign-userid-user_id-role-userrole-processenvjwt_secret-expiresin-24h-resjson-token-catch-err-nexterr-moduleexports-router" title="Permanent link">¶</a></h2>
+<blockquote>
+<p><strong>Always return the same error message for bad email and bad password.</strong> Separate messages (<code>"user not found"</code> vs <code>"wrong password"</code>) let attackers enumerate valid email addresses.</p>
+</blockquote>
+<hr/>
+<h4 id="the-authenticate-middleware">The Authenticate Middleware<a class="headerlink" href="#the-authenticate-middleware" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1">// middleware/authenticate.js</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jwt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'jsonwebtoken'</span><span class="p">);</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="kd">function</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">authHeader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">authorization</span><span class="p">;</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">authHeader</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">authHeader</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'Bearer '</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'No token provided'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>
+<a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">authHeader</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mf">1</span><span class="p">];</span>
+<a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">decoded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">);</span>
+<a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">decoded</span><span class="p">;</span><span class="w">  </span><span class="c1">// { userId, role, iat, exp }</span>
+<a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+<a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'TokenExpiredError'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Token expired'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Invalid token'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="p">}</span>
+<a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a>
+<a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">;</span>
+</code></pre></div>
+<hr/>
+<h2 id="usage-protect-any-route">Usage — protect any route:<a class="headerlink" href="#usage-protect-any-route" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'../middleware/authenticate'</span><span class="p">);</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="c1">// Protect an entire router</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'/api'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">);</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="c1">// Protect individual routes</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/profile'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">,</span><span class="w"> </span><span class="nx">getProfile</span><span class="p">);</span>
+<a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="nx">router</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s1">'/:id'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteUser</span><span class="p">);</span>
+</code></pre></div>
+<hr/>
+<h2 id="authorization-role-based-access-control">Authorization: Role-Based Access Control<a class="headerlink" href="#authorization-role-based-access-control" title="Permanent link">¶</a></h2>
+<h3 id="authentication-proves-identity-authorization-enforces-permissions">Authentication proves identity. Authorization enforces permissions.<a class="headerlink" href="#authentication-proves-identity-authorization-enforces-permissions" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="c1">// middleware/authorize.js</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">authorize</span><span class="p">(...</span><span class="nx">roles</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Not authenticated'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">roles</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">role</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Insufficient permissions'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+<a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">  </span><span class="p">};</span>
+<a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="p">}</span>
+<a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a>
+<a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">authorize</span><span class="p">;</span>
+</code></pre></div>
+<hr/>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'../middleware/authenticate'</span><span class="p">);</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">authorize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'../middleware/authorize'</span><span class="p">);</span>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="c1">// Any authenticated user</span>
+<a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/profile'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">,</span><span class="w"> </span><span class="nx">getProfile</span><span class="p">);</span>
+<a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a>
+<a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="c1">// Admin only</span>
+<a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="nx">router</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s1">'/users/:id'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">,</span><span class="w"> </span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">),</span><span class="w"> </span><span class="nx">deleteUser</span><span class="p">);</span>
+<a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a>
+<a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="c1">// Admin or moderator</span>
+<a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="nx">router</span><span class="p">.</span><span class="nx">patch</span><span class="p">(</span><span class="s1">'/posts/:id/flag'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">,</span><span class="w"> </span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span>
+<a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">	</span><span class="s1">'moderator'</span><span class="p">),</span><span class="w"> </span><span class="nx">flagPost</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>The middleware chain:</strong> <code>authenticate</code> runs first (proves identity, attaches <code>req.user</code>), then <code>authorize</code> checks the role.</p>
+<hr/>
+<h2 id="token-expiry-and-refresh-tokens">Token Expiry and Refresh Tokens<a class="headerlink" href="#token-expiry-and-refresh-tokens" title="Permanent link">¶</a></h2>
+<h3 id="short-lived-access-tokens-long-lived-refresh-tokens">Short-lived access tokens + long-lived refresh tokens<a class="headerlink" href="#short-lived-access-tokens-long-lived-refresh-tokens" title="Permanent link">¶</a></h3>
+<p><strong>The problem with long-lived tokens:</strong></p>
+<ul>
+<li>If a token is stolen, the attacker has access until it expires</li>
+<li>You can’t easily invalidate a JWT (the server is stateless)</li>
+</ul>
+<p><strong>The solution: two-token pattern</strong></p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Lifespan</th>
+<th>Stored</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access token</strong></td>
+<td>15 min – 1 hour</td>
+<td>Memory / JS variable</td>
+<td>Sent with every API request</td>
+</tr>
+<tr>
+<td><strong>Refresh token</strong></td>
+<td>7–30 days</td>
+<td>HttpOnly cookie or secure storage</td>
+<td>Used only to get a new access token</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="c1">// Login: issue both tokens</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">accessToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">  </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">,</span>
+<a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">expiresIn</span><span class="o">:</span><span class="w"> </span><span class="s1">'15m'</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="p">);</span>
+<a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a>
+<a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="kd">const</span><span class="w"> </span><span class="nx">refreshToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
+<a href="#__codelineno-16-9" id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-16-10" id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">  </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_REFRESH_SECRET</span><span class="p">,</span>
+<a href="#__codelineno-16-11" id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">expiresIn</span><span class="o">:</span><span class="w"> </span><span class="s1">'7d'</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-16-12" id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="p">);</span>
+<a href="#__codelineno-16-13" id="__codelineno-16-13" name="__codelineno-16-13"></a>
+<a href="#__codelineno-16-14" id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">accessToken</span><span class="p">,</span><span class="w"> </span><span class="nx">refreshToken</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1">// POST /auth/refresh — get a new access token</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/refresh'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">refreshToken</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">decoded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="nx">refreshToken</span><span class="p">,</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_REFRESH_SECRET</span><span class="p">);</span>
+<a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">accessToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
+<a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="nx">decoded</span><span class="p">.</span><span class="nx">userId</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">      </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">,</span>
+<a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">expiresIn</span><span class="o">:</span><span class="w"> </span><span class="s1">'15m'</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="p">);</span>
+<a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">accessToken</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-13" id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">'Invalid or expired refresh token'</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-17-14" id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-17-15" id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="p">});</span>
+</code></pre></div>
+<hr/>
+<h2 id="security-what-can-go-wrong">Security: What Can Go Wrong<a class="headerlink" href="#security-what-can-go-wrong" title="Permanent link">¶</a></h2>
+<h3 id="the-most-common-jwt-implementation-mistakes">The most common JWT implementation mistakes<a class="headerlink" href="#the-most-common-jwt-implementation-mistakes" title="Permanent link">¶</a></h3>
+<p><strong>1. Weak or missing secret</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1"># Bad</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="nv">JWT_SECRET</span><span class="o">=</span>secret
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="nv">JWT_SECRET</span><span class="o">=</span>password123
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="c1"># Good — generate a strong random secret</span>
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a>node<span class="w"> </span>-e<span class="w"> </span><span class="s2">"console.log(require('crypto').randomBytes(64).toString('hex'))"</span>
+</code></pre></div><p></p>
+<p><strong>2. Sensitive data in the payload</strong><br/>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="c1">// Bad — never put this in a JWT</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="p">{</span><span class="w"> </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="s2">"plaintext"</span><span class="p">,</span><span class="w"> </span><span class="nx">creditCard</span><span class="o">:</span><span class="w"> </span><span class="s2">"4111..."</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="c1">// Good — only identifiers and public claims</span>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="p">{</span><span class="w"> </span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="s2">"64abc123"</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">"user"</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div><p></p>
+<hr/>
+<p><strong>3. Not checking expiry</strong><br/>
+<code>jwt.verify()</code> checks expiry automatically — but only if you use it. Never decode without verifying.</p>
+<p><strong>4. Storing access tokens in localStorage</strong><br/>
+localStorage is accessible to any JavaScript on the page — including injected scripts (XSS). Prefer memory storage for access tokens, HttpOnly cookies for refresh tokens.</p>
+<p><strong>5. Not rotating refresh tokens</strong><br/>
+After a refresh token is used to get a new access token, invalidate it and issue a new one. If a refresh token is stolen and used, you’ll detect it when the legitimate user’s copy is rejected.</p>
+<hr/>
+<h2 id="secrets-that-must-never-be-committed">Secrets that must never be committed<a class="headerlink" href="#secrets-that-must-never-be-committed" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1"># .env</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nv">JWT_SECRET</span><span class="o">=</span>a64-character-random-hex-string-generated-with-crypto
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nv">JWT_REFRESH_SECRET</span><span class="o">=</span>another-different-64-character-random-hex-string
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nv">JWT_EXPIRES_IN</span><span class="o">=</span>15m
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="nv">JWT_REFRESH_EXPIRES_IN</span><span class="o">=</span>7d
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1"># .env.example</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="nv">JWT_SECRET</span><span class="o">=</span>replace_with_output_of_node_crypto_randomBytes_64_hex
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="nv">JWT_REFRESH_SECRET</span><span class="o">=</span>replace_with_a_different_random_secret
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="nv">JWT_EXPIRES_IN</span><span class="o">=</span>15m
+<a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="nv">JWT_REFRESH_EXPIRES_IN</span><span class="o">=</span>7d
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="c1">// Generate a secret — run this once in your terminal</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="nx">node</span><span class="w"> </span><span class="o">-</span><span class="nx">e</span><span class="w"> </span><span class="s2">"console.log(require('crypto').randomBytes(64).toString('hex'))"</span>
+</code></pre></div>
+<blockquote>
+<p>Using the same secret for access and refresh tokens defeats the purpose of having two. If one secret is compromised, both token types are compromised. Always use separate secrets.</p>
+</blockquote>
+<hr/>
+<h2 id="updated-project-structure">Updated Project Structure<a class="headerlink" href="#updated-project-structure" title="Permanent link">¶</a></h2>
+<h3 id="where-auth-files-live">Where auth files live<a class="headerlink" href="#where-auth-files-live" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a>my-api/
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a>├── server.js
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a>├── db.js
+<a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a>├── .env
+<a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a>├── .env.example
+<a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a>│
+<a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a>├── models/
+<a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a>│   └── User.js           ← password hashing hook, comparePassword method
+<a href="#__codelineno-23-9" id="__codelineno-23-9" name="__codelineno-23-9"></a>│
+<a href="#__codelineno-23-10" id="__codelineno-23-10" name="__codelineno-23-10"></a>├── routes/
+<a href="#__codelineno-23-11" id="__codelineno-23-11" name="__codelineno-23-11"></a>│   ├── auth.js           ← POST /auth/register, POST /auth/login, POST /auth/refresh
+<a href="#__codelineno-23-12" id="__codelineno-23-12" name="__codelineno-23-12"></a>│   └── users.js          ← protected routes
+<a href="#__codelineno-23-13" id="__codelineno-23-13" name="__codelineno-23-13"></a>│
+<a href="#__codelineno-23-14" id="__codelineno-23-14" name="__codelineno-23-14"></a>└── middleware/
+<a href="#__codelineno-23-15" id="__codelineno-23-15" name="__codelineno-23-15"></a>    ├── authenticate.js   ← verify JWT, attach req.user
+<a href="#__codelineno-23-16" id="__codelineno-23-16" name="__codelineno-23-16"></a>    ├── authorize.js      ← check role
+<a href="#__codelineno-23-17" id="__codelineno-23-17" name="__codelineno-23-17"></a>    └── errorHandler.js
+</code></pre></div>
+<hr/>
+<h2 id="in-serverjs">In server.js<a class="headerlink" href="#in-serverjs" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'/auth'</span><span class="p">,</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'./routes/auth'</span><span class="p">));</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="c1">// all user routes protected</span>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'/users'</span><span class="p">,</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">,</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'./routes/users'</span><span class="p">));</span><span class="w">  </span>
+</code></pre></div>
+<hr/>
+<h2 id="what-is-oauth-20">What Is OAuth 2.0?<a class="headerlink" href="#what-is-oauth-20" title="Permanent link">¶</a></h2>
+<ul>
+<li>
+<p><strong>The problem OAuth solves:</strong><br/>
+Users don’t want to create yet another account. Developers don’t want to store passwords. Both want to use existing identity providers (Google, GitHub, etc.).</p>
+</li>
+<li>
+<p><strong>OAuth 2.0</strong> is an authorization framework that lets a user grant your app limited access to their account at another service — without giving you their password.</p>
+</li>
+</ul>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a>User clicks "Sign in with Google"
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a>        │
+<a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a>        ▼
+<a href="#__codelineno-25-4" id="__codelineno-25-4" name="__codelineno-25-4"></a>Redirected to Google's login page
+<a href="#__codelineno-25-5" id="__codelineno-25-5" name="__codelineno-25-5"></a>        │
+<a href="#__codelineno-25-6" id="__codelineno-25-6" name="__codelineno-25-6"></a>        ▼
+<a href="#__codelineno-25-7" id="__codelineno-25-7" name="__codelineno-25-7"></a>User authenticates with Google (not your app)
+<a href="#__codelineno-25-8" id="__codelineno-25-8" name="__codelineno-25-8"></a>        │
+<a href="#__codelineno-25-9" id="__codelineno-25-9" name="__codelineno-25-9"></a>        ▼
+<a href="#__codelineno-25-10" id="__codelineno-25-10" name="__codelineno-25-10"></a>Google redirects back to your app with an authorization code
+<a href="#__codelineno-25-11" id="__codelineno-25-11" name="__codelineno-25-11"></a>        │
+<a href="#__codelineno-25-12" id="__codelineno-25-12" name="__codelineno-25-12"></a>        ▼
+<a href="#__codelineno-25-13" id="__codelineno-25-13" name="__codelineno-25-13"></a>Your server exchanges the code for an access token (server-to-server)
+<a href="#__codelineno-25-14" id="__codelineno-25-14" name="__codelineno-25-14"></a>        │
+<a href="#__codelineno-25-15" id="__codelineno-25-15" name="__codelineno-25-15"></a>        ▼
+<a href="#__codelineno-25-16" id="__codelineno-25-16" name="__codelineno-25-16"></a>Your server calls Google's API to get the user's profile
+<a href="#__codelineno-25-17" id="__codelineno-25-17" name="__codelineno-25-17"></a>        │
+<a href="#__codelineno-25-18" id="__codelineno-25-18" name="__codelineno-25-18"></a>        ▼
+<a href="#__codelineno-25-19" id="__codelineno-25-19" name="__codelineno-25-19"></a>Your server creates/finds the user in your DB, issues your own JWT
+</code></pre></div>
+<blockquote>
+<p>Your app never sees the user’s Google password. Google handles authentication; your app handles authorization from that point on.</p>
+</blockquote>
+<hr/>
+<h2 id="oauth-key-concepts">OAuth Key Concepts<a class="headerlink" href="#oauth-key-concepts" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resource Owner</strong></td>
+<td>The user</td>
+</tr>
+<tr>
+<td><strong>Client</strong></td>
+<td>Your application</td>
+</tr>
+<tr>
+<td><strong>Authorization Server</strong></td>
+<td>Google, GitHub, etc. — issues tokens</td>
+</tr>
+<tr>
+<td><strong>Resource Server</strong></td>
+<td>The API you’re calling (e.g., Google Profile API)</td>
+</tr>
+<tr>
+<td><strong>Authorization Code</strong></td>
+<td>Short-lived code exchanged for tokens (never exposed to browser)</td>
+</tr>
+<tr>
+<td><strong>Access Token</strong></td>
+<td>Credential for calling the provider’s API</td>
+</tr>
+<tr>
+<td><strong>Scope</strong></td>
+<td>What your app is asking permission for (<code>email</code>, <code>profile</code>, <code>read:repos</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The authorization code flow</strong> (what “Sign in with Google” uses) is the most secure. The code is exchanged server-to-server — the access token never appears in the browser URL or JavaScript.</p>
+<hr/>
+<h2 id="oauth-with-passportjs">OAuth with Passport.js<a class="headerlink" href="#oauth-with-passportjs" title="Permanent link">¶</a></h2>
+<p>Passport.js is the standard Node.js library for auth strategies — including OAuth.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a>npm<span class="w"> </span>install<span class="w"> </span>passport<span class="w"> </span>passport-google-oauth20
+</code></pre></div>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">passport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'passport'</span><span class="p">);</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">GoogleStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'passport-google-oauth20'</span><span class="p">).</span><span class="nx">Strategy</span><span class="p">;</span>
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">GoogleStrategy</span><span class="p">(</span>
+<a href="#__codelineno-27-5" id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">  </span><span class="p">{</span>
+<a href="#__codelineno-27-6" id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">    </span><span class="nx">clientID</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">GOOGLE_CLIENT_ID</span><span class="p">,</span>
+<a href="#__codelineno-27-7" id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="w">    </span><span class="nx">clientSecret</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">GOOGLE_CLIENT_SECRET</span><span class="p">,</span>
+<a href="#__codelineno-27-8" id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="nx">callbackURL</span><span class="o">:</span><span class="w"> </span><span class="s1">'/auth/google/callback'</span><span class="p">,</span>
+<a href="#__codelineno-27-9" id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="w">  </span><span class="p">},</span>
+<a href="#__codelineno-27-10" id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">accessToken</span><span class="p">,</span><span class="w"> </span><span class="nx">refreshToken</span><span class="p">,</span><span class="w"> </span><span class="nx">profile</span><span class="p">,</span><span class="w"> </span><span class="nx">done</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-27-11" id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="w">    </span><span class="c1">// profile contains the user's Google info</span>
+<a href="#__codelineno-27-12" id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="w"> </span><span class="nx">googleId</span><span class="o">:</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-27-13" id="__codelineno-27-13" name="__codelineno-27-13"></a>
+<a href="#__codelineno-27-14" id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-27-15" id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="w">      </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<a href="#__codelineno-27-16" id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="w">        </span><span class="nx">googleId</span><span class="o">:</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<a href="#__codelineno-27-17" id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">displayName</span><span class="p">,</span>
+<a href="#__codelineno-27-18" id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="w">        </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">emails</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">value</span><span class="p">,</span>
+<a href="#__codelineno-27-19" id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="w">      </span><span class="p">});</span>
+<a href="#__codelineno-27-20" id="__codelineno-27-20" name="__codelineno-27-20"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-27-21" id="__codelineno-27-21" name="__codelineno-27-21"></a>
+<a href="#__codelineno-27-22" id="__codelineno-27-22" name="__codelineno-27-22"></a><span class="w">    </span><span class="c1">// Issue your own JWT here</span>
+<a href="#__codelineno-27-23" id="__codelineno-27-23" name="__codelineno-27-23"></a><span class="w">    </span><span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">);</span>
+<a href="#__codelineno-27-24" id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-27-25" id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="p">));</span>
+</code></pre></div>
+<hr/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="c1">// Routes</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/auth/google'</span><span class="p">,</span>
+<a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">  </span><span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="s1">'google'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">scope</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'profile'</span><span class="p">,</span><span class="w"> </span><span class="s1">'email'</span><span class="p">]</span><span class="w"> </span><span class="p">})</span>
+<a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="p">);</span>
+<a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a>
+<a href="#__codelineno-28-6" id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/auth/google/callback'</span><span class="p">,</span>
+<a href="#__codelineno-28-7" id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">  </span><span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="s1">'google'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">session</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}),</span>
+<a href="#__codelineno-28-8" id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">  </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-28-9" id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
+<a href="#__codelineno-28-10" id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-28-11" id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">      </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">,</span>
+<a href="#__codelineno-28-12" id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">expiresIn</span><span class="o">:</span><span class="w"> </span><span class="s1">'24h'</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-28-13" id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="w">    </span><span class="p">);</span>
+<a href="#__codelineno-28-14" id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-28-15" id="__codelineno-28-15" name="__codelineno-28-15"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-28-16" id="__codelineno-28-16" name="__codelineno-28-16"></a><span class="p">);</span>
+</code></pre></div>
+<hr/>
+<h2 id="user-model-for-oauth">User Model for OAuth<a class="headerlink" href="#user-model-for-oauth" title="Permanent link">¶</a></h2>
+<h2 id="const-userschema-new-mongooseschema-name-type-string-required-true-email-type-string-required-true-unique-true-role-type-string-enum-user-admin-default-user-local-auth-not-required-oauth-users-have-no-password-password-type-string-minlength-8-oauth-sparse-unique-index-ignores-null-values-googleid-type-string-sparse-true-githubid-type-string-sparse-true-timestamps-true-only-hash-password-if-it-exists-and-was-modified-userschemapresave-async-function-next-if-thispassword-thisismodifiedpassword-return-next-thispassword-await-bcrypthashthispassword-12-next"><div class="highlight"><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">userSchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-29-3" id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">unique</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-29-4" id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">  </span><span class="nx">role</span><span class="o">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="kr">enum</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'user'</span><span class="p">,</span><span class="w"> </span><span class="s1">'admin'</span><span class="p">],</span><span class="w"> </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="s1">'user'</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-29-5" id="__codelineno-29-5" name="__codelineno-29-5"></a>
+<a href="#__codelineno-29-6" id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">  </span><span class="c1">// Local auth</span>
+<a href="#__codelineno-29-7" id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="w">  </span><span class="c1">// not required — OAuth users have no password</span>
+<a href="#__codelineno-29-8" id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="w">  </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">minlength</span><span class="o">:</span><span class="w"> </span><span class="mf">8</span><span class="w"> </span><span class="p">},</span><span class="w">  </span>
+<a href="#__codelineno-29-9" id="__codelineno-29-9" name="__codelineno-29-9"></a>
+<a href="#__codelineno-29-10" id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="w">  </span><span class="c1">// OAuth</span>
+<a href="#__codelineno-29-11" id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="w">  </span><span class="c1">// sparse: unique index ignores null values</span>
+<a href="#__codelineno-29-12" id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">  </span><span class="nx">googleId</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">sparse</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span><span class="w">    </span>
+<a href="#__codelineno-29-13" id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">  </span><span class="nx">githubId</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nx">sparse</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-29-14" id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">timestamps</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-29-15" id="__codelineno-29-15" name="__codelineno-29-15"></a>
+<a href="#__codelineno-29-16" id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="c1">// Only hash password if it exists and was modified</span>
+<a href="#__codelineno-29-17" id="__codelineno-29-17" name="__codelineno-29-17"></a><span class="nx">userSchema</span><span class="p">.</span><span class="nx">pre</span><span class="p">(</span><span class="s1">'save'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-29-18" id="__codelineno-29-18" name="__codelineno-29-18"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isModified</span><span class="p">(</span><span class="s1">'password'</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">();</span>
+<a href="#__codelineno-29-19" id="__codelineno-29-19" name="__codelineno-29-19"></a><span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="mf">12</span><span class="p">);</span>
+<a href="#__codelineno-29-20" id="__codelineno-29-20" name="__codelineno-29-20"></a><span class="w">  </span><span class="nx">next</span><span class="p">();</span>
+<a href="#__codelineno-29-21" id="__codelineno-29-21" name="__codelineno-29-21"></a><span class="p">});</span>
+</code></pre></div><a class="headerlink" href="#const-userschema-new-mongooseschema-name-type-string-required-true-email-type-string-required-true-unique-true-role-type-string-enum-user-admin-default-user-local-auth-not-required-oauth-users-have-no-password-password-type-string-minlength-8-oauth-sparse-unique-index-ignores-null-values-googleid-type-string-sparse-true-githubid-type-string-sparse-true-timestamps-true-only-hash-password-if-it-exists-and-was-modified-userschemapresave-async-function-next-if-thispassword-thisismodifiedpassword-return-next-thispassword-await-bcrypthashthispassword-12-next" title="Permanent link">¶</a></h2>
+<blockquote>
+<p><code>sparse: true</code> on the index means documents without a <code>googleId</code> (local-only users) don’t violate the unique constraint. Without it, two local users with no <code>googleId</code> would conflict.</p>
+</blockquote>
+<hr/>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<h3 id="what-we-covered">What we covered<a class="headerlink" href="#what-we-covered" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Authentication</strong> proves identity; <strong>authorization</strong> enforces permissions — separate concerns, applied in order</li>
+<li><strong>Sessions</strong> are stateful and hard to scale; <strong>JWTs</strong> are stateless and self-contained</li>
+<li>A JWT has three parts: header, payload, signature — the payload is readable, not encrypted</li>
+<li><strong>bcrypt</strong> hashes passwords one-way with a salt — never store plaintext</li>
+<li>The Mongoose <code>pre('save')</code> hook keeps hashing logic in the model layer</li>
+<li>The <strong>authenticate middleware</strong> verifies the JWT and attaches <code>req.user</code> to the request</li>
+<li>The <strong>authorize middleware</strong> checks <code>req.user.role</code> against allowed roles</li>
+<li>Short-lived <strong>access tokens</strong> + long-lived <strong>refresh tokens</strong> limit the blast radius of theft</li>
+<li>JWTs have failure modes: weak secrets, sensitive payload data, insecure storage</li>
+</ul>
+<p><strong>Bonus:</strong></p>
+<ul>
+<li><strong>OAuth 2.0</strong> delegates authentication to a trusted provider — your app never sees the user’s provider password</li>
+<li><strong>Passport.js</strong> implements OAuth strategies and other auth patterns in Node</li>
+</ul>
+<hr/>
+<h2 id="speaker-notes">Speaker Notes<a class="headerlink" href="#speaker-notes" title="Permanent link">¶</a></h2>
+<h3 id="slide-2-auth-vs-authz">Slide 2 (Auth vs Authz)<a class="headerlink" href="#slide-2-auth-vs-authz" title="Permanent link">¶</a></h3>
+<p>Ask: “Has anyone ever gotten a 403 from an API they were using? What does that tell you about your account?” The distinction between 401 and 403 is something most students have encountered as API consumers but never thought about as API builders.</p>
+<h3 id="slide-45-jwt-anatomy">Slide 4–5 (JWT Anatomy)<a class="headerlink" href="#slide-45-jwt-anatomy" title="Permanent link">¶</a></h3>
+<p>Go to <a href="https://jwt.io">jwt.io</a> live. Paste in a token and show the decoded payload. Then modify the payload and show how the signature changes. Then show what happens if you change the payload but keep the old signature — verification fails. This makes the security model concrete.</p>
+<h3 id="slide-7-bcrypt">Slide 7 (bcrypt)<a class="headerlink" href="#slide-7-bcrypt" title="Permanent link">¶</a></h3>
+<p>Show the actual timing difference: <code>bcrypt.hash('password', 10)</code> vs <code>bcrypt.hash('password', 14)</code>. The difference in milliseconds is the point — it’s slow on purpose. Ask: “If an attacker can try 1 billion passwords per second against MD5, how many can they try per second against bcrypt with cost factor 12?” (Answer: a few thousand at most.)</p>
+<h3 id="slide-9-auth-routes">Slide 9 (Auth Routes)<a class="headerlink" href="#slide-9-auth-routes" title="Permanent link">¶</a></h3>
+<p>Emphasize the identical error message for wrong email and wrong password. This is the kind of security detail that’s easy to overlook and genuinely matters. Enumerate-the-user-base attacks are real.</p>
+<h3 id="slide-12-refresh-tokens">Slide 12 (Refresh Tokens)<a class="headerlink" href="#slide-12-refresh-tokens" title="Permanent link">¶</a></h3>
+<p>This is where complexity spikes. Gauge the room. If students are struggling with the basic JWT flow, skip the refresh token implementation details and just explain the concept. The demo will implement a simpler version with longer-lived access tokens.</p>
+<h3 id="slide-13-what-can-go-wrong">Slide 13 (What Can Go Wrong)<a class="headerlink" href="#slide-13-what-can-go-wrong" title="Permanent link">¶</a></h3>
+<p>Ask: “Where have you seen ‘Sign in with Google’ and not thought twice about it? What data is that site getting about you?” This connects OAuth (next slides) to things students already use.</p>
+<h3 id="slides-1619-oauth-bonus">Slides 16–19 (OAuth — Bonus)<a class="headerlink" href="#slides-1619-oauth-bonus" title="Permanent link">¶</a></h3>
+<p>Only cover if you’re ahead of time. Don’t rush through it. It’s better to cut it entirely and refer students to the Passport.js docs than to cover it superficially. The concepts in slides 16–17 are worth explaining even if you skip the code in 18–19.</p>
+<hr/>
+<div class="md-source-file">
+<small>
+<!-- mkdocs-git-revision-date-localized-plugin -->
+<u>Last update</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 13, 2026 03:03:50 UTC">July 13, 2026</span>
+<!-- mkdocs-git-revision-date-plugin -->
+<br/>
+<u>Created</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 13, 2026 03:03:50 UTC">July 13, 2026</span>
+</small>
+</div>
+<!-- Was this page helpful? -->
+<!-- Comment system -->
+<script> 
+    try {
+      const index = document.querySelector('h1').innerHTML;
+      if (index === "Index") {
+        document.querySelector('h1').innerHTML = "Week 9   Authentication";
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  </script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/Enveloppe/" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+<script src="../../_static/js/mathjax.js"></script>
+<script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../_static/js/snippets.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/index.js"></script>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html><!-- Source file information --><!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
