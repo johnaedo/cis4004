@@ -2,7 +2,7 @@
 <html class="no-js" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Since you’re migrating Budget Planner to MongoDB, this is worth locking down properly before exposing it. Here’s the process:" name="description"/>
+<meta content="Course notes, code demos, and tutorials" name="description"/>
 <meta content="Dr. John Aedo" name="author"/>
 <link href="https://johnaedo.github.io/cis4004/Code%20Demos%20and%20Tutorials/Setting%20Up%20MongoDB%20Auth%20and%20Security/" rel="canonical"/>
 <link href="../.." rel="prev"/>
@@ -32,8 +32,8 @@
 <meta content="https://johnaedo.github.io/cis4004/" name="site_url"/>
 <meta content="Setting Up MongoDB Auth and Security" property="og:title"/>
 <meta content="Setting Up MongoDB Auth and Security" name="twitter:title"/>
-<meta content="Since you’re migrating Budget Planner to MongoDB, this is worth locking down properly before exposing it. Here’s the process:" name="og:description"/>
-<meta content="Since you’re migrating Budget Planner to MongoDB, this is worth locking down properly before exposing it. Here’s the process:" name="twitter:description"/>
+<meta content="Course notes, code demos, and tutorials" name="og:description"/>
+<meta content="Course notes, code demos, and tutorials" name="twitter:description"/>
 <script> document.title = "Setting Up MongoDB Auth and Security" </script>
 <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
@@ -217,49 +217,111 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-create-an-admin-user-first-before-enabling-auth">
+<a class="md-nav__link" href="#securing-mongodb-authentication-tls-setup-guide">
 <span class="md-ellipsis">
       
-        1. Create an admin user first (before enabling auth)
+        Securing MongoDB: Authentication + TLS Setup Guide
+      
+    </span>
+</a>
+<nav aria-label="Securing MongoDB: Authentication + TLS Setup Guide" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-create-users-before-enabling-auth">
+<span class="md-ellipsis">
+      
+        1. Create Users (before enabling auth)
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-enable-authorization-in-the-config-file">
+<a class="md-nav__link" href="#create-an-admin-user">
 <span class="md-ellipsis">
       
-        2. Enable authorization in the config file
+        Create an admin user
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-restart-mongodb">
+<a class="md-nav__link" href="#create-an-app-specific-user-recommended">
 <span class="md-ellipsis">
       
-        3. Restart MongoDB
+        Create an app-specific user (recommended)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-obtain-a-tls-certificate-with-certbot">
+<span class="md-ellipsis">
+      
+        2. Obtain a TLS Certificate with Certbot
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-test-auth-works">
+<a class="md-nav__link" href="#3-build-the-certificate-files-mongodb-needs">
 <span class="md-ellipsis">
       
-        4. Test auth works
+        3. Build the Certificate Files MongoDB Needs
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#5-before-opening-the-firewall-a-few-things-worth-doing-at-the-same-time">
+<a class="md-nav__link" href="#4-update-etcmongodconf">
 <span class="md-ellipsis">
       
-        5. Before opening the firewall — a few things worth doing at the same time
+        4. Update /etc/mongod.conf
       
     </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-restart-and-verify">
+<span class="md-ellipsis">
+      
+        5. Restart and Verify
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-automate-certificate-renewal">
+<span class="md-ellipsis">
+      
+        6. Automate Certificate Renewal
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-before-opening-the-firewall">
+<span class="md-ellipsis">
+      
+        7. Before Opening the Firewall
+      
+    </span>
+</a>
+<nav aria-label="7. Before Opening the Firewall" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example-nodejs-mongoose-connection-string">
+<span class="md-ellipsis">
+      
+        Example Node.js / Mongoose connection string
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -472,49 +534,111 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-create-an-admin-user-first-before-enabling-auth">
+<a class="md-nav__link" href="#securing-mongodb-authentication-tls-setup-guide">
 <span class="md-ellipsis">
       
-        1. Create an admin user first (before enabling auth)
+        Securing MongoDB: Authentication + TLS Setup Guide
+      
+    </span>
+</a>
+<nav aria-label="Securing MongoDB: Authentication + TLS Setup Guide" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-create-users-before-enabling-auth">
+<span class="md-ellipsis">
+      
+        1. Create Users (before enabling auth)
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-enable-authorization-in-the-config-file">
+<a class="md-nav__link" href="#create-an-admin-user">
 <span class="md-ellipsis">
       
-        2. Enable authorization in the config file
+        Create an admin user
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-restart-mongodb">
+<a class="md-nav__link" href="#create-an-app-specific-user-recommended">
 <span class="md-ellipsis">
       
-        3. Restart MongoDB
+        Create an app-specific user (recommended)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-obtain-a-tls-certificate-with-certbot">
+<span class="md-ellipsis">
+      
+        2. Obtain a TLS Certificate with Certbot
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-test-auth-works">
+<a class="md-nav__link" href="#3-build-the-certificate-files-mongodb-needs">
 <span class="md-ellipsis">
       
-        4. Test auth works
+        3. Build the Certificate Files MongoDB Needs
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#5-before-opening-the-firewall-a-few-things-worth-doing-at-the-same-time">
+<a class="md-nav__link" href="#4-update-etcmongodconf">
 <span class="md-ellipsis">
       
-        5. Before opening the firewall — a few things worth doing at the same time
+        4. Update /etc/mongod.conf
       
     </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-restart-and-verify">
+<span class="md-ellipsis">
+      
+        5. Restart and Verify
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-automate-certificate-renewal">
+<span class="md-ellipsis">
+      
+        6. Automate Certificate Renewal
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-before-opening-the-firewall">
+<span class="md-ellipsis">
+      
+        7. Before Opening the Firewall
+      
+    </span>
+</a>
+<nav aria-label="7. Before Opening the Firewall" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example-nodejs-mongoose-connection-string">
+<span class="md-ellipsis">
+      
+        Example Node.js / Mongoose connection string
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -554,24 +678,36 @@
 <!-- Page content -->
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Source:  Claude.ai, verified manually by executing the steps and validating the output.</p>
+<p>Source:  Claude.ai, manually verified on a DigitalOcean droplet created with the MERN template.</p>
 </div>
-<p>Since you’re migrating Budget Planner to MongoDB, this is worth locking down properly before exposing it. Here’s the process:</p>
-<h3 id="1-create-an-admin-user-first-before-enabling-auth">1. Create an admin user first (before enabling auth)<a class="headerlink" href="#1-create-an-admin-user-first-before-enabling-auth" title="Permanent link">¶</a></h3>
-<p>Connect to MongoDB locally (auth isn’t required yet):</p>
+<h2 id="securing-mongodb-authentication-tls-setup-guide">Securing MongoDB: Authentication + TLS Setup Guide<a class="headerlink" href="#securing-mongodb-authentication-tls-setup-guide" title="Permanent link">¶</a></h2>
+<p>This document covers the full process for locking down a MongoDB instance before exposing it on the firewall:</p>
+<ol>
+<li>Creating admin and application users</li>
+<li>Enabling TLS/SSL with Let’s Encrypt certificates</li>
+<li>Handling the “chain of trust” requirement</li>
+<li>Final <code>mongod.conf</code> configuration</li>
+<li>Certificate renewal automation</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> MongoDB’s config file is normally located at <code>/etc/mongod.conf</code> (not <code>/etc/mongodb.conf</code>) on most package installs. Adjust paths below if yours differs.</p>
+</blockquote>
+<hr/>
+<h3 id="1-create-users-before-enabling-auth">1. Create Users (before enabling auth)<a class="headerlink" href="#1-create-users-before-enabling-auth" title="Permanent link">¶</a></h3>
+<p>Auth isn’t required yet at this point, so connect locally without credentials:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>mongosh
 </code></pre></div>
-<p>Switch to the <code>admin</code> database and create a user:</p>
+<h3 id="create-an-admin-user">Create an admin user<a class="headerlink" href="#create-an-admin-user" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nx">use</span><span class="w"> </span><span class="nx">admin</span>
 <a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>
 <a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="nx">db</span><span class="p">.</span><span class="nx">createUser</span><span class="p">({</span>
 <a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="nx">user</span><span class="o">:</span><span class="w"> </span><span class="s2">"adminUser"</span><span class="p">,</span>
-<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="nx">pwd</span><span class="o">:</span><span class="w"> </span><span class="nx">passwordPrompt</span><span class="p">(),</span><span class="w">  </span><span class="c1">// will prompt securely instead of typing it inline</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="nx">pwd</span><span class="o">:</span><span class="w"> </span><span class="nx">passwordPrompt</span><span class="p">(),</span><span class="w">  </span><span class="c1">// prompts securely, avoids leaving password in shell history</span>
 <a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="nx">roles</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">"userAdminAnyDatabase"</span><span class="p">,</span><span class="w"> </span><span class="nx">db</span><span class="o">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s2">"readWriteAnyDatabase"</span><span class="w"> </span><span class="p">]</span>
 <a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="p">})</span>
 </code></pre></div>
-<p><code>passwordPrompt()</code> avoids leaving the password in your shell history — worth using over typing it as a plain string.</p>
-<p>You can also create an app-specific user scoped to just your Budget Planner database:</p>
+<h3 id="create-an-app-specific-user-recommended">Create an app-specific user (recommended)<a class="headerlink" href="#create-an-app-specific-user-recommended" title="Permanent link">¶</a></h3>
+<p>Scope this to just your application’s database rather than granting broad access:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nx">use</span><span class="w"> </span><span class="nx">budgetplanner</span>
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
 <a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nx">db</span><span class="p">.</span><span class="nx">createUser</span><span class="p">({</span>
@@ -580,37 +716,123 @@
 <a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="nx">roles</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">"readWrite"</span><span class="p">,</span><span class="w"> </span><span class="nx">db</span><span class="o">:</span><span class="w"> </span><span class="s2">"budgetplanner"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span>
 <a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="p">})</span>
 </code></pre></div>
-<h2 id="2-enable-authorization-in-the-config-file">2. Enable authorization in the config file<a class="headerlink" href="#2-enable-authorization-in-the-config-file" title="Permanent link">¶</a></h2>
-<p>Edit <code>/etc/mongod.conf</code>:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nt">security</span><span class="p">:</span>
-<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">authorization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enabled</span>
+<hr/>
+<h2 id="2-obtain-a-tls-certificate-with-certbot">2. Obtain a TLS Certificate with Certbot<a class="headerlink" href="#2-obtain-a-tls-certificate-with-certbot" title="Permanent link">¶</a></h2>
+<p>MongoDB validates TLS against a hostname, so this requires a real domain pointing at the server (not just an IP).</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>sudo<span class="w"> </span>certbot<span class="w"> </span>certonly<span class="w"> </span>--standalone<span class="w"> </span>-d<span class="w"> </span>yourdomain.example.com
 </code></pre></div>
-<p>If you’re planning to expose this on the firewall, also bind explicitly rather than to all interfaces unless you need to:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nt">net</span><span class="p">:</span>
-<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">27017</span>
-<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="nt">bindIp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1,YOUR_SERVER_IP</span>
-</code></pre></div>
-<h2 id="3-restart-mongodb">3. Restart MongoDB<a class="headerlink" href="#3-restart-mongodb" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mongod
-</code></pre></div>
-<h2 id="4-test-auth-works">4. Test auth works<a class="headerlink" href="#4-test-auth-works" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>mongosh<span class="w"> </span>-u<span class="w"> </span>adminUser<span class="w"> </span>-p<span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin
-</code></pre></div>
-<p>If it lets you in with the password and rejects connections without one, you’re good.</p>
-<h2 id="5-before-opening-the-firewall-a-few-things-worth-doing-at-the-same-time">5. Before opening the firewall — a few things worth doing at the same time<a class="headerlink" href="#5-before-opening-the-firewall-a-few-things-worth-doing-at-the-same-time" title="Permanent link">¶</a></h2>
+<p>Use <code>--webserver</code> mode instead of <code>--standalone</code> if nginx/apache is already running on port 80.</p>
+<p>This creates the following files under <code>/etc/letsencrypt/live/yourdomain.example.com/</code>:</p>
 <ul>
-<li><strong>Enable TLS/SSL</strong> for the connection, not just username/password. Without it, credentials go over the wire in the clear.</li>
-<li><strong>Restrict by IP</strong> in your firewall rules (<code>ufw allow from &lt;trusted-ip&gt; to any port 27017</code>) rather than opening it to <code>0.0.0.0</code>. MongoDB has historically been a popular target for mass-scanning bots when left open with weak/no auth.</li>
-<li><strong>Use a strong, unique password</strong> for each user, and store it in your <code>.env</code> / connection string rather than hardcoding it (this ties directly into the Mongoose connection setup you’ve been building).</li>
-<li>Consider whether you actually need direct external access at all — if only your app server talks to MongoDB, keeping it on a private network/VPC and never exposing port 27017 publicly is safer than authenticating + opening it.</li>
+<li><code>fullchain.pem</code> — full certificate chain</li>
+<li><code>privkey.pem</code> — private key</li>
+<li><code>chain.pem</code> — intermediate CA certificate (needed for the chain-of-trust requirement below)</li>
 </ul>
-<p>Want help updating your Mongoose connection string/config to use the new credentials once you’ve got the user created?</p>
+<hr/>
+<h2 id="3-build-the-certificate-files-mongodb-needs">3. Build the Certificate Files MongoDB Needs<a class="headerlink" href="#3-build-the-certificate-files-mongodb-needs" title="Permanent link">¶</a></h2>
+<p>MongoDB requires two separate files:</p>
+<ul>
+<li>A combined cert + key file (<code>certificateKeyFile</code>)</li>
+<li>A CA file for chain-of-trust validation (<code>CAFile</code>) — <strong>required</strong> as of MongoDB 4.4.29 / 5.0.25 / 6.0.14 / 7.0.6+ due to a security fix (CVE-2024-1351). Without this, <code>mongod</code> will refuse to start with the error <em>“The use of TLS without specifying a chain of trust is no longer supported.”</em></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/ssl/mongodb
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1"># Combined cert + private key</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'cat /etc/letsencrypt/live/yourdomain.example.com/fullchain.pem \</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="s1">  /etc/letsencrypt/live/yourdomain.example.com/privkey.pem \</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="s1">  &gt; /etc/ssl/mongodb/mongodb.pem'</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="c1"># CA chain file, copied into a location the mongodb user can read</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/letsencrypt/live/yourdomain.example.com/chain.pem<span class="w"> </span>/etc/ssl/mongodb/chain.pem
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>
+<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="c1"># Lock down permissions</span>
+<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>sudo<span class="w"> </span>chown<span class="w"> </span>mongodb:mongodb<span class="w"> </span>/etc/ssl/mongodb/mongodb.pem<span class="w"> </span>/etc/ssl/mongodb/chain.pem
+<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/ssl/mongodb/mongodb.pem<span class="w"> </span>/etc/ssl/mongodb/chain.pem
+</code></pre></div>
+<p>Certbot’s <code>/etc/letsencrypt/live/</code> directory is normally root-only, which is why the files are copied into <code>/etc/ssl/mongodb</code> where the <code>mongodb</code> user can read them.</p>
+<hr/>
+<h2 id="4-update-etcmongodconf">4. Update <code>/etc/mongod.conf</code><a class="headerlink" href="#4-update-etcmongodconf" title="Permanent link">¶</a></h2>
+<p>Combine authentication, network binding, and TLS settings into the config file:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nt">security</span><span class="p">:</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="nt">authorization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enabled</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nt">net</span><span class="p">:</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">27017</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">  </span><span class="nt">bindIp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1,YOUR_SERVER_IP</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">requireTLS</span>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="nt">certificateKeyFile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/ssl/mongodb/mongodb.pem</span>
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="nt">CAFile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/ssl/mongodb/chain.pem</span>
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="nt">allowConnectionsWithoutCertificates</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p><strong>Field notes:</strong></p>
+<ul>
+<li><code>authorization: enabled</code> — requires username/password for all connections</li>
+<li><code>bindIp</code> — bind to localhost plus the server’s actual IP rather than all interfaces (<code>0.0.0.0</code>), to limit exposure</li>
+<li><code>tls.mode: requireTLS</code> — rejects any non-TLS connection</li>
+<li><code>certificateKeyFile</code> — the combined server cert + key</li>
+<li><code>CAFile</code> — required chain-of-trust file (intermediate CA)</li>
+<li><code>allowConnectionsWithoutCertificates: true</code> — this is server-side TLS only (encrypts the connection); it does <strong>not</strong> require clients to present their own certificate. Client identity is handled via username/password instead. Omit this only if you want full mutual TLS (client certs), which is a more involved, separate setup.</li>
+</ul>
+<blockquote>
+<p><strong>YAML indentation matters.</strong> <code>tls:</code> must be nested one level under <code>net:</code>, using spaces, not tabs — a common source of “unrecognized option” errors.</p>
+</blockquote>
+<hr/>
+<h2 id="5-restart-and-verify">5. Restart and Verify<a class="headerlink" href="#5-restart-and-verify" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mongod
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mongod<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w">   </span><span class="c1"># check for startup errors</span>
+</code></pre></div>
+<p>Test the connection with both auth and TLS:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>mongosh<span class="w"> </span>--tls<span class="w"> </span>--host<span class="w"> </span>yourdomain.example.com<span class="w"> </span>-u<span class="w"> </span>adminUser<span class="w"> </span>-p<span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin
+</code></pre></div>
+<p>If it connects successfully with the password and refuses connections without one, the setup is working.</p>
+<hr/>
+<h2 id="6-automate-certificate-renewal">6. Automate Certificate Renewal<a class="headerlink" href="#6-automate-certificate-renewal" title="Permanent link">¶</a></h2>
+<p>Let’s Encrypt certificates expire every 90 days. Certbot auto-renews the underlying cert, but MongoDB needs its combined PEM and CA file rebuilt, and the service restarted, after each renewal.</p>
+<p>Create a deploy hook:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/letsencrypt/renewal-hooks/deploy/mongodb-tls.sh
+</code></pre></div>
+<p>Contents:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="ch">#!/bin/bash</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nv">DOMAIN</span><span class="o">=</span><span class="s2">"yourdomain.example.com"</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>cat<span class="w"> </span>/etc/letsencrypt/live/<span class="nv">$DOMAIN</span>/fullchain.pem<span class="w"> </span><span class="se">\</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span>/etc/letsencrypt/live/<span class="nv">$DOMAIN</span>/privkey.pem<span class="w"> </span><span class="se">\</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span>&gt;<span class="w"> </span>/etc/ssl/mongodb/mongodb.pem
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>cp<span class="w"> </span>/etc/letsencrypt/live/<span class="nv">$DOMAIN</span>/chain.pem<span class="w"> </span>/etc/ssl/mongodb/chain.pem
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a>chown<span class="w"> </span>mongodb:mongodb<span class="w"> </span>/etc/ssl/mongodb/mongodb.pem<span class="w"> </span>/etc/ssl/mongodb/chain.pem
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/ssl/mongodb/mongodb.pem<span class="w"> </span>/etc/ssl/mongodb/chain.pem
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>mongod
+</code></pre></div>
+<p>Make it executable:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/etc/letsencrypt/renewal-hooks/deploy/mongodb-tls.sh
+</code></pre></div>
+<p>Certbot automatically runs every script in <code>renewal-hooks/deploy/</code> after a successful renewal, so this keeps MongoDB’s certificates current without manual intervention.</p>
+<hr/>
+<h2 id="7-before-opening-the-firewall">7. Before Opening the Firewall<a class="headerlink" href="#7-before-opening-the-firewall" title="Permanent link">¶</a></h2>
+<ul>
+<li>
+<p>Restrict the port to trusted IPs only, rather than opening it broadly:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span>&lt;trusted-ip&gt;<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">27017</span>
+</code></pre></div>
+</li>
+<li>
+<p>Use strong, unique passwords per user, stored in environment variables / connection strings rather than hardcoded.</p>
+</li>
+<li>Consider whether external exposure is even necessary — if only your app server talks to MongoDB, keeping it on a private network/VPC and never opening 27017 publicly is the safest option.</li>
+</ul>
+<h3 id="example-nodejs-mongoose-connection-string">Example Node.js / Mongoose connection string<a class="headerlink" href="#example-nodejs-mongoose-connection-string" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>mongodb://budgetApp:PASSWORD@yourdomain.example.com:27017/budgetplanner?tls=true&amp;authSource=budgetplanner
+</code></pre></div>
 <hr/>
 <div class="md-source-file">
 <small>
 <!-- mkdocs-git-revision-date-localized-plugin -->
 <u>Last update</u> :
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 21, 2026 19:18:53 UTC">July 21, 2026</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 21, 2026 19:56:54 UTC">July 21, 2026</span>
 <!-- mkdocs-git-revision-date-plugin -->
 <br/>
 <u>Created</u> :
