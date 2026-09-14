@@ -205,7 +205,6 @@ dependencies = [
     { name = "babel" },
     { name = "beautifulsoup4" },
     { name = "mdx-breakless-lists" },
-    { name = "mkdocs" },
     { name = "mkdocs-awesome-pages-plugin" },
     { name = "mkdocs-callouts" },
     { name = "mkdocs-custom-fences" },
@@ -218,6 +217,7 @@ dependencies = [
     { name = "mkdocs-meta-descriptions-plugin" },
     { name = "mkdocs-obsidian-links" },
     { name = "mkdocs-revealjs" },
+    { name = "properdocs" },
 ]
 
 [package.dev-dependencies]
@@ -233,7 +233,6 @@ requires-dist = [
     { name = "babel" },
     { name = "beautifulsoup4" },
     { name = "mdx-breakless-lists" },
-    { name = "mkdocs" },
     { name = "mkdocs-awesome-pages-plugin" },
     { name = "mkdocs-callouts" },
     { name = "mkdocs-custom-fences" },
@@ -246,6 +245,7 @@ requires-dist = [
     { name = "mkdocs-meta-descriptions-plugin" },
     { name = "mkdocs-obsidian-links" },
     { name = "mkdocs-revealjs" },
+    { name = "properdocs" },
 ]
 
 [package.metadata.requires-dev]
@@ -695,6 +695,29 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/53/18/f3bb8ef0d3b930692343da8aa4d3cbcd6749477c053959395ac81965a6e9/platformdirs-4.11.8.tar.gz", hash = "sha256:f23abafea7dd4276d1f29104b83598d7dcc567cafd07c9c951e66665645437fc", size = 37182, upload-time = "2026-09-08T22:20:42.866Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f4/e1/5b7b8bbb55084d1425bcb9bc823ff519e1b2be05f6ebb0089e2eacc38413/platformdirs-4.11.8-py3-none-any.whl", hash = "sha256:52f2f181bbfde907966932cc8312d967d02976422d66d537ea16092b8e291081", size = 24027, upload-time = "2026-09-08T22:20:41.537Z" },
+]
+
+[[package]]
+name = "properdocs"
+version = "1.6.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "ghp-import" },
+    { name = "jinja2" },
+    { name = "markdown" },
+    { name = "markupsafe" },
+    { name = "packaging" },
+    { name = "pathspec" },
+    { name = "platformdirs" },
+    { name = "pyyaml" },
+    { name = "pyyaml-env-tag" },
+    { name = "watchdog" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ec/29/f27a4e1eddf72ed3db6e47818fbafe6debbf09fd7051f9c1a007239b46ef/properdocs-1.6.7.tar.gz", hash = "sha256:adc7b16e562890af0e098a7e5b02e3a81c20894a87d6a28d345c9300de73c26e", size = 276141, upload-time = "2026-03-20T20:07:48.167Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/4d/fc923f5c85318ee8cc903566dc4e0ebe41b2dfc1d2ecf5546db232397ed6/properdocs-1.6.7-py3-none-any.whl", hash = "sha256:6fa0cfa2e01bf338f684892c8a506cf70ea88ae7f3479c933b6fa20168101cbd", size = 225406, upload-time = "2026-03-20T20:07:46.875Z" },
 ]
 
 [[package]]
